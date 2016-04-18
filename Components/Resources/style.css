@@ -1,0 +1,89 @@
+body {
+  background-color: #775644;
+  margin: 0px;
+  padding: 0px;
+}
+
+.container-fluid {
+  margin: 0px;
+  padding: 0px;
+}
+
+#header {
+    background-image: url(images/raccoon_border.png);
+    background-repeat: repeat-x;
+    background-size: contain;
+    width: 100%;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    
+    position: relative;
+    top: 0px;
+}
+
+.page {
+    position: relative;
+    top: 0px;
+    text-align: center;
+}
+
+#header img {
+  height: auto;
+  max-width: 100%;
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: block;
+  padding: 0px;
+}
+
+#login {
+  max-width: 300px;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  color: #201a1a;
+  font-size: 20px;
+  font-family: Calibri;
+}
+
+#login input {
+  text-align: center;
+  background-color: #a38571;
+  font-weight: 700;
+  font-size: 16px;
+  border: 1px solid #3d3434;
+  border-radius: 8px;
+  color: #3d3434;
+}
+
+#login label {
+  margin-top: 5px;
+}
+
+#mainmenu {
+  max-width: 800px;
+  padding: 20px;
+  margin: auto;
+}
+
+.pageButton {
+  background-color: #a38571;
+  margin-bottom: 13px;
+  border: 1px solid #3d3434;
+  border-radius: 8px;
+}
+
+.pageButton:hover {
+  background-color: #3d3434;
+}
+
+h1 {
+  font-family: Calibri;
+  font-size: 20px;
+  font-weight: 700;
+  color: #201a1a;
+  position: relative;
+  margin: 15px;
+}

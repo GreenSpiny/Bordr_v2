@@ -60,10 +60,12 @@ function ValidateUser (req, res) {
       console.log(db_err);
       err['database'] = db_err;
     }
-    else {
-      console.log("Success");
+    else if (record) {
       req.login_cookie.user = user;
       res.send("Login Successful");
+    }
+    else {
+      res.send("Invalid Credentials");
     }
   });
 }

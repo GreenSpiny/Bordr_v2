@@ -16,114 +16,203 @@
     
     <!-- Custom JS -->
     <script src="jquery-2.1.4.min.js"></script>
-    <script src="transitions.js"></script>
-    <script>
-      $(document).ready( function() {
-        $("#signupBTN").click( function() {
-          var data = {username: $('#user').val(), password: $('#password').val()};
-          $.post('http://localhost:3000/signup', data).done(function(response) {
-
-          });
-        })  
-        $("#loginBTN").click( function() {
-          var data = {username: $('#user').val(), password: $('#password').val()};
-          $.post('http://localhost:3000/login', data).done(function(response) {
-            console.log(response);
-            if (response == 'Login Successful') {
-              goToPage($('#loginBTN').attr("value"));
-            }
-          });
-        })  
-      });
-    </script>
+    <script src="js/communication.js"></script>
+    <script src="js/transitions.js"></script>
+    <script src="js/index.js" type="text/javascript"></script>
   </head>
 
   <body>
   
-    <div id="header">
+    <div id="header" class="container-fluid">
       <img id="logo" src="images/raccoon_small.png"> </img>
     </div>
   
-  <div id="content" class="container-fluid">
-  
-    <!-- oooooooooooooooooooooooooo -->
-    <div id="login" class="page" value="0">
-      <div class="row-fluid" id='server_response'></div>
-      <div class="form-group row-fluid">
-        <label for="user">Username:</label>
-        <input type="text" class="form-control input-sm" id="user"> </input>
-        <label for="password">Password:</label>
-        <input type="password" class="form-control input-sm" id="password"> </input>
-      </div>
-      
-      <div class="row-fluid">
-        <div class="col-sm-6">
-          <button id="loginBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Log In</button>
-        </div>
-        <div class="col-sm-6"> 
-          <button id="signupBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Sign Up</button>
-        </div>
-      </div>
-      
-    </div>
+    <div id="content" class="container-fluid">
     
-    <!-- oooooooooooooooooooooooooo -->
-    <div id="mainmenu" hidden="true" class="page" value="1">
-      
-      <div class="row-fluid">
-        <div class="col-sm-12">
-          <h1>Welcome, username!</h1>
+      <!-- Page 0: Login -->
+      <div id="login" class="page" value="0">
+        
+        <div class="form-group row">
+          <label for="user">Username:</label>
+          <input type="text" class="form-control input-sm" id="user"> </input>
+          <label for="password">Password:</label>
+          <input type="password" class="form-control input-sm" id="password"> </input>
         </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="loginBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary">Log In</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="signupBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary">Sign Up</button>
+          </div>
+        </div>
+        
       </div>
       
-      <div class="row-fluid">
-        <div class="col-sm-6">
-          <button id="eventsBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Event Listing</button>
+      <!-- Page 1: Main Menu -->
+      <div id="mainmenu" hidden="true" class="page" value="1">
+        
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Welcome to Bordr!</h1>
+          </div>
         </div>
-        <div class="col-sm-6"> 
-          <button id="makeBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Create Event</button>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="eventsBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Event Listing</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="makeBTN" type="button" value=3 class="pageButton btn btn-block btn-primary">Create Event</button>
+          </div>
         </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="friendsBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">My Events</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="settingsBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Friends</button>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-4"> </div>
+          <div class="col-sm-4"> 
+            <button id="logoutBTN" type="button" value=0 class="pageButton btn btn-block btn-primary">Logout</button>
+          </div>
+          <div class="col-sm-4"> </div>
+        </div>
+        
       </div>
       
-      <div class="row-fluid">
-        <div class="col-sm-6">
-          <button id="findBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Search Events</button>
+      <!-- Page 2: Event List -->
+      <div id="eventlist" hidden="true" class="page" value="2">
+        
+        <div class="infoArea" hidden="true" value="2">
+          <p>Bored? Here's where you find something to do, close or far!</p>
+          <p>Browse through your friends' events, or search for all users' events.</p>
+          <p>You can also talk to event attendees via group chat!</p>
         </div>
-        <div class="col-sm-6"> 
-          <button id="friendsBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Friends</button>
+        
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Event Listing</h1>
+          </div>
         </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=2 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+        
+         <div id="eventSearcher" class="space row container">
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Search tags:</p>
+            </div>
+            <div class="form-group col-sm-10">
+              <input id="searchEvents" type="text" class="form-control"></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <select id="distanceSelect" class="form-control">
+                <option>1 mile</option>
+                <option>10 miles</option>
+                <option>100 miles</option>
+                <option selected>anywhere</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <select id="friendSelect" class="form-control">
+                <option selected>friends only</option>
+                <option>all users</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div id="searchSubmit" class="row">
+          <div class="col-sm-3"></div>
+          <button id="searchEventsBTN" class="btn btn-success col-sm-6">Search Events!</button>
+          <div class="col-sm-3"></div>
+        </div>
+        
+        <hr>
+        <h2 class="row">No results found.</h2>
+        <div id="eventsResultsArea" class="row container">
+        
+        </div>
+        
       </div>
       
-      <div class="row-fluid">
-        <div class="col-sm-4"> </div>
-        <div class="col-sm-4"> 
-          <button id="logoutBTN" type="button" value=0 class="pageButton btn btn-block btn-primary">Logout</button>
+      <!-- Page 3: Create Event -->
+      <div id="createEvent" hidden="true" class="page" value="3">
+        
+        <div class="infoArea" hidden="true" value="3">
+          <p>Create an event for others to join!  Your event will show up in your friends' Event Listings.</p>
+          <p>If "all users" is selected, non-friend members can find your event via search.</p>
+          <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
         </div>
-        <div class="col-sm-4"> </div>
+        
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Create Event</h1>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=3 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+        
+        <div id="eventMaker" class="space row container">
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Name:</p>
+            </div>
+            <div class="form-group col-sm-10">
+              <input id="eventNameInput" type="text" class="form-control"></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Tags:</p>
+            </div>
+            <div class="form-group col-sm-10">
+              <input id="eventTagsInput" type="text" class="form-control"></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Description:</p>
+            </div>
+            <div class="form-group col-sm-10">
+              <textarea id="eventDescriptionInput" type="text" class="form-control"></textArea>
+            </div>
+          </div>
+        </div>
+        
+        <div id="eventSubmit" class="row">
+          <div class="col-sm-3"></div>
+          <button id="eventBTN" class="btn btn-success col-sm-6">Create Event!</button>
+          <div class="col-sm-3"></div>
+        </div>
+        
       </div>
       
+      <!-- oooooooooooooooooooooooooo -->
     </div>
-    
-    <!-- oooooooooooooooooooooooooo -->
-    <div id="anothermenu" hidden="true" class="page" value="2">
-      
-      <div class="row-fluid">
-        <div class="col-sm-12">
-          <h1>This is another menu</h1>
-        </div>
-      </div>
-      
-      <div class="row-fluid">
-        <div class="col-sm-4"> </div>
-        <div class="col-sm-4"> 
-          <button id="backBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Go Back</button>
-        </div>
-        <div class="col-sm-4"> </div>
-      </div>
-      
-    </div>
-  
-  </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

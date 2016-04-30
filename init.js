@@ -58,8 +58,10 @@ function ConfigureSitemap() {
 function InitializeDatabase(callback) {
   // Connect with client
   client.connect(mongo.url, function(err, db) {
+    console.log(err);
     mongo.db = db;
     db.createCollection('users', function(collection_err, collection) {
+      console.log(collection_err);
       collection.createIndex({username: 1}, {unique: true}); 
     });
     console.log("Database initialized")

@@ -5,7 +5,6 @@ function () {
   app.get("/", function(req, res) {
     if (req.login_cookie && req.login_cookie.user) {
       logged_in = true;
-      console.log("USER LOGGED IN");
     }
     var extension = req.originalUrl;
     if (extension == '' || extension == '/')
@@ -57,11 +56,15 @@ function ValidateUser (req, res) {
 
   collection = mongo.db.collection('users');
   collection.findOne(user, function(db_err, record) {
-    if (db_err)
+    if (db_err) {
+      console.log(db_err);
       err['database'] = db_err;
-    else 
+    }
+    else {
+      console.log("Success");
       req.login_cookie.user = user;
-    res.send(err);
+      res.send("Login Successful");
+    }
   });
 }
 

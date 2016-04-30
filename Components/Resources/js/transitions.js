@@ -13,13 +13,9 @@ $(document).ready(function() {
       scroll("down",0);
     }
   });
-
-  // Transition to different pages
+  
   $(".pageButton").click(function(){
-    goToPage($(this).attr("value"));
-    $(".infoArea").each(function(){
-      $(this).hide();
-    });
+    goToPage(($(this)).attr("value"));
   });
   
   // Open help info
@@ -36,6 +32,11 @@ $(document).ready(function() {
   // Create new event
   $("#eventBTN").click(function() {
     createEvent();
+  });
+  
+  // Search events
+  $("#searchEventsBTN").click(function() {
+    searchEvents();
   });
   
 });
@@ -86,4 +87,12 @@ function scroll(direction, duration) {
       $("#header").animate({top: 0}, duration);
       $(".page").animate({top: 0}, duration);
   }
+}
+
+function transition(button) {
+  goToPage(button.attr("value"));
+  $(".infoArea").each(function(){
+    //what the hell does this do?!
+    // button.hide();
+  });
 }

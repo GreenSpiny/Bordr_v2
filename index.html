@@ -91,6 +91,12 @@
       <!-- Page 2: Event List -->
       <div id="eventlist" hidden="true" class="page" value="2">
         
+        <div class="infoArea" hidden="true" value="2">
+          <p>Bored? Here's where you find something to do, close or far!</p>
+          <p>Browse through your friends' events, or search for all users' events.</p>
+          <p>You can also talk to event attendees via group chat!</p>
+        </div>
+        
         <div class="row">
           <div class="col-sm-12">
             <h1>Event Listing</h1>
@@ -102,8 +108,47 @@
             <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
           </div>
           <div class="col-sm-6"> 
-            <button id="helpBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Info</button>
+            <button id="helpBTN" type="button" value=2 class="infoButton btn btn-block btn-primary">Info</button>
           </div>
+        </div>
+        
+         <div id="eventSearcher" class="space row container">
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Search tags:</p>
+            </div>
+            <div class="form-group col-sm-10">
+              <input id="searchEvents" type="text" class="form-control"></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <select id="distanceSelect" class="form-control">
+                <option>1 mile</option>
+                <option>10 miles</option>
+                <option>100 miles</option>
+                <option selected>anywhere</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <select id="friendSelect" class="form-control">
+                <option selected>friends only</option>
+                <option>all users</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div id="searchSubmit" class="row">
+          <div class="col-sm-3"></div>
+          <button id="searchEventsBTN" class="btn btn-success col-sm-6">Search Events!</button>
+          <div class="col-sm-3"></div>
+        </div>
+        
+        <hr>
+        <h2 class="row">No results found.</h2>
+        <div id="eventsResultsArea" class="row container">
+        
         </div>
         
       </div>
@@ -132,7 +177,7 @@
           </div>
         </div>
         
-        <div id="eventMaker" class="row container">
+        <div id="eventMaker" class="space row container">
           <div class="row">
             <div class="col-sm-2">
               <p class="bg-1">Name:</p>
@@ -161,7 +206,7 @@
         
         <div id="eventSubmit" class="row">
           <div class="col-sm-3"></div>
-          <button id="eventBTN" class="pageButton btn btn-success col-sm-6">Create Event!</button>
+          <button id="eventBTN" class="btn btn-success col-sm-6">Create Event!</button>
           <div class="col-sm-3"></div>
         </div>
         

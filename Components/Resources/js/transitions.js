@@ -13,9 +13,10 @@ $(document).ready(function() {
       scroll("down",0);
     }
   });
+  
   $(".pageButton").click(function(){
-    transition($(this));
-   });
+    goToPage(($(this)).attr("value"));
+  });
   
   // Open help info
   $(".infoButton").click(function(){
@@ -91,6 +92,7 @@ function scroll(direction, duration) {
 function transition(button) {
   goToPage(button.attr("value"));
   $(".infoArea").each(function(){
-    button.hide();
+    //what the hell does this do?!
+    // button.hide();
   });
 }

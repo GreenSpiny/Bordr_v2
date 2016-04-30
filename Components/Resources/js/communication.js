@@ -5,3 +5,10 @@ function createEvent() {
   var description = $("#eventDescriptionInput").val();
   console.log("Attempting to make a new event!");
 }
+
+// Search for events
+function searchEvents() {
+  var tagsRaw = $("#searchEvents").val();
+  var distance = $("#distanceSelect").val();
+  var friends = $("#friendSelect").val();
+}

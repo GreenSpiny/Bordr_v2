@@ -28,6 +28,7 @@
         $("#loginBTN").click( function() {
           var data = {username: $('#user').val(), password: $('#password').val()};
           $.post('http://localhost:3000/login', data).done(function(response) {
+          console.log(response);
             if (response.slice(0,11) == 'User Found:') 
               goToPage($('#loginBTN').attr("value"));
           });

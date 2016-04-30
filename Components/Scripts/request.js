@@ -28,11 +28,11 @@ function AddUser (user, client) {
 
   // Validate Username
   var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i
-  if (user.username.length < 3 || user.username.length > 15 || !re_Alphanumeric.test(user.username))
+  if (user.username.length < 3 || user.username.length > 15 || !rx_Alphanumeric.test(user.username))
     err['username'] = "Username must be between 3 and 15 alphanumeric characters";
 
   // Validate Password
-  if (user.password.length < 8 || user.password.length > 15 || !re_Alphanumeric.test(user.username))
+  if (user.password.length < 8 || user.password.length > 15 || !rx_Alphanumeric.test(user.username))
     err['password'] = "Password must be between 8 and 15 alphanumeric characters";
   if (user.password_confirm != user.password)
     err['password_confirm'] = "The entered passwords do not match";

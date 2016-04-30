@@ -21,8 +21,9 @@
       $(document).ready( function() {
         $("#signupBTN").click( function() {
           var data = {username: $('#user').val(), password: $('#password').val()};
+          console.log(data);
           $.post('http://localhost:3000/signup', data).done(function(response) {
-
+            console.log("response",response);
           });
         })  
         $("#loginBTN").click( function() {

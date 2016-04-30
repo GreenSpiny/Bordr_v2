@@ -13,14 +13,6 @@ $(document).ready(function() {
       scroll("down",0);
     }
   });
-
-  // Transition to different pages
-  $(".pageButton").click(function(){
-    goToPage($(this).attr("value"));
-    $(".infoArea").each(function(){
-      $(this).hide();
-    });
-  });
   
   // Open help info
   $(".infoButton").click(function(){
@@ -86,4 +78,11 @@ function scroll(direction, duration) {
       $("#header").animate({top: 0}, duration);
       $(".page").animate({top: 0}, duration);
   }
+}
+
+function transition(button) {
+  goToPage(button.attr("value"));
+  $(".infoArea").each(function(){
+    button.hide();
+  });
 }

@@ -28,8 +28,10 @@
         $("#loginBTN").click( function() {
           var data = {username: $('#user').val(), password: $('#password').val()};
           $.post('http://localhost:3000/login', data).done(function(response) {
-            if (response.slice(0,11) == 'User Found:') 
+            console.log(response);
+            if (response == 'Login Successful') {
               goToPage($('#loginBTN').attr("value"));
+            }
           });
         })  
       });

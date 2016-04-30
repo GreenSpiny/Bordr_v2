@@ -38,6 +38,11 @@ $(document).ready(function() {
     createEvent();
   });
   
+  // Search events
+  $("#searchEventsBTN").click(function() {
+    searchEvents();
+  });
+  
 });
 
 // Helper functions --- o

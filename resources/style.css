@@ -85,7 +85,7 @@ body {
   background-color: #3d3434;
 }
 
-h1 {
+h1, h2 {
   font-family: Calibri;
   font-size: 20px;
   font-weight: 700;
@@ -96,44 +96,55 @@ h1 {
 }
 
 .bg-1 { background-color: #5CB85C; }
-.bg-2 { background-color: #FFC259; }
-.bg-3 { background-color: #9DEBF2; }
 
-#eventMaker{
+.space {
   margin: 5px;
   background-color: #a38571;
   border: 1px solid #3d3434;
   border-radius: 8px;
   width: inherit;
   line-height: 30px;
-  padding-top: 15px;
+  padding-top: 12px;
 }
 
-#eventSubmit {
+#eventlist hr {
+  color: #a38571;
+  border-color: #a38571;
+  margin: 15px;
+  padding: 0px;
+}
+
+#eventlist h2 {
+  margin: 0px;
+  margin-bottom: 15px;
+  padding: 0px;
+}
+
+#eventSubmit, #searchSubmit {
   margin: 5px;
   margin-top: 15px;
 }
 
-#eventMaker .col-sm-2 {
+.space .col-sm-2 {
   max-height: 34px;
 }
 
-#eventBTN {
+#eventBTN, #searchEventsBTN {
   border: 1px solid #3d3434;
 }
 
-#eventMaker p {
+.space p {
   text-align: center;
   line-height: 24px;
   border-radius: 3px;
   height: 24px;
-  margin-top: 6px;
+  margin-top: 5px;
   margin-bottom: 5px;
   color: #FFF;
   border: 1px solid #57634A;
 }
 
-#eventMaker input, #eventMaker textarea {
+.space input, .space textarea, .space select {
   background-color: #F2E3DA;
 }
 

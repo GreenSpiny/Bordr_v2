@@ -13,6 +13,9 @@ $(document).ready(function() {
       scroll("down",0);
     }
   });
+  $(".pageButton").click(function(){
+    transition($(this));
+   });
   
   // Open help info
   $(".infoButton").click(function(){

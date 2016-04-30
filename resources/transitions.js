@@ -17,6 +17,25 @@ $(document).ready(function() {
   // Transition to different pages
   $(".pageButton").click(function(){
     goToPage($(this).attr("value"));
+    $(".infoArea").each(function(){
+      $(this).hide();
+    });
+  });
+  
+  // Open help info
+  $(".infoButton").click(function(){
+    var value = $(this).val();
+    $(this).blur();
+    $(".infoArea").each(function(){
+      if ($(this).attr("value") == value) {
+        $(this).slideToggle("fast");
+      }
+    });
+  });
+  
+  // Create new event
+  $("#eventBTN").click(function() {
+    createEvent();
   });
   
 });
@@ -42,14 +61,13 @@ function goToPage(num) {
   
   // Scroll header up or down
   if (num > 0 && page <= 0) {
-    scroll("up",1000);
+    scroll("up",750);
   }
   else if (num <=0 && page > 0) {
-    scroll("down",1000);
+    scroll("down",750);
   }
   
-  // Set name, remove password
-  $("#mainmenu h1").html("Welcome, " + $("#user").val() + "!");
+  // Remove password
   $("#password").val("");
   
   // Set page number to current page

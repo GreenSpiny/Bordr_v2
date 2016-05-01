@@ -1,6 +1,6 @@
-var app = angular.module("app", []);
+var app = angular.module("Bordr", []);
 //add controller to app
-app.controller("controller",
+app.controller("controller0",
 function($scope, $http) {
   var signup = false;
   $scope.user = "";

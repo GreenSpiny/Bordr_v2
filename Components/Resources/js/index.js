@@ -7,7 +7,7 @@ $(document).ready( function() {
       return;
     }
     else {
-      var data = {username: $('#user').val(), password: $('#password').val()};
+      var data = {username: $('#user').val(), password: $('#password').val(), confirm: $('#confirm').val(), email: $('#email').val()};
       console.log(data);
       $.post('http://localhost:3000/signup', data).done(function(response) {
         var alerts = "";
@@ -21,11 +21,11 @@ $(document).ready( function() {
           $('#password').addClass("error");
           $('#password').after('<div class="alert alert-warning">'+ response.password +'</div>');
         }
-        if (response.password_confirm != null) {
-          alerts += response.password_confirm + "\n";
+        if (response.confirm != null) {
+          alerts += response.confirm + "\n";
           $('#password').addClass("error");
           $('#confirm').addClass("error");
-          $('#confirm').after('<div class="alert alert-warning">'+ response.password_confirm +'</div>');
+          $('#confirm').after('<div class="alert alert-warning">'+ response.confirm +'</div>');
         }
         if (response.email != null) {
           alerts += response.email + "\n";
@@ -40,9 +40,7 @@ $(document).ready( function() {
   $("#loginBTN").click( function() {
     var data = {username: $('#user').val(), password: $('#password').val()};
     $.post('http://localhost:3000/login', data).done(function(response) {
-    console.log(response);
       if (response.slice(0,11) == 'User Found:') 
-      console.log(response);
       if (response == 'Login Successful') {
         goToPage($('#loginBTN').attr("value"));
       }

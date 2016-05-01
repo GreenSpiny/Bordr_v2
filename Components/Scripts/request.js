@@ -33,9 +33,10 @@ function AddUser (user, client) {
   // Validate Password
   if (user.password.length < 8 || user.password.length > 15 || !rx_Alphanumeric.test(user.username))
     err['password'] = "Password must be between 8 and 15 alphanumeric characters";
-  if (user.password_confirm != user.password)
-    err['password_confirm'] = "The entered passwords do not match";
-
+  if (user.confirm != user.password){
+    console.log (user.confirm, user.password);
+    err['confirm'] = "The entered passwords do not match";
+}
   // Validate Email
   var rx_EmailAddress = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   if (!rx_EmailAddress.test(user.email))
@@ -53,14 +54,14 @@ function AddUser (user, client) {
 function ValidateUser (req, res) {
   err = {};
   user = req.body;
-
   collection = mongo.db.collection('users');
   collection.findOne(user, function(db_err, record) {
+    console.log(user);
     if (db_err) {
       console.log(db_err);
       err['database'] = db_err;
     }
-    else if (record) {
+    else if (record && (user.username != "") ) {
       req.login_cookie.user = user;
       res.send("Login Successful");
     }

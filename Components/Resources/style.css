@@ -74,6 +74,13 @@ body {
   margin: auto;
 }
 
+#resultsArea {
+  max-width: 800px;
+  padding: 20px;
+  margin: auto;
+  display: none;
+}
+
 .pageButton, .pageButtonWait ,.infoButton {
   background-color: #a38571;
   margin-bottom: 13px;

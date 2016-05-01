@@ -28,17 +28,6 @@ $(document).ready(function() {
       }
     });
   });
-  
-  // Create new event
-  $("#eventBTN").click(function() {
-    createEvent();
-  });
-  
-  // Search events
-  $("#searchEventsBTN").click(function() {
-    searchEvents();
-  });
-  
 });
 
 // Helper functions --- o

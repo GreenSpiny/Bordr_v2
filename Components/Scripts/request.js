@@ -21,6 +21,14 @@ function () {
   app.listen(3000, function() {});
 }
 
+app.post('/createEvent', function(req, res) {
+  CreateEvent(req, res);
+})
+
+app.get('/getEvents', function(req, res){
+  getUserEvents(req, res);
+})
+
 
 function AddUser (user, client) {
   err = {};
@@ -68,6 +76,32 @@ function ValidateUser (req, res) {
       res.send("Invalid Credentials");
     }
   });
+}
+
+function CreateEvent(req, client) {
+  collection = mongo.db.collection('events');
+  var eventListing = {name: req.query.n, tags: req.query.t, description: req.query.d};
+  collection.insert(eventListing, function(db_err, result) {
+    if (db_err)
+    {
+      console.log(db_err);
+      client.send(err);
+    }
+    else
+    {
+      client.send("Event successfully created!");
+    }
+  })
+}
+
+function getUserEvents(req, client) {
+  events.find(function(err, tweets){
+    if (err) console.log(err);
+    else 
+    {
+      client.send(events);
+    }
+  })
 }
 
 

@@ -63,8 +63,13 @@ function InitializeDatabase(callback) {
     db.createCollection('users', function(collection_err, collection) {
       console.log(collection_err);
       collection.createIndex({username: 1}, {unique: true}); 
+      console.log("Database initialized")
     });
-    console.log("Database initialized")
+    db.createCollection('events', function(collection_err, collection) {
+      console.log(collection_err);
+      collection.createIndex({name: 1}, {unique: true});
+      console.log("Database initialized")
+    })
     callback();
   });
 }

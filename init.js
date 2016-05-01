@@ -13,7 +13,8 @@ function InitializeGlobals() {
     crypto        : require('crypto'),
     file          : require('fs'),
     mongo         : require('mongodb'),
-    http          : require('http')
+    http          : require('http'),
+    socket_io     : require('socket.io')
   }
 
   // Initialize Site Structure
@@ -33,8 +34,10 @@ function InitializeGlobals() {
   global.mongo = {
     url      : 'mongodb://bordr:abc123@work.websci:7000/bordr'
   }
-  
+
   global.logged_in = false;
+
+  global.io = (mod.socket_io).listen(app.listen(3000););
 
   console.log("Global framework initialized")
 
@@ -59,10 +62,8 @@ function ConfigureSitemap() {
 function InitializeDatabase(callback) {
   // Connect with client
   client.connect(mongo.url, function(err, db) {
-    console.log(err);
     mongo.db = db;
     db.createCollection('users', function(collection_err, collection) {
-      console.log(collection_err);
       collection.createIndex({username: 1}, {unique: true}); 
     });
     console.log("Database initialized")
@@ -115,18 +116,27 @@ function AllowPageAccess() {
     console.log("Site operational");
 }
 
-
-// global.io.on('connection', function(socket){
-//   console.log("One user joined the chat");
-//   //draw limited messages out of the database
-//   //push messages to the chat
-//   socket.on('message', function(msg){
-//     console.log("Message recieved by the chat server");
-//     //send message to the clients
-//     // socket.broadcast.emit('message', msg);
+// //setups for the various modules
+// var express_ = require('express');
+// var http_ = require('http');
+// var app_ = express();
+// app_.use('/', express_.static(__dirname));
+// var server_ = app_.listen(3000);
+// var io_ = require('socket.io').listen(server_);
 
 
-//     //save message to database
-//   });
 
-// });
+io.on('connection', function(socket){
+  console.log("One user joined the chat");
+  //draw limited messages out of the database
+  //push messages to the chat
+  socket.on('message', function(msg){
+    console.log("Message recieved by the chat server");
+    //send message to the clients
+    // socket.broadcast.emit('message', msg);
+
+
+    //save message to database
+  });
+
+});

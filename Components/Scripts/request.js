@@ -1,7 +1,3 @@
-var appSocket = require('express')();
-var httpSocket = require('http').Server(app);
-var io = require('socket.io')(httpSocket);
-
 var request = module.exports =  
 function () { 
 
@@ -17,7 +13,7 @@ function () {
   });
 
   app.get('/chat', function(req, res) {
-    res.render(mod.path.join(loc.root, 'Components/Pages/Chat'));
+    res.render(mod.path.join(loc.root, 'Components/Pages/chat.html'));
   });
 
   // Handle Post Requests
@@ -26,15 +22,13 @@ function () {
   });
 
   app.post('/login', ValidateUser);
-  app.post('/chat', function(req, res) {
-    console.log("POST");
-  });
 
-  app.listen(3000, function() {
-    io.on('connection', function(socket){
-      console.log("One user joined the chat");
-    });
-  });
+  // app.listen(3000, function() {
+  //   io.on('connection', function(socket){
+  //     console.log("One user joined the chat");
+  //   });
+  // });
+
 }
 
 

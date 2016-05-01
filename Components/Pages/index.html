@@ -74,7 +74,7 @@
             <button id="friendsBTN" type="button" value=4 class="pageButton btn btn-block btn-primary" ng-click="$broadcast('loadEvents')">My Events</button>
           </div>
           <div class="col-sm-6"> 
-            <button id="settingsBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Friends</button>
+            <button id="settingsBTN" type="button" value=5 class="pageButton btn btn-block btn-primary">Friends</button>
           </div>
         </div>
         
@@ -158,7 +158,7 @@
         
         <div class="infoArea" hidden="true" value="3">
           <p>Create an event for others to join!  Your event will show up in your friends' Event Listings.</p>
-          <p>If "all users" is selected, non-friend members can find your event via search.</p>
+          <p>If "private" is selected, non-friend members cannot find your event via search.</p>
           <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
         </div>
         
@@ -203,6 +203,15 @@
               <textarea id="eventDescriptionInput" type="text" class="form-control" ng-model="eventDesc"></textarea>
             </div>
           </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Private?</p>
+            </div>
+            <div class="form-group col-sm-1">
+              <input id="eventFriendsInput" type="checkbox" checked class="form-control" ng-model="eventFriends"></input>
+            </div>
+            <div class="col-sm-9"></div>
+          </div>
         </div>
         
         <div id="eventSubmit" class="row">
@@ -223,15 +232,15 @@
       <!-- Page 4: My Events -->
       <div id="myEvents" hidden="true" class="page" value="4" ng-controller="Controller1">
 
-      <div class="infoArea" hidden="true" value="4">
-          <p>Here are all of the events that you've created!</p>
-          <p>Here is where you have all of the options edit your events and invite friends to your events!</p>
+        <div class="infoArea" hidden="true" value="4">
+          <p>Here are all of the events you have created!</p>
+          <p>You can edit your events or invite friends to them.</p>
           <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
         </div>
-        
+          
         <div class="row">
           <div class="col-sm-12">
-            <h1>Your Events Feed</h1>
+            <h1>My Events</h1>
           </div>
         </div>
         
@@ -240,9 +249,54 @@
             <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
           </div>
           <div class="col-sm-6"> 
-            <button id="helpBTN" type="button" value=3 class="infoButton btn btn-block btn-primary">Info</button>
+            <button id="helpBTN" type="button" value=4 class="infoButton btn btn-block btn-primary">Info</button>
           </div>
         </div>
+        
+        <div id="events" class="rowEvent">
+          <section id="event-feed">
+            <ul>
+              <li ng-repeat="event in events">
+                <span class="name">
+                  {{event.name}}
+                </span>
+                <span class="description">
+                 {{event.description}}
+                </span>
+              </li>
+            </ul>
+          </section>
+        </div>
+        
+        <div id="eventsArea">
+        </div>
+
+      </div>
+      
+      <!-- Page 5: Friends -->
+      <div id="friends" hidden="true" class="page" value="5" ng-controller="Controller5">
+      
+        <div class="infoArea" hidden="true" value="5">
+          <p>View, add, or delete your friends!</p>
+          <p>Click on a friends profile to see all their events.</p>
+          <p>To add a new friend, search for their profile's user name.</p>
+        </div>
+          
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Friends!</h1>
+          </div>
+        </div>
+        
+       <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=5 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+<<<<<<< HEAD
       <div id="events" class="rowEvent" ng-controller="rootController">
             <h1>Your Events</h1>
             <section id="event-feed">
@@ -257,8 +311,19 @@
                 </li>
               </ul>
             </section>
+=======
+        
+        <h1>Friends currently online:</h1>
+        <div id="friendsOnline">
+        
+>>>>>>> origin/Events
         </div>
+        <h1>Add a friend:</h1>
+        <input id="friendsInput" class="form-control"></input>
+      
       </div>
+        
+    </div>
       <!-- oooooooooooooooooooooooooo -->
     </div>
 

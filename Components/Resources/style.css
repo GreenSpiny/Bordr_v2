@@ -68,7 +68,7 @@ body {
   margin: auto;
 }
 
-#eventlist, #createEvent {
+#eventlist, #createEvent, #myEvents, #friends {
   max-width: 800px;
   padding: 20px;
   margin: auto;
@@ -114,6 +114,14 @@ h1, h2 {
   padding-top: 12px;
 }
 
+#eventsArea .space {
+  padding: 15px;
+}
+
+#eventsArea input, textarea {
+  font-weight: 700;
+}
+
 #eventlist hr {
   color: #a38571;
   border-color: #a38571;
@@ -136,7 +144,7 @@ h1, h2 {
   max-height: 34px;
 }
 
-#eventBTN, #searchEventsBTN {
+#eventBTN, #searchEventsBTN, .eventObject button {
   border: 1px solid #3d3434;
 }
 
@@ -151,7 +159,7 @@ h1, h2 {
   border: 1px solid #57634A;
 }
 
-.space input, .space textarea, .space select {
+.space input, .space textarea, .space select, #friendsInput {
   background-color: #F2E3DA;
 }
 
@@ -168,4 +176,8 @@ h1, h2 {
   padding-top: 15px;
   margin: 0px;
   display: inline-block;
+}
+
+#friendsInput {
+  text-align: center;
 }

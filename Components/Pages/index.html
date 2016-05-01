@@ -51,46 +51,43 @@
       </div>
       
       <!-- Page 1: Main Menu -->
-      <div id="mainmenu" hidden="true" class="page container" value="1">
+      <div id="mainmenu" hidden="true" class="page" value="1">
         
-        <div class="col-sm-6">
-        
-          <div class="row">
-            <div class="col-sm-12">
-              <h1>Welcome to Bordr!</h1>
-            </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Welcome to Bordr, username!</h1>
           </div>
-          
-          <div class="row">
-            <div class="col-sm-6">
-              <button id="eventsBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Event Listing</button>
-            </div>
-            <div class="col-sm-6"> 
-              <button id="makeBTN" type="button" value=3 class="pageButton btn btn-block btn-primary">Create Event</button>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-sm-6">
-              <button id="friendsBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">My Events</button>
-            </div>
-            <div class="col-sm-6"> 
-              <button id="settingsBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Friends</button>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-sm-4"> </div>
-            <div class="col-sm-4"> 
-              <button id="logoutBTN" type="button" value=0 class="pageButton btn btn-block btn-primary">Logout</button>
-            </div>
-            <div class="col-sm-4"> </div>
-          </div>
-        
         </div>
         
-        <div class="col-sm-6">
-        
+        <div class="row">
+          <div class="col-sm-6 container">
+            <div class="row">
+              <button id="eventsBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Event Listing</button>
+            </div>
+            <div class="row"> 
+              <button id="makeBTN" type="button" value=3 class="pageButton btn btn-block btn-primary">Create Event</button>
+            </div>
+            <div class="row">
+              <button id="manageBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">My Events</button>
+            </div>
+            <div class="row"> 
+              <button id="profileBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Manage Profile</button>
+            </div>
+            <div class="row">
+              <button id="logoutBTN" type="button" value=0 class="pageButton btn btn-block btn-primary">Logout</button>
+            </div>
+          </div>
+          
+          <div id="friendsOnline" class="col-sm-6 container">
+            <h2 class="row">Friends online:</h2>
+            <div class="row spaceAlt">
+              <div class="nametag">
+                <div class="nametagName">MLG_Plotkaman</div>
+                <div class="nametagChat"></div>
+              </div>
+            </div>       
+          
+          </div>
         </div>
         
       </div>
@@ -164,8 +161,8 @@
       <div id="createEvent" hidden="true" class="page" value="3">
         
         <div class="infoArea" hidden="true" value="3">
-          <p>Create an event for others to join!  Your event will show up in your friends' Event Listings.</p>
-          <p>If "all users" is selected, non-friend members can find your event via search.</p>
+          <p>Create an event for others to join!  It will show up in your friends' Event Listings.</p>
+          <p>If "all users" is selected, non-friend members can find the event via search.</p>
           <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
         </div>
         

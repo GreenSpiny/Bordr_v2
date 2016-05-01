@@ -66,6 +66,7 @@ body {
   max-width: 800px;
   padding: 20px;
   margin: auto;
+  text-align: center;
 }
 
 #eventlist, #createEvent {
@@ -105,6 +106,25 @@ h1, h2 {
   width: inherit;
   line-height: 30px;
   padding-top: 12px;
+}
+
+.spaceAlt {
+  margin: 5px;
+  margin-top: 0px;
+  background-color: #a38571;
+  border: 1px solid #3d3434;
+  border-radius: 8px;
+  line-height: 30px;
+}
+
+#mainmenu h2 {
+  margin-top: 0px;
+}
+
+#mainmenu space {
+  width: auto;
+  text-align: center;
+  display: inline-block;
 }
 
 #eventlist hr {
@@ -161,4 +181,31 @@ h1, h2 {
   padding-top: 15px;
   margin: 0px;
   display: inline-block;
+}
+
+.nametag {
+  width: 140px;
+  padding: 0px;
+  margin: 5px;
+  float: left;
+  background-image: url("images/nametag.png");
+}
+
+.nametagName {
+  width: 108px;
+  height: 32px;
+  margin: 0px;
+  overflow: hidden;
+  font-size: 12px;
+  font-family: "Calibri", sans-serif;
+  font-weight: 700;
+  float: left;
+}
+
+.nametagChat {
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  margin: 0px;
+  float: right;
 }

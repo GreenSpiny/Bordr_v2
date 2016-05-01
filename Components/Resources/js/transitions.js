@@ -16,6 +16,9 @@ $(document).ready(function() {
   
   $(".pageButton").click(function(){
     goToPage(($(this)).attr("value"));
+    $(".infoArea").each(function(){
+      $(this).hide();
+    });
   });
   
   // Open help info

@@ -46,7 +46,7 @@ $(document).ready(function() {
 
 // Helper functions --- o
 function goToPage(num) {
-
+  console.log("goto",num);
   // Calculate fade in speed
   var fadeValue = 0;
   if (page > 0 && num > 0) {
@@ -81,8 +81,8 @@ function goToPage(num) {
 function scroll(direction, duration) {
   // Scroll header up
   if (direction == "up") {
-      var scroll = $("#header").height() * -imageRatio;
-      $("#header").animate({top: scroll}, duration);
+      var scroll = $("header").height() * -imageRatio;
+      $("header").animate({top: scroll}, duration);
       $(".page").animate({top: scroll}, duration);
   }
   // Scroll header down

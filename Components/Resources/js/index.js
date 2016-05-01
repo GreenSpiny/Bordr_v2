@@ -58,10 +58,20 @@ function($scope, $http) {
   }
   $scope.chat = function() {
     var data = {username: $scope.user, password: $scope.password, confirm: $scope.confirm, email:$scope.email};
-    $.get('http://localhost:3000/chat', data).done(function(response) {
-      console.log(response);
-      // <a href="print.html"  onclick="window.open('print.html', 'newwindow', 'width=300, height=250'); return false;"> Print</a>
+    var form = document.createElement("form");
 
-    });
+    form.setAttribute("method", "get");
+    form.setAttribute("action", "http://localhost:3000/chat");
+    form.setAttribute("target", "view");
+
+    var hiddenField = document.createElement("input"); 
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "message");
+    hiddenField.setAttribute("value", "val");
+    form.appendChild(hiddenField);
+    document.body.appendChild(form);
+    window.open('', 'view', 'resizable=0,width=350,height=250');
+    form.submit();
+
   }
 });

@@ -43,7 +43,7 @@ function($scope, $http) {
           $scope.errorConfirm = 'error';
           $('#password').after('<div class="alert alert-warning">'+ response.password +'</div>');
         }
-        if (response.confirm != null) {
+        if (response.confirm != null) { 
           $scope.errorPassword = 'error';
           $scope.errorConfirm = 'error';
           $('#confirm').after('<div class="alert alert-warning">'+ response.confirm +'</div>');
@@ -55,5 +55,13 @@ function($scope, $http) {
         $scope.$apply();
       });
     }
+  }
+  $scope.chat = function() {
+    var data = {username: $scope.user, password: $scope.password, confirm: $scope.confirm, email:$scope.email};
+    $.get('http://localhost:3000/chat', data).done(function(response) {
+      console.log(response);
+      // <a href="print.html"  onclick="window.open('print.html', 'newwindow', 'width=300, height=250'); return false;"> Print</a>
+
+    });
   }
 });

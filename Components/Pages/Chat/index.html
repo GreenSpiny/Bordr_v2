@@ -1,0 +1,40 @@
+<!-- <a href="print.html"  onclick="window.open('print.html', 'newwindow', 'width=300, height=250'); return false;"> Print</a>
+ -->
+
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  
+  <head>
+ 	<!-- Title and icon -->
+    <title>Chat</title>
+    <link rel="icon" href="images/raccoon_icon.png">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Angular JS link from Google - https://developers.google.com/speed/libraries/-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">  
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+  </head>
+  <body>
+    <form action="" id="nickname-form">
+      <input id="nickname" autocomplete="off" /><button id="select">Nickname</button>
+    </form>
+    <div id="greeting"></div>
+    <form action="" id="chat-form">
+      <input id="message" autocomplete="off" /><button id="send">Send</button>
+    </form>
+    <ul id="messages"></ul>
+  </body>
+ </html>
+

@@ -33,10 +33,11 @@ function InitializeGlobals() {
   global.mongo = {
     url      : 'mongodb://bordr:abc123@work.websci:7000/bordr'
   }
-
+  
   global.logged_in = false;
 
   console.log("Global framework initialized")
+
 }
 
 function ConfigureSitemap() {
@@ -115,3 +116,17 @@ function AllowPageAccess() {
 }
 
 
+// global.io.on('connection', function(socket){
+//   console.log("One user joined the chat");
+//   //draw limited messages out of the database
+//   //push messages to the chat
+//   socket.on('message', function(msg){
+//     console.log("Message recieved by the chat server");
+//     //send message to the clients
+//     // socket.broadcast.emit('message', msg);
+
+
+//     //save message to database
+//   });
+
+// });

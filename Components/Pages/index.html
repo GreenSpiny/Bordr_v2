@@ -74,7 +74,7 @@
             <button id="friendsBTN" type="button" value=4 class="pageButton btn btn-block btn-primary" ng-click="loadEvents()">My Events</button>
           </div>
           <div class="col-sm-6"> 
-            <button id="settingsBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Friends</button>
+            <button id="settingsBTN" type="button" value=5 class="pageButton btn btn-block btn-primary">Friends</button>
           </div>
         </div>
         
@@ -268,11 +268,45 @@
           </section>
         </div>
         
-        <div id="eventsArea"></div>
+        <div id="eventsArea">
+        </div>
 
+      </div>
+      
+      <!-- Page 5: Friends -->
+      <div id="friends" hidden="true" class="page" value="5" ng-controller="Controller5">
+      
+        <div class="infoArea" hidden="true" value="5">
+          <p>View, add, or delete your friends!</p>
+          <p>Click on a friends profile to see all their events.</p>
+          <p>To add a new friend, search for their profile's user name.</p>
+        </div>
+          
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Friends!</h1>
+          </div>
         </div>
         
+       <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=5 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+        
+        <h1>Friends currently online:</h1>
+        <div id="friendsOnline">
+        
+        </div>
+        <h1>Add a friend:</h1>
+        <input id="friendsInput" class="form-control"></input>
+      
       </div>
+        
+    </div>
       <!-- oooooooooooooooooooooooooo -->
     </div>
 

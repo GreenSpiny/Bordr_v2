@@ -158,7 +158,7 @@
         
         <div class="infoArea" hidden="true" value="3">
           <p>Create an event for others to join!  Your event will show up in your friends' Event Listings.</p>
-          <p>If "all users" is selected, non-friend members can find your event via search.</p>
+          <p>If "private" is selected, non-friend members cannot find your event via search.</p>
           <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
         </div>
         
@@ -202,6 +202,15 @@
             <div class="form-group col-sm-10">
               <textarea id="eventDescriptionInput" type="text" class="form-control" ng-model="eventDesc"></textarea>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Private?</p>
+            </div>
+            <div class="form-group col-sm-1">
+              <input id="eventFriendsInput" type="checkbox" checked class="form-control" ng-model="eventFriends"></input>
+            </div>
+            <div class="col-sm-9"></div>
           </div>
         </div>
         

@@ -114,6 +114,14 @@ h1, h2 {
   padding-top: 12px;
 }
 
+#eventsArea .space {
+  padding: 15px;
+}
+
+#eventsArea input, textarea {
+  font-weight: 700;
+}
+
 #eventlist hr {
   color: #a38571;
   border-color: #a38571;
@@ -136,7 +144,7 @@ h1, h2 {
   max-height: 34px;
 }
 
-#eventBTN, #searchEventsBTN {
+#eventBTN, #searchEventsBTN, .eventObject button {
   border: 1px solid #3d3434;
 }
 

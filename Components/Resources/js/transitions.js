@@ -57,6 +57,11 @@ function goToPage(num) {
     scroll("down",750);
   }
   
+  // Hide all info boxes
+  $(".infoArea").each(function() {
+    $(this).hide();
+  });
+  
   // Remove password
   $("#password").val("");
   
@@ -76,12 +81,4 @@ function scroll(direction, duration) {
       $("#header").animate({top: 0}, duration);
       $(".page").animate({top: 0}, duration);
   }
-}
-
-function transition(button) {
-  goToPage(button.attr("value"));
-  $(".infoArea").each(function(){
-    //what the hell does this do?!
-    // button.hide();
-  });
 }

@@ -68,7 +68,7 @@ body {
   margin: auto;
 }
 
-#eventlist, #createEvent {
+#eventlist, #createEvent, #myEvents {
   max-width: 800px;
   padding: 20px;
   margin: auto;

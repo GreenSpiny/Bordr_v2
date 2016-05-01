@@ -31,7 +31,7 @@ function InitializeGlobals() {
   // Initialize Database Client
   global.client = mod.mongo.MongoClient;
   global.mongo = {
-    url      : 'mongodb://localhost:27017/bordr'
+    url      : 'mongodb://bordr:abc123@work.websci:7000/bordr'
   }
 
   global.logged_in = false;

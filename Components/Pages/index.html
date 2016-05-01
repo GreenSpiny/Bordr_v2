@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" ng-app="Bordr">
   
   <head>
   
@@ -10,6 +10,9 @@
     
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Angular JS link from Google - https://developers.google.com/speed/libraries/-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 
     <!-- Custom styles -->
     <link href="style.css" rel="stylesheet">  
@@ -23,35 +26,41 @@
 
   <body>
   
-    <div id="header" class="container-fluid">
+    <header class="container-fluid">
       <img id="logo" src="images/raccoon_small.png"> </img>
-    </div>
+    </header>
   
-    <div id="content" class="container-fluid">
+    <main class="container-fluid">
     
       <!-- Page 0: Login -->
-      <div id="login" class="page" value="0">
+      <section id="login" class="page" value="0" ng-controller="controller0">
         
         <div class="form-group row">
           <label for="user">Username:</label>
-          <input type="text" class="form-control input-sm" id="user"> </input>
+          <input type="text" class="form-control input-sm" id="user" ng-model="user" ng-class="errorUser"> </input>
           <label for="password">Password:</label>
-          <input type="password" class="form-control input-sm" id="password"> </input>
+          <input type="password" class="form-control input-sm" id="password" ng-model="password" ng-class="errorPassword"> </input>
+          <div id="signUpInfo" hidden="true">
+            <label for="password">Confirm Password:</label>
+            <input type="password" class="form-control input-sm" id="confirm" ng-model="confirm" ng-class="errorConfirm"> </input>
+            <label for="password">E-mail Address:</label>
+            <input type="text" class="form-control input-sm" id="email" ng-model="email" ng-class="errorEmail"> </input>
+          </div>
         </div>
         
         <div class="row">
           <div class="col-sm-6">
-            <button id="loginBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary">Log In</button>
+            <button id="loginBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary" ng-click="logInClick()">Log In</button>
           </div>
           <div class="col-sm-6"> 
-            <button id="signupBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary">Sign Up</button>
+            <button id="signupBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary" ng-click="signUpClick()">Sign Up</button>
           </div>
         </div>
         
-      </div>
+      </section>
       
       <!-- Page 1: Main Menu -->
-      <div id="mainmenu" hidden="true" class="page" value="1">
+      <section id="mainmenu" hidden="true" class="page" value="1">
         
         <div class="row">
           <div class="col-sm-12">
@@ -85,10 +94,10 @@
           <div class="col-sm-4"> </div>
         </div>
         
-      </div>
+      </section>
       
       <!-- Page 2: Event List -->
-      <div id="eventlist" hidden="true" class="page" value="2">
+      <section id="eventlist" hidden="true" class="page" value="2">
         
         <div class="infoArea" hidden="true" value="2">
           <p>Bored? Here's where you find something to do, close or far!</p>
@@ -150,10 +159,10 @@
         
         </div>
         
-      </div>
+      </section>
       
       <!-- Page 3: Create Event -->
-      <div id="createEvent" hidden="true" class="page" value="3">
+      <section id="createEvent" hidden="true" class="page" value="3">
         
         <div class="infoArea" hidden="true" value="3">
           <p>Create an event for others to join!  Your event will show up in your friends' Event Listings.</p>
@@ -198,7 +207,7 @@
               <p class="bg-1">Description:</p>
             </div>
             <div class="form-group col-sm-10">
-              <textarea id="eventDescriptionInput" type="text" class="form-control"></textArea>
+              <textarea id="eventDescriptionInput" type="text" class="form-control"></textarea>
             </div>
           </div>
         </div>
@@ -209,10 +218,9 @@
           <div class="col-sm-3"></div>
         </div>
         
-      </div>
-      
+      </section>
       <!-- oooooooooooooooooooooooooo -->
-    </div>
+    </main>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

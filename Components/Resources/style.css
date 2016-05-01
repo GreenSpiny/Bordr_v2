@@ -9,7 +9,7 @@ body {
   padding: 0px;
 }
 
-#header {
+header {
     background-image: url(images/raccoon_border.png);
     background-repeat: repeat-x;
     background-size: contain;
@@ -28,7 +28,7 @@ body {
     text-align: center;
 }
 
-#header img {
+header img {
   height: auto;
   max-width: 100%;
   margin: auto;
@@ -60,6 +60,12 @@ body {
 
 #login label {
   margin-top: 5px;
+}
+
+.error { 
+    border-color: rgba(229, 103, 23, 0.8);
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+    outline: 0 none;
 }
 
 #mainmenu {

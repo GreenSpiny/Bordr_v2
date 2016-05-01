@@ -95,13 +95,15 @@ function CreateEvent(req, client) {
 }
 
 function getUserEvents(req, client) {
-  events.find(function(err, tweets){
-    if (err) console.log(err);
+  var eventsList = [];
+  var collection = mongo.db.collection('events');
+  var myCursor = collection.find();
+  myCursor.each( function(err, doc) {
+    if (doc != null)
+      eventsList.push(doc);
     else 
-    {
-      client.send(events);
-    }
-  })
+      client.send(eventsList);
+  });
 }
 
 

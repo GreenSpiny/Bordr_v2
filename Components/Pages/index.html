@@ -28,7 +28,7 @@
       <img id="logo" src="images/raccoon_small.png"> </img>
     </div>
   
-    <div id="content" class="container-fluid">
+    <div id="content" class="container-fluid" ng-controller="rootController">
     
       <!-- Page 0: Login -->
       <div id="login" class="page" value="0">
@@ -52,7 +52,7 @@
       </div>
       
       <!-- Page 1: Main Menu -->
-      <div id="mainmenu" hidden="true" class="page" value="1" ng-controller="Controller1">
+      <div id="mainmenu" hidden="true" class="page" value="1">
         
         <div class="row">
           <div class="col-sm-12">
@@ -69,9 +69,9 @@
           </div>
         </div>
         
-        <div class="row">
+        <div class="row" ng-controller="rootController">
           <div class="col-sm-6">
-            <button id="friendsBTN" type="button" value=4 class="pageButton btn btn-block btn-primary" ng-click="loadEvents()">My Events</button>
+            <button id="friendsBTN" type="button" value=4 class="pageButton btn btn-block btn-primary" ng-click="$broadcast('loadEvents')">My Events</button>
           </div>
           <div class="col-sm-6"> 
             <button id="settingsBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Friends</button>
@@ -221,7 +221,7 @@
       </div>
 
       <!-- Page 4: My Events -->
-      <div id="myEvents" hidden="true" class="page" value="4" ng-controller="Controller4">
+      <div id="myEvents" hidden="true" class="page" value="4" ng-controller="Controller1">
 
       <div class="infoArea" hidden="true" value="4">
           <p>Here are all of the events that you've created!</p>
@@ -243,11 +243,11 @@
             <button id="helpBTN" type="button" value=3 class="infoButton btn btn-block btn-primary">Info</button>
           </div>
         </div>
-      <div id="events" class="rowEvent">
+      <div id="events" class="rowEvent" ng-controller="rootController">
             <h1>Your Events</h1>
             <section id="event-feed">
               <ul>
-                <li ng-repeat="event in events">
+                <li ng-repeat="event in eventsFeed">
                   <span class="name">
                      {{event.name}}
                   </span>
@@ -273,9 +273,9 @@
     <script>
     var app = angular.module('Bordr', []);
 
-    app.controller('Controller1', function($scope, $http){
-      $scope.loadEvents = function() {
-
+    app.controller('Controller1', function($rootScope){
+      $rootScope.loadEvents = function() {
+        $rootScope.$broadcast('loadEvents', myEvents());
       }
     });
 
@@ -313,19 +313,19 @@
       }
     });
 
-    app.controller('Controller4', function($scope, $http){
-      $scope.events = [];
-      $scope.myEvents = function(events) {
+    app.controller('rootController', function($scope, $http){
+      $scope.eventsFeed = [];
+      $scope.$on('loadEvents', function() {
         $http({
           method: 'GET',
           url: '/getEvents'
         }).then(function successCallback(response) {
           for (var i=0; i < response.data.length; i++)
           {
-            $scope.events.push(response.data[i]);
+            $scope.eventsFeed.push(response.data[i]);
           }
         })
-      }
+      })
     });
     </script>
   </body>

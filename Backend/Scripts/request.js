@@ -2,28 +2,46 @@ var request = module.exports =
 function () { 
 
   // Handle Page Routing
-  app.get("/", function(req, res) {
+  app.get("*", function(req, res) {
     if (req.login_cookie && req.login_cookie.user) {
       logged_in = true;
     }
-    var extension = req.originalUrl;
-    if (extension == '' || extension == '/')
-      res.render(mod.path.join(loc.root, 'Components/Pages'));
+    var extension = req.originalUrl.toLowerCase();
+
+    if (extension.slice(0,9) == '/scripts/') {
+      var path  = mod.path.join(loc.frontend_scripts, extension.slice(9));
+      res.sendFile(path);
+    }
+    // If the exension is empty, redirect to the index page
+    else if (extension == '' || (extension == '/' && extension.length == 1) ) {
+      res.render(mod.path.join(loc.pages));
+    }
+    // Otherwise, try to render a page with the extension name, 404 on error
+    else {
+      res.render(mod.path.join(loc.pages + extension), {}, function(err, html) {
+        if (err) {
+          console.log(mod.path.join(loc.pages + extension) + "does not exist. Redirecting...");
+          res.redirect('/404');
+        }
+        else {
+          res.send(html);
+        }
+      });
+    }
   });
 
   // Handle Post Requests
-  app.post('/signup', function(req, res) {
-    AddUser(req.body, res);
-  });
-
+  app.post('/signup', AddUser);
   app.post('/login', ValidateUser);
+  app.post('/autofill', Autofill);
 
   app.listen(3000, function() {});
 }
 
 
-function AddUser (user, client) {
+function AddUser (req, client) {
   err = {};
+  user = req.body;
 
   // Validate Username
   var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i
@@ -48,6 +66,7 @@ function AddUser (user, client) {
     if (err != null) 
       err['database'] = db_err;
     client.send(err);
+    console.log(err);
   });
 }
 
@@ -69,6 +88,27 @@ function ValidateUser (req, res) {
       res.send("Invalid Credentials");
     }
   });
+}
+
+function Autofill (req, res) {
+  err = {};
+  value = req.body.value;
+  property = req.body.property;
+  collection = mongo.db.collection(req.body.collection);
+
+  var possibilities = [];
+  var rx_AutofillValue = new RegExp(value,"i");
+  var query = {};
+
+  query[property] = rx_AutofillValue;
+
+  var cursor = collection.find(query);
+  cursor.each( function(err, doc) {
+    if (doc != null)
+      possibilities.push(doc);
+    else 
+      res.send(possibilities);
+  });  
 }
 
 

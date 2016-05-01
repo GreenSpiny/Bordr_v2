@@ -18,11 +18,12 @@ function InitializeGlobals() {
 
   // Initialize Site Structure
   global.loc = {
-    root        : mod.path.dirname(require.main.filename),
-    scripts     : mod.path.join(mod.path.dirname(require.main.filename), 'Components/Scripts'),
-    system_data : mod.path.join(mod.path.dirname(require.main.filename), 'Components/SystemData'),
-    pages       : mod.path.join(mod.path.dirname(require.main.filename), 'Components/Pages'),
-    resources   : mod.path.join(mod.path.dirname(require.main.filename), 'Components/Resources')
+    root                        : mod.path.dirname(require.main.filename),
+    backend_scripts             : mod.path.join(mod.path.dirname(require.main.filename), 'Backend/Scripts'),
+    system_data                 : mod.path.join(mod.path.dirname(require.main.filename), 'Backend/SystemData'),
+    frontend_scripts            : mod.path.join(mod.path.dirname(require.main.filename), 'Frontend/Scripts'),
+    pages                       : mod.path.join(mod.path.dirname(require.main.filename), 'Frontend/Pages'),
+    resources                   : mod.path.join(mod.path.dirname(require.main.filename), 'Frontend/Resources')
   } 
  
   // Initialize Application
@@ -63,6 +64,9 @@ function InitializeDatabase(callback) {
     db.createCollection('users', function(collection_err, collection) {
       console.log(collection_err);
       collection.createIndex({username: 1}, {unique: true}); 
+    });
+    db.createCollection('interests', function(collection_err, collection) {
+      collection.createIndex({title: 1}, {unique: true}); 
     });
     console.log("Database initialized")
     callback();
@@ -110,8 +114,8 @@ function InitializeSessionManager(callback) {
 }
 
 function AllowPageAccess() {
-  require(mod.path.join(loc.scripts, 'request.js'))();
-    console.log("Site operational");
+  require(mod.path.join(loc.backend_scripts, 'request.js'))();
+  console.log("Site operational");
 }
 
 

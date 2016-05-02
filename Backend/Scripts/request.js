@@ -28,7 +28,19 @@ function () {
 
   // Handle Post Requests 
   app.post('/signup', function (req, res) {
-    AddUser(req.body, function(data) { 
+    CreateUser(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/createInterest', function (req, res) {
+    CreateInterest(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/createEvent', function (req, res) {
+    CreateEvent(req.body, function(data) { 
       res.send(data);
     });
   });
@@ -63,25 +75,37 @@ function () {
     });
   });
 
+  app.post('/interestinfo', function (req, res) {
+    InterestInfo(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/eventinfo', function (req, res) {
+    EventInfo(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
   app.post('/relationship', function (req, res) {
     Relationship(req.body, function(data) { 
       res.send(data);
     });
   });
 
-  app.post('/createEvent', function(req, res) {
+  app.post('/createEvent', function (req, res) {
     CreateEvent(req.body, function(data) {
       res.send(data);
     });
   })
 
-  app.post('/getUserEvents', function(req, res){
+  app.post('/getUserEvents', function (req, res){
     GetUserEvents(req.body[0], function(data) {
       res.send(data);
     });
   })
 
-  app.post('/saveChanges', function(req, res) {
+  app.post('/saveChanges', function (req, res) {
     UpdateEvent(req.body, function(data) {
       res.send(data);
     });
@@ -91,7 +115,7 @@ function () {
 }
 
 
-function AddUser (signup_info, callback) {
+function CreateUser (signup_info, callback) {
   var err = {};
 
   // Validate Username
@@ -125,6 +149,48 @@ function AddUser (signup_info, callback) {
       err['database'] = db_err;
     callback(err);
   });
+}
+
+function CreateInterest (new_interest, callback) {
+  var err = {};
+  var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i;
+
+  if (new_interest.title.length < 3 || new_interest.title.length > 15 || !rx_Alphanumeric.test(new_interest.title))
+    err['title'] = "Event title must be between 3 and 15 alphanumeric characters";
+  if (new_interest.description.length > 250)
+    err['description'] = "Event name must be under 250 characters";
+  
+  // Database Insertion
+  collection = mongo.db.collection('interests');    
+  collection.insert(new_interest, {w:1}, function(db_err, result) { 
+    if (err != null) 
+      err['database'] = db_err;
+    callback(err);
+  });
+}
+
+function CreateEvent (new_interest, callback) {
+  var err = {};
+  var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i;
+
+  if (new_interest.title.length < 3 || new_interest.title.length > 15 || !rx_Alphanumeric.test(new_interest.title))
+    err['title'] = "Event title must be between 3 and 15 alphanumeric characters";
+  if (new_interest.description.length > 250)
+    err['description'] = "Event name must be under 250 characters";
+  
+  // Database Insertion
+  collection = mongo.db.collection('interests');    
+  collection.insert(new_interest, {w:1}, function(db_err, result) { 
+    if (err != null) 
+      err['database'] = db_err;
+    callback(err);
+  });
+}
+
+function LinkEntries (link_data, callback) {
+  var err = {};
+  
+
 }
 
 function ValidateUser (req, credentials, callback) {
@@ -165,8 +231,6 @@ function UserInfo (user_ids, callback) {
   var err = {};
   var collection = mongo.db.collection('users');
 
-  console.log(user_ids);
-
   var formatted_ids = [];
   user_ids.values.forEach( function (user_id) {
     formatted_ids.push(mod.mongo.ObjectId(user_id));
@@ -181,6 +245,48 @@ function UserInfo (user_ids, callback) {
       users.push(doc);
     else 
       callback(users);
+  });
+}
+
+function InterestInfo (interest_ids, callback) {
+  var err = {};
+  var collection = mongo.db.collection('interests');
+
+  var formatted_ids = [];
+  interest_ids.values.forEach( function (interest_id) {
+    formatted_ids.push(mod.mongo.ObjectId(interest_id));
+  });
+
+  var interests = [];
+  var cursor = collection.find({"_id": {$in: formatted_ids}});
+  cursor.each( function(err, doc) {
+    if (err)
+      callback(err);
+    else if (doc != null)
+      interests.push(doc);
+    else 
+      callback(interests);
+  });
+}
+
+function EventInfo (event_ids, callback) {
+  var err = {};
+  var collection = mongo.db.collection('events');
+
+  var formatted_ids = [];
+  event_ids.values.forEach( function (event_id) {
+    formatted_ids.push(mod.mongo.ObjectId(event_id));
+  });
+
+  var events = [];
+  var cursor = collection.find({"_id": {$in: formatted_ids}});
+  cursor.each( function(err, doc) {
+    if (err)
+      callback(err);
+    else if (doc != null)
+      events.push(doc);
+    else 
+      callback(events);
   });
 }
 

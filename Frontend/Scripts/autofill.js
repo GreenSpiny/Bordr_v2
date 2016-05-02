@@ -1,5 +1,4 @@
 function TestSubmit(data) {
-  console.log(data);
   var user_ids = {values: [data[0]["_id"], data[1]["_id"]]};
 
   /*$.post('http://localhost:3000/relationship', {0: user1_id, 1: user2_id}).done( function(data) {
@@ -7,9 +6,8 @@ function TestSubmit(data) {
     console.log(data);
   });*/
 
-  console.log(user_ids);
- $.post('http://localhost:3000/userinfo', user_ids).done( function(data) {
-    // data contains information about one user!
+ $.post('http://localhost:3000/createInterest', {title: "game", description: "play it"}).done( function(data) {
+    // data contains information about all users in user_ids!!
      console.log(data); 
   });
 }

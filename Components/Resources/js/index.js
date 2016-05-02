@@ -56,6 +56,7 @@ function($scope, $http) {
       });
     }
   }
+  
   $scope.chat = function() {
     var data = {username: $scope.user, password: $scope.password, confirm: $scope.confirm, email:$scope.email};
     var form = document.createElement("form");

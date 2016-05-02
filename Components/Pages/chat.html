@@ -25,16 +25,16 @@
   </head>
 
   <body ng-app="chatApp">
-  <main  ng-controller="chatController">
+  
+    <h1>Chat Room for {{room}}</h1>
+    <main  ng-controller="chatController">
    <label for="message">Message:</label>
-    <input type="text" class="form-control input-sm" id="message" ng-model="message"> </input>
-    <button ng-click="send()">Send</button>
+    <input type="text" class="form-control input-sm" id="words" ng-model="words"> </input>
+    <button id="send" class="btn btn-block btn-primary pageButtonWait" ng-click="send()">Send</button>
     <ul id="conversation" ng-model="conversation">
     </ul>
    </div>
    </main>
   </body>
-
-
  </html>
 

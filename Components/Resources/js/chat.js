@@ -2,26 +2,37 @@
 var socket = io();
 
 //declare Angular app name
-var app = angular.module("chatApp", []);
+var app = angular.module('chatApp',[]);
 
 //add controller to app
 app.controller("chatController",
 function($scope, $http) {
-	//I swear to you, this will not work. Thus the janky-not-so-angular solution
-	// $scope.messages = [{message: "Yo!"},{message: "Hello"}];
+	var room;
+	var event;
+	var name = "Sender";
+	var names = ["ConradTest1","ConradTest2"];
+
+	var data = {room: room, event:event, users:names};
+	$.post('http://localhost:3000/startChat', data).done(function(response) {
+		room = response;
+		socket.emit('room', {room:room});
+	});	
 
 	$scope.send = function() {
-		if (!($scope.message == "")) {
-			socket.emit("send", {message: $scope.message});
+		if (!($scope.words == "" || $scope.words == undefined)) {
+			socket.emit("send", {room: room, event:event, users: names, message: [{speaker: name, words: $scope.words}] });
 		}
 	}
 
 	socket.on("recieve", function(data){
-		console.log(data.message);
-		var message = data.message
+		console.log(data);
+		$scope.words = "";
+		$scope.$apply();
 		var string = "";
-            string += ' <li> ';
-            string +=   data.message.message;
+            string += ' <li class="message"> ';
+            string +=   data.speaker;            
+            string +=   ": ";            
+            string +=   data.words;
             string += ' </li> ';
         document.getElementById('conversation').innerHTML += string; 
 	});

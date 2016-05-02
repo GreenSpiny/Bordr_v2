@@ -34,6 +34,8 @@ function InitializeGlobals() {
   global.mongo = {
     url      : 'mongodb://bordr:abc123@work.websci:7000/bordr'
   }
+  global.ObjectId = mod.mongo.ObjectID;
+
 
   global.logged_in = false;
 
@@ -66,7 +68,7 @@ function InitializeDatabase(callback) {
     db.createCollection('users', function(collection_err, collection) {
       collection.createIndex({username: 1}, {unique: true}); 
     });
-    console.log("Database initialized")
+    console.log("Database initialized");
     callback();
   });
 }

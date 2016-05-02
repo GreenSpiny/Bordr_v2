@@ -215,3 +215,16 @@ h1, h2 {
   margin: 0px;
   float: right;
 }
+
+.message {
+
+  margin: 15px auto;
+  padding: 20px auto;
+
+  border: 3px solid black;
+  list-style-type: none;
+  background: white;
+
+  border-radius: 5px;
+
+}

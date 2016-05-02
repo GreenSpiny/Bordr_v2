@@ -189,7 +189,10 @@ function CreateEvent (new_interest, callback) {
 
 function LinkEntries (link_data, callback) {
   var err = {};
-  
+  var collection1 = link_data.collection1;
+  var collection2 = link_data.collection2;
+  var col1entry = link_data.entries[0];
+  var col2entries = link_data.entries[1];
 
 }
 

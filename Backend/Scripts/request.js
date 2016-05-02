@@ -65,6 +65,7 @@ function () {
 
   app.post('/autofill', function (req, res) {
     Autofill(req.body, function(data) { 
+      console.log(data);
       res.send(data);
     });
   });
@@ -330,7 +331,6 @@ function Autofill (data, callback) {
   var value = data.value;
 
   property = data.property;
-  collection = mongo.db.collection(data.collection);
 
   var possibilities = [];
   var rx_AutofillValue = new RegExp(value,"i");
@@ -338,8 +338,10 @@ function Autofill (data, callback) {
 
   query[property] = rx_AutofillValue;
 
+  collection = mongo.db.collection(data.collection);
   var cursor = collection.find(query);
   cursor.each( function(err, doc) {
+    //console.log(doc);
     if (doc != null)
       possibilities.push(doc);
     else {

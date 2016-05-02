@@ -41,7 +41,6 @@ $(document).ready( function () {
     })
 
     function UpdateSuggestions() {
-
       var value = input.val();
       autofill_box.html("");
 
@@ -50,6 +49,8 @@ $(document).ready( function () {
       }
       if (value.length >= 3) {
         $.post('http://localhost:3000/autofill', {"collection": collection, "value": value, "property": property}).done( function(suggestions) {
+
+          console.log({"collection": collection, "value": value, "property": property});
 
           if (suggestions.length > 0)
             autofill_box.show();

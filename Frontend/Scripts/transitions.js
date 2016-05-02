@@ -82,8 +82,13 @@ function goToPage(num) {
   // Set page number to current page
   page = num;
   
-  // TESTING
-  $("#interestsArea").html(makeInterest("Corn Flakes") + makeInterest("Memes") + makeInterest("Bugs"));
+  // Page specific transitions ---o
+  if (num == 6) {
+    populateInterests();
+  }
+  
+  // 0000000000000000000000000 ---o
+
 }
 
 function scroll(direction, duration) {
@@ -104,6 +109,11 @@ function makeInterest(name) {
   return '<div class="interest"><p>' + name + '</p><div></div></div>';
 }
 
+function makeFriend(name) {
+  return '<div class="friend"><p>' + name + '</p></div>';
+}
+
+// Reads in user info
 function setUser() {
   if (user == null) {
     user = current_user;
@@ -112,4 +122,26 @@ function setUser() {
     $("#profile #changePassword").html(user.password);
     $("#profile #changeEmail").html(user.email);
   }
+}
+
+// Populate interests page
+function populateInterests() {
+  var interests = user.interests;
+  interests.push("team fortress 2");
+  interests.push("pokemon");
+  interests.push("R.O.B.");
+  for (var i = 0; i < 10; i++) {
+    interests.push("Super " + i.toString());
+  }
+  
+  var string = "";
+  for (var i = 0; i < interests.length; i++) {
+    string += makeInterest(interests[i]);
+  }
+  $("#interestsArea").html(string);
+}
+
+function populateFriends() {
+  var friends = user.friends;
+
 }

@@ -146,6 +146,21 @@ function ValidateUser (req, credentials, callback) {
   });
 }
 
+function CheckLogin(req, callback) {
+  if (req.login_cookie && req.login_cookie.user) {
+    console.log(req.login_cookie.user);
+    callback(req.login_cookie.user);
+  }
+  else {
+    callback(false);
+  }
+}
+
+function Logout(req, callback) {
+  req.login_cookie.destroy();
+  callback("Logged Out");
+}
+
 function UserInfo (user_id, callback) {
   var err = {};
   var collection = mongo.db.collection('users');
@@ -248,22 +263,7 @@ function UpdateEvents(req, client) {
 
 }
 
-function CheckLogin(req, callback) {
-  console.log("CHECK");
-  if (req.login_cookie && req.login_cookie.user) {
-    console.log(req.login_cookie.user);
-    callback(req.login_cookie.user);
-  }
-  else {
-    callback(false);
-  }
-}
 
-function Logout(req, callback) {
-  console.log(Object.keys(req));
-  req.login_cookie.destroy();
-  callback("Logged Out");
-}
 
 
 

@@ -67,6 +67,9 @@ function goToPage(num) {
   
   // Set page number to current page
   page = num;
+  
+  // TESTING
+  $("#interestsArea").html(makeInterest("Corn Flakes") + makeInterest("Memes") + makeInterest("Bugs"));
 }
 
 function scroll(direction, duration) {
@@ -81,4 +84,8 @@ function scroll(direction, duration) {
       $("#header").animate({top: 0}, duration);
       $(".page").animate({top: 0}, duration);
   }
+}
+
+function makeInterest(name) {
+  return '<div class="interest"><p>' + name + '</p><div></div></div>';
 }

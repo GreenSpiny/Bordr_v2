@@ -159,7 +159,7 @@ h1, h2 {
   border: 1px solid #57634A;
 }
 
-.space input, .space textarea, .space select, #friendsInput, #loginInfo input {
+.space input, .space textarea, .space select, #friendsInput, #loginInfo input, #profile input {
   background-color: #F2E3DA;
 }
 
@@ -232,4 +232,8 @@ h1, h2 {
 
 #interestsArea {
   margin: 5px;
+}
+
+#searchInterests {
+  text-align: center;
 }

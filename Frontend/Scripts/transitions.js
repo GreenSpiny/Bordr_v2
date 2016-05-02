@@ -83,6 +83,10 @@ function goToPage(num) {
   page = num;
   
   // Page specific transitions ---o
+  if (num == 5) {
+    populateFriends();
+  }
+  
   if (num == 6) {
     populateInterests();
   }
@@ -126,7 +130,7 @@ function setUser() {
 
 // Populate interests page
 function populateInterests() {
-  var interests = user.interests;
+  var interests = user.interests.slice();
   interests.push("team fortress 2");
   interests.push("pokemon");
   interests.push("R.O.B.");
@@ -141,7 +145,27 @@ function populateInterests() {
   $("#interestsArea").html(string);
 }
 
+// Populate friends page
 function populateFriends() {
-  var friends = user.friends;
 
+  /*
+  // Grab friends' info
+  $.post('http://localhost:3000/userinfo', user_ids).done( function(data) {
+    // data contains information about all users in user_ids!!
+     console.log(data);
+     var friendArray = [];
+     friendArray.push
+  });*/
+
+  var friends = user.friends.slice();
+  var friendArray = [];
+  friendArray.push({name: "Dan", id: 123})
+  friendArray.push({name: "Conrad", id: 456})
+  friendArray.push({name: "Chandler", id: 789})
+  
+  var string = "";
+  for (var i = 0; i < friendArray.length; i++) {
+    string += makeFriend(friendArray[i].name);
+  }
+  $("#friendsOnline").html(string);
 }

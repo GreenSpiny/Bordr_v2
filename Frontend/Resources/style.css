@@ -210,23 +210,19 @@ h1, h2 {
 }
 
 .interest, .friend {
-  float: left;
   padding: 0px;
   margin: 5px;
   border: 2px solid #4C3E3E;
   border-radius: 3px;
   height: 34px;
-}
-
-.friend p, .friend {
-  cursor: pointer;
+  display: inline-block;
 }
 
 .interest div:hover {
   background-image: url(images/x_icon_1.png);
 }
 
-.interest p {
+.interest p, .friend p {
   float: left;
   line-height: 30px;
   padding: 0px;
@@ -239,6 +235,15 @@ h1, h2 {
   font-weight: 700;
 }
 
+.friend p {
+  border-right: none;
+  cursor: pointer;
+}
+
+.friend {
+  cursor: pointer;
+}
+
 .interest div {
   padding: 0px;
   margin: 0px;
@@ -249,10 +254,18 @@ h1, h2 {
   cursor: pointer;
 }
 
-#interestsArea {
-  margin: 5px;
+#interestsArea, #friendsOnline {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
 }
 
-#searchInterests {
+#searchInterests, # {
   text-align: center;
+}
+
+.eventId {
+  display: none;
 }

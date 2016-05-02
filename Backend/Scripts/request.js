@@ -3,11 +3,7 @@ function () {
 
   // Handle Page Routing
   app.get("*", function(req, res) {
-    if (req.login_cookie && req.login_cookie.user) {
-      logged_in = true;
-    }
     var extension = req.originalUrl.toLowerCase();
-
     if (extension.slice(0,9) == '/scripts/') {
       var path  = mod.path.join(loc.frontend_scripts, extension.slice(9));
       res.sendFile(path);
@@ -43,6 +39,18 @@ function () {
     });
   });
 
+  app.post('/checkLogin', function(req, res) {
+    CheckLogin(req, function(data) {
+      res.send(data);
+    });
+  })
+
+  app.post('/logout', function (req, res) {
+    Logout(req, function(data) { 
+      res.send(data);
+    });
+  });
+
   app.post('/autofill', function (req, res) {
     Autofill(req.body, function(data) { 
       res.send(data);
@@ -67,13 +75,13 @@ function () {
     });
   })
 
-  app.get('/getUserEvents', function(req, res){
+  app.post('/getUserEvents', function(req, res){
     GetUserEvents(req.body[0], function(data) {
       res.send(data);
     });
   })
 
-  app.get('/saveChanges', function(req, res) {
+  app.post('/saveChanges', function(req, res) {
     UpdateEvent(req.body, function(data) {
       res.send(data);
     });
@@ -110,8 +118,6 @@ function AddUser (signup_info, callback) {
   user.profile_picture = null;
   user.bio = null;
 
-  console.log(err);
-
   // Database Insertion
   collection = mongo.db.collection('users');    
   collection.insert(user, {w:1}, function(db_err, result) { 
@@ -127,13 +133,15 @@ function ValidateUser (req, credentials, callback) {
   collection.findOne(credentials, function(db_err, record) {
     if (db_err) {
       err['database'] = db_err;
+      callback({'err': err, 'user': null});
     }
     else if (record && (record.username != "") ) {
-      req.login_cookie.user = credentials;
-      callback("Login Successful");
+      req.login_cookie.user = record;
+      callback({'err': null, 'user': record});
     }
     else {
-      callback("Invalid Credentials");
+      err['credentials'] = 'Invalid Credentials';
+      callback({'err': err, 'user': null});
     }
   });
 }
@@ -238,6 +246,20 @@ function UpdateEvents(req, client) {
   //console.log(req.query.id);
   //collection = mongo.db.collection('events');
 
+}
+
+function CheckLogin(req, callback) {
+  if (req.login_cookie && req.login_cookie.user) {
+    callback(true);
+  }
+  else
+    callback(false);
+}
+
+function Logout(req, callback) {
+  console.log(Object.keys(req));
+  req.login_cookie.destroy();
+  callback("Logged Out");
 }
 
 

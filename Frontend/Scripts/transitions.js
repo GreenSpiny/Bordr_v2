@@ -14,11 +14,17 @@ $(document).ready(function() {
     }
   });
   
-  $(".pageButton").click(function(){
+  $(".pageButton").click(function(event) {
     goToPage(($(this)).attr("value"));
     $(".infoArea").each(function(){
       $(this).hide();
     });
+
+    if($(event.target)[0].id == "logoutBTN") {
+      $.post('http://localhost:3000/logout').done( function (data) {
+        console.log(data);
+      });
+    };
   });
   
   // Open help info

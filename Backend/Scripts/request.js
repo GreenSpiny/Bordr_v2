@@ -45,6 +45,18 @@ function () {
     });
   });
 
+  app.post('/removeDocumentById', function (req, res) {
+    RemoveDocumentById(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/linkEntries', function (req, res) {
+    LinkEntries(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
   app.post('/login', function (req, res) {
     ValidateUser(req, req.body, function(data) { 
       res.send(data);
@@ -65,7 +77,6 @@ function () {
 
   app.post('/autofill', function (req, res) {
     Autofill(req.body, function(data) { 
-      console.log(data);
       res.send(data);
     });
   });
@@ -164,9 +175,13 @@ function CreateInterest (new_interest, callback) {
   // Database Insertion
   collection = mongo.db.collection('interests');    
   collection.insert(new_interest, {w:1}, function(db_err, result) { 
-    if (err != null) 
+    if (db_err != null) {
       err['database'] = db_err;
-    callback(err);
+      callback(err);
+    }
+    else {
+      callback({data: results.ops[0]});
+    }
   });
 }
 
@@ -190,11 +205,45 @@ function CreateEvent (new_interest, callback) {
 
 function LinkEntries (link_data, callback) {
   var err = {};
-  var collection1 = link_data.collection1;
-  var collection2 = link_data.collection2;
-  var col1entry = link_data.entries[0];
-  var col2entries = link_data.entries[1];
+  
+  var endpoints = link_data.endpoints;
 
+  var collection = mongo.db.collection(link_data.collection);
+  var select = {_id: mod.mongo.ObjectId(link_data.entry_id)};
+  var inner_query = {}
+  inner_query[link_data.entry_property_name] = { $each: link_data.corresponding_entry_ids };
+  var query = { $push: inner_query };
+  var handler = 
+    function(err, result) {
+      if (err) {
+        console.log(err);
+        callback(err);
+      }
+      else {
+        callback(result);
+      }
+    };
+
+  collection.updateOne(
+    select,
+    query,
+    handler
+  );
+}
+
+function RemoveDocumentById(document_info, callback) {
+  var err = {};
+  var collection = mongo.db.collection(document_info.collection);
+  var id = document_info.id;
+  collection.remove({_id: id}, function(db_err, record) {
+    if (db_err) {
+      err['database'] = db_err;
+      callback(err);
+    }
+    else {
+      callback(record);
+    }
+  });
 }
 
 function ValidateUser (req, credentials, callback) {
@@ -341,7 +390,7 @@ function Autofill (data, callback) {
   collection = mongo.db.collection(data.collection);
   var cursor = collection.find(query);
   cursor.each( function(err, doc) {
-    //console.log(doc);
+     
     if (doc != null)
       possibilities.push(doc);
     else {
@@ -374,12 +423,6 @@ function GetUserEvents(user_id, callback) {
     else 
       callback(eventsList);
   });
-}
-
-function UpdateEvents(req, client) {
-  //console.log(req.query.id);
-  //collection = mongo.db.collection('events');
-
 }
 
 

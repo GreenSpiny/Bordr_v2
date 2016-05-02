@@ -1,14 +1,25 @@
 function TestSubmit(data) {
-  var user_ids = {values: [data[0]["_id"], data[1]["_id"]]};
+  var user_id = data[0]["_id"];
+  var other_user_ids = [data[0]["_id"], data[1]["_id"], data[2]["_id"]];
 
   /*$.post('http://localhost:3000/relationship', {0: user1_id, 1: user2_id}).done( function(data) {
     // data contains all information about relationship between two users!
     console.log(data);
   });*/
 
- $.post('http://localhost:3000/createInterest', {title: "game", description: "play it"}).done( function(data) {
-    // data contains information about all users in user_ids!!
-     console.log(data); 
+  /*var query = {
+    collection: 'users',
+    entry_property_name: 'friends',
+    entry_id: user_id,
+    corresponding_entry_ids: other_user_ids
+  }
+
+  $.post('http://localhost:3000/linkEntries', query).done( function(data) {
+     //console.log(data); 
+  });*/
+
+  $.post('http://localhost:3000/createInterest', {title: "game221", description: "play it"}).done( function(data) {
+       //console.log(data);
   });
 }
 
@@ -49,8 +60,6 @@ $(document).ready( function () {
       }
       if (value.length >= 3) {
         $.post('http://localhost:3000/autofill', {"collection": collection, "value": value, "property": property}).done( function(suggestions) {
-
-          console.log({"collection": collection, "value": value, "property": property});
 
           if (suggestions.length > 0)
             autofill_box.show();

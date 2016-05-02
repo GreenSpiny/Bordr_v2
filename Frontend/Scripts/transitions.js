@@ -18,7 +18,6 @@ $(document).ready(function() {
   $(".pageButton").click(function(event) {
   
     setUser();
-  
     // Change pages
     goToPage(($(this)).attr("value"));
     $(".infoArea").each(function(){

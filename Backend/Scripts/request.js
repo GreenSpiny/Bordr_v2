@@ -58,7 +58,7 @@ function () {
   });
 
   app.post('/userinfo', function (req, res) {
-    UserInfo(req.body[0], function(data) { 
+    UserInfo(req.body, function(data) { 
       res.send(data);
     });
   });
@@ -161,18 +161,26 @@ function Logout(req, callback) {
   callback("Logged Out");
 }
 
-function UserInfo (user_id, callback) {
+function UserInfo (user_ids, callback) {
   var err = {};
   var collection = mongo.db.collection('users');
 
-  collection.findOne({"_id": mod.mongo.ObjectId(user_id)} , function(db_err, record) {
-    if (db_err) {
-      err['database'] = db_err;
+  console.log(user_ids);
+
+  var formatted_ids = [];
+  user_ids.values.forEach( function (user_id) {
+    formatted_ids.push(mod.mongo.ObjectId(user_id));
+  });
+
+  var users = [];
+  var cursor = collection.find({"_id": {$in: formatted_ids}});
+  cursor.each( function(err, doc) {
+    if (err)
       callback(err);
-    }
-    else {
-      callback(record);
-    }
+    else if (doc != null)
+      users.push(doc);
+    else 
+      callback(users);
   });
 }
 
@@ -248,8 +256,8 @@ function CreateEvent(event_data, callback) {
 function GetUserEvents(user_id, callback) {
   var eventsList = [];
   var collection = mongo.db.collection('events');
-  var myCursor = collection.find({ 'participants': user_id });
-  myCursor.each( function(err, doc) {
+  var cursor = collection.find({ 'participants': user_id });
+  cursor.each( function(err, doc) {
     if (doc != null)
       eventsList.push(doc);
     else 

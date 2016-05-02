@@ -1,14 +1,14 @@
 function TestSubmit(data) {
-  var user1_id = data[0]["_id"];
-  var user2_id = data[0]["_id"];
-  console.log("ENTER");
+  console.log(data);
+  var user_ids = {values: [data[0]["_id"], data[1]["_id"]]};
 
-  $.post('http://localhost:3000/relationship', {0: user1_id, 1: user2_id}).done( function(data) {
+  /*$.post('http://localhost:3000/relationship', {0: user1_id, 1: user2_id}).done( function(data) {
     // data contains all information about relationship between two users!
     console.log(data);
-  });
+  });*/
 
-  $.post('http://localhost:3000/userinfo', {0: user1_id}).done( function(data) {
+  console.log(user_ids);
+ $.post('http://localhost:3000/userinfo', user_ids).done( function(data) {
     // data contains information about one user!
      console.log(data); 
   });

@@ -29,21 +29,21 @@ function($scope, $http) {
       $.post('http://localhost:3000/signup', data).done(function(response) {
          if (response.username != null) {
           $scope.errorUser = 'error';          
-          $('#user').after('<div class="alert alert-warning">'+ response.username +'</div>');
+          $('#userFail').slideDown();
         }
         if (response.password != null) {
           $scope.errorPassword = 'error';
           $scope.errorConfirm = 'error';
-          $('#password').after('<div class="alert alert-warning">'+ response.password +'</div>');
+          $('#passwordFail').slideDown();
         }
         if (response.confirm != null) {
           $scope.errorPassword = 'error';
           $scope.errorConfirm = 'error';
-          $('#confirm').after('<div class="alert alert-warning">'+ response.confirm +'</div>');
+          $('#confirmFail').slideDown();
         }
         if (response.email != null) {
           $scope.errorEmail = 'error';
-          $('#email').after('<div class="alert alert-warning">'+ response.email +'</div>');
+          $('#emailFail').slideDown();
         }
         $scope.$apply();
       });

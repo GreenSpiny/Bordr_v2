@@ -62,6 +62,21 @@ body {
   margin-top: 5px;
 }
 
+#loginButtons {
+  margin-top: 15px;
+}
+
+.wrongInput {
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #B49C8F;
+  margin: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 6px;
+  padding: 0px;
+}
+
 #mainmenu {
   max-width: 800px;
   padding: 20px;
@@ -88,7 +103,7 @@ body {
   border-radius: 8px;
 }
 
-.pageButton:hover, .infoButton:hover {
+.pageButton:hover, .pageButtonWait:hover, .infoButton:hover {
   background-color: #3d3434;
 }
 
@@ -204,7 +219,7 @@ h1, h2 {
 }
 
 .interest div:hover {
-  background-image: url("images/x_icon_1.png");
+  background-image: url(images/x_icon_1.png);
 }
 
 .interest p {
@@ -223,7 +238,7 @@ h1, h2 {
 .interest div {
   padding: 0px;
   margin: 0px;
-  background-image: url("images/x_icon_2.png");
+  background-image: url(images/x_icon_2.png);
   width: 30px;
   height: 30px;
   display: inline-block;

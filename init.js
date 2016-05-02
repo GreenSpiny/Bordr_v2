@@ -39,7 +39,10 @@ function InitializeGlobals() {
   global.session = {
     user: null
   }
-
+  
+  global.ObjectId = mod.mongo.ObjectID;
+  global.io = (mod.socket_io).listen(app.listen(3000));
+  
   global.logged_in = false;
 
   console.log("Global framework initialized")

@@ -1,7 +1,39 @@
 var request = module.exports =  
 function () { 
+    io.on("connection",function(socket) {
+    console.log("connect");
 
+    socket.on("send",function(data){
+      var id = ObjectId(data.room.toString());
+      collection = mongo.db.collection('chats');    
+      collection.update({"_id": id}, { $push: { messages: data.message } }, function(db_err, result) {});
+      collection.findOne({"_id" : id}, function(db_err, record) {
+      });
+      io.sockets.in(data.room).emit("recieve", data.message[0]);
+    });
+
+    socket.on('room', function(data) {
+    console.log("room");
+      var id = ObjectId(data.room.toString());
+      socket.join(data.room);
+      collection = mongo.db.collection('chats')
+      collection.findOne({"_id" : id}, function(db_err, record) {
+        if (!(record == null || record.messages == undefined)) {
+          for (var i = 0; i < record.messages.length; i++) {
+            socket.emit("recieve",record.messages[i][0]); 
+          }   
+        }
+      });
+    });
+    
+    });
+    
   // Handle Page Routing
+  
+  app.get('/chat', function(req, res) {
+    res.render(mod.path.join(loc.root, 'Frontend/Pages/chat.html'));
+  });
+  
   app.get("*", function(req, res) {
     var extension = req.originalUrl.toLowerCase();
     if (extension.slice(0,9) == '/scripts/') {
@@ -25,12 +57,25 @@ function () {
       });
     }
   });
+ 
 
   // Handle Post Requests 
   app.post('/signup', function (req, res) {
     CreateUser(req.body, function(data) { 
       res.send(data);
     });
+  });
+  
+  app.post('/startChat', function(req, res) {
+    console.log(req.body);
+    if (req.body.event != null){
+      findEvent(req.body, res);
+    }
+    else if (req.body.users != null){
+      findUsers(req.body, res);
+    }
+    else {
+    }
   });
 
   app.post('/createInterest', function (req, res) {
@@ -118,7 +163,8 @@ function () {
     });
   })
 
-  app.listen(3000, function() {});
+
+  // app.listen(3000, function() {});
 }
 
 

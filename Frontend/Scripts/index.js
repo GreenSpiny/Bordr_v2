@@ -106,7 +106,22 @@ current_user = {};
         $('#eventArea').show(); 
       }
     });
-
+      app.controller('Controller5', function($scope, $http){
+        $scope.chat = function() {
+            var form = document.createElement("form");
+            form.setAttribute("method", "get");
+            form.setAttribute("action", "http://localhost:3000/chat");
+            form.setAttribute("target", "view");
+            var hiddenField = document.createElement("input"); 
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "message");
+            hiddenField.setAttribute("value", $scope.user);
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            window.open('', 'view', 'resizable=0,width=400,height=400');
+            form.submit();
+          }
+        });
     app.controller('rootController', function($scope, $http){
       $scope.eventsFeed = [];
       $scope.$on('loadEvents', function() {
@@ -172,3 +187,4 @@ current_user = {};
       })
     }
   });
+

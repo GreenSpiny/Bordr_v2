@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="scripts/autofill.js"></script>
+    <link rel="stylesheet" type="text/css" href="scripts/autofill.css">
+  </head>
+  <body>
+    <button id='signup'>Sign Up</button>
+    <button id='login'>Log In</button>
+
+    <div class="AUTOFILL"> 
+      <input type='text' data-collection="users" data-property="username" data-link-prefix="/users/" data-link-property="_id" data-submit-function="TestSubmit">
+    </div>
+
+  </body>
+</html>

@@ -31,6 +31,17 @@ $(document).ready(function() {
       }
     });
   });
+  
+  // Create new event
+  $("#eventBTN").click(function() {
+    createEvent();
+  });
+  
+  // Search events
+  $("#searchEventsBTN").click(function() {
+    searchEvents();
+  });
+  
 });
 
 // Helper functions --- o
@@ -60,19 +71,11 @@ function goToPage(num) {
     scroll("down",750);
   }
   
-  // Hide all info boxes
-  $(".infoArea").each(function() {
-    $(this).hide();
-  });
-  
   // Remove password
   $("#password").val("");
   
   // Set page number to current page
   page = num;
-  
-  // TESTING
-  $("#interestsArea").html(makeInterest("Corn Flakes") + makeInterest("Memes") + makeInterest("Bugs"));
 }
 
 function scroll(direction, duration) {
@@ -89,6 +92,10 @@ function scroll(direction, duration) {
   }
 }
 
-function makeInterest(name) {
-  return '<div class="interest"><p>' + name + '</p><div></div></div>';
+function transition(button) {
+  goToPage(button.attr("value"));
+  $(".infoArea").each(function(){
+    //what the hell does this do?!
+    // button.hide();
+  });
 }

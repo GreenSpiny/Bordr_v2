@@ -2,10 +2,10 @@ current_user = {};
   var app = angular.module("Bordr", []);
 
   function LogInUser(user_info) {
-    current_user = user.info;
+    current_user = user_info;
     goToPage(1);
 
-    // ADAM PUT CODE HERE
+    setUser();
   }
 
   $(document).ready( function () {

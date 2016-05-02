@@ -253,19 +253,10 @@
             <button id="helpBTN" type="button" value=4 class="infoButton btn btn-block btn-primary">Info</button>
           </div>
         </div>
-        
-        <div id="events" class="rowEvent">
+
+        <div id="events" class="rowEvent" ng-controller="rootController">
+          <h1>Your Events</h1>
           <section id="event-feed">
-            <ul>
-              <li ng-repeat="event in events">
-                <span class="name">
-                  {{event.name}}
-                </span>
-                <span class="description">
-                 {{event.description}}
-                </span>
-              </li>
-            </ul>
           </section>
         </div>
         
@@ -289,7 +280,7 @@
           </div>
         </div>
         
-       <div class="row">
+        <div class="row">
           <div class="col-sm-6">
             <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
           </div>
@@ -297,19 +288,11 @@
             <button id="helpBTN" type="button" value=5 class="infoButton btn btn-block btn-primary">Info</button>
           </div>
         </div>
-<<<<<<< HEAD
-      <div id="events" class="rowEvent" ng-controller="rootController">
-            <h1>Your Events</h1>
-            <section id="event-feed">
-
-            </section>
-=======
         
         <h1>Friends currently online:</h1>
         <div id="friendsOnline">
-        
->>>>>>> origin/Events
         </div>
+        
         <h1>Add a friend:</h1>
         <input id="friendsInput" class="form-control"></input>
       
@@ -503,6 +486,7 @@
           params: {n: $scope.eventName, t: $scope.eventTags, d: $scope.eventDesc, p:$scope.isPrivate}
         }).then(function successCallback(response) {
 
+    })
     }
     });
     </script>

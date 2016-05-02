@@ -4,7 +4,6 @@ current_user = {};
   function LogInUser(user_info) {
     current_user = user_info;
     goToPage(1);
-
     setUser();
   }
 

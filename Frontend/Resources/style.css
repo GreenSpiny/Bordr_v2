@@ -170,7 +170,7 @@ h1, h2 {
   border: 1px solid #57634A;
 }
 
-#eventBTN, #searchEventsBTN, .eventObject button, #loginInfo p {
+#eventBTN, #searchEventsBTN, .eventObject button, #loginInfo p, #editUserInfoBTN {
   border: 1px solid #3d3434;
 }
 
@@ -262,10 +262,32 @@ h1, h2 {
   text-align: center;
 }
 
-#searchInterests, # {
+#searchInterests {
   text-align: center;
+}
+
+#newInterestBTN {
+  height: 30px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #FFF;
+  border-color: #3d3434;
 }
 
 .eventId {
   display: none;
+}
+
+#newInterestArea {
+  margin-top: 10px;
+}
+
+#interestDescription {
+  height: 150px;
+  background-color: #eee;
+}
+
+#interestName, #interestDescription {
+  text-align: center;
+  font-weight: 700;
 }

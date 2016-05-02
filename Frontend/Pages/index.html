@@ -288,7 +288,7 @@
           </div>
         </div>
         
-        <h1 class="row">Friends:</h1>
+        <h1 class="row">Friend list:</h1>
         <div id="friendsOnline" class="row">
         </div>
         
@@ -326,55 +326,69 @@
         
         <div id="loginInfo">
         
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">User name:</p>
-            </div>
-            <div class="col-sm-8">
-              <div id="changeUsername">My Username</div>
-            </div>
-            <div class="col-sm-2">
-            </div>
-          </div>
+          <button id="editUserInfoBTN" class="btn btn-success btn-block">Edit user information</button>  
           
-                  
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">Password:</p>
+          <div id="userInfo" hidden="true">
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">User name:</p>
+              </div>
+              <div class="col-sm-8">
+                <div id="changeUsername">My Username</div>
+              </div>
+              <div class="col-sm-2">
+              </div>
             </div>
-            <div class="col-sm-8">
-              <input id="changePassword" type="password" class="form-control" value="My Username"></input>
-            </div>
-            <div class="col-sm-2">
-              <button id="saveChangePassword" type="button" class="btn btn-primary btn-block">Save</button>
-            </div>
-          </div>
           
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">Email:</p>
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Password:</p>
+              </div>
+              <div class="col-sm-8">
+                <input id="changePassword" type="password" class="form-control" value="My Username"></input>
+              </div>
+              <div class="col-sm-2">
+                <button id="saveChangePassword" type="button" class="btn btn-primary btn-block">Save</button>
+              </div>
             </div>
-            <div class="col-sm-8">
-              <input id="changeEmail" type="email" class="form-control" value="myemail@gmail.com"></input>
-            </div>
-            <div class="col-sm-2">
-              <button id="saveChangeEmail" type="button" class="btn btn-primary btn-block">Save</button>
+            
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Email:</p>
+              </div>
+              <div class="col-sm-8">
+                <input id="changeEmail" type="email" class="form-control" value="myemail@gmail.com"></input>
+              </div>
+              <div class="col-sm-2">
+                <button id="saveChangeEmail" type="button" class="btn btn-primary btn-block">Save</button>
+              </div>
             </div>
           </div>
           
         </div>
         
-        <h1 class="row">My interests</h1>
+        <h1 class="row">My interests:</h1>
         
         <div id="interestsArea" class="row">
         </div>
         
-        <h1 class="row">Add interests</h1>
+        <h1 class="row">Add an interest:</h1>
 
         <div class="row">
           <div class="col-sm-3"></div>
           <div class="col-sm-6">
             <input id="searchInterests" type="text" class="form-control col-sm-4"></input>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        
+        <button id="newInterestBTN" class="btn btn-success" value=0>...not found? Make a new interest.</button>
+        
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div id="newInterestArea" hidden="true" class="col-sm-6">
+            <input id="interestName" type="text" value="(Name)" class="form-control"></input>
+            <textarea id="interestDescription" type="text" class="form-control">(Description)</textarea>
           </div>
           <div class="col-sm-3"></div>
         </div>

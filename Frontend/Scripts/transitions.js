@@ -42,6 +42,30 @@ $(document).ready(function() {
       }
     });
   });
+  
+  // Open user info dialog
+  $("#editUserInfoBTN").click(function() {
+    $("#userInfo").slideDown();
+    $(this).slideUp();
+  });
+  
+  // Interest creation dialog
+  $("#newInterestBTN").click(function(){
+    if ($(this).val() == 0) {
+      $("#newInterestArea").slideDown();
+      $(this).val(1);
+      $(this).html("Submit new interest");
+    }
+    else {
+      submitNewInterest($("#interestName").val(),$("#interestDescription").val());
+      $("#newInterestArea").slideUp();
+      $(this).val(0);
+      $(this).html("...not found? Make a new interest.");
+      $("#interestName").val("(Name");
+      $("#interestDescription").val("(Description)");
+    }
+  });
+  
 });
 
 // Helper functions --- o
@@ -89,6 +113,7 @@ function goToPage(num) {
   
   if (num == 6) {
     populateInterests();
+    $("#newInteresBTN").val(0);
   }
   
   // 0000000000000000000000000 ---o
@@ -168,4 +193,10 @@ function populateFriends() {
     string += makeFriend(friendArray[i].name);
   }
   $("#friendsOnline").html(string);
+}
+
+function submitNewInterest(title, description) {
+  $.post('http://localhost:3000/createInterest', {title: title, description: description}).done( function(data) {
+     console.log(data); 
+  });
 }

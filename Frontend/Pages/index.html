@@ -12,7 +12,8 @@
     <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles -->
-    <link href="style.css" rel="stylesheet">  
+    <link href="style.css" rel="stylesheet">
+    <link href="scripts/autofill.css" rel="stylesheet">  
 
     <!-- Angular JS link from Google - https://developers.google.com/speed/libraries/-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
@@ -23,6 +24,7 @@
     <script src="scripts/transitions.js"></script>
     <script src="scripts/index.js" type="text/javascript"></script>
     <script src="scripts/communication.js"></script>
+    <script src="scripts/autofill.js"></script>
 
      <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -376,9 +378,10 @@
 
         <div class="row">
           <div class="col-sm-3"></div>
-          <div class="col-sm-6">
-            <input id="searchInterests" type="text" class="form-control col-sm-4"></input>
-          </div>
+          <div class="col-sm-6">  
+            <div class="AUTOFILL"> 
+              <input id="searchInterests" type='text' data-collection="interests" data-property="title" data-link-prefix="/users/" data-link-property="_id" data-submit-function="TestSubmit">
+            </div>
           <div class="col-sm-3"></div>
         </div>
         

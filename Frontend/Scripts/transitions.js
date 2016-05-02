@@ -61,7 +61,7 @@ $(document).ready(function() {
       $("#newInterestArea").slideUp();
       $(this).val(0);
       $(this).html("...not found? Make a new interest.");
-      $("#interestName").val("(Name");
+      $("#interestName").val("(Name)");
       $("#interestDescription").val("(Description)");
     }
   });

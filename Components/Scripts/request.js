@@ -29,6 +29,10 @@ app.get('/getEvents', function(req, res){
   getUserEvents(req, res);
 })
 
+app.get('/saveChanges', function(req, res) {
+  
+})
+
 
 function AddUser (user, client) {
   err = {};

@@ -423,6 +423,15 @@
           }
         })
       })
+
+    $scope.saveChanges = function(){
+      $http({
+          method: 'POST',
+          url: '/saveChanges',
+          params: {n: $scope.eventName, t: $scope.eventTags, d: $scope.eventDesc, p:$scope.isPrivate}
+        }).then(function successCallback(response) {
+
+    }
     });
     </script>
   </body>

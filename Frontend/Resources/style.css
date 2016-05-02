@@ -159,10 +159,6 @@ h1, h2 {
   max-height: 34px;
 }
 
-#eventBTN, #searchEventsBTN, .eventObject button {
-  border: 1px solid #3d3434;
-}
-
 .space p, #loginInfo p {
   text-align: center;
   line-height: 24px;
@@ -172,6 +168,10 @@ h1, h2 {
   margin-bottom: 5px;
   color: #FFF;
   border: 1px solid #57634A;
+}
+
+#eventBTN, #searchEventsBTN, .eventObject button, #loginInfo p {
+  border: 1px solid #3d3434;
 }
 
 .space input, .space textarea, .space select, #friendsInput, #loginInfo input, #profile input {
@@ -209,20 +209,20 @@ h1, h2 {
   text-align: center;
 }
 
-.interest {
-  float: left;
+.interest, .friend {
   padding: 0px;
   margin: 5px;
   border: 2px solid #4C3E3E;
   border-radius: 3px;
   height: 34px;
+  display: inline-block;
 }
 
 .interest div:hover {
   background-image: url(images/x_icon_1.png);
 }
 
-.interest p {
+.interest p, .friend p {
   float: left;
   line-height: 30px;
   padding: 0px;
@@ -235,6 +235,15 @@ h1, h2 {
   font-weight: 700;
 }
 
+.friend p {
+  border-right: none;
+  cursor: pointer;
+}
+
+.friend {
+  cursor: pointer;
+}
+
 .interest div {
   padding: 0px;
   margin: 0px;
@@ -245,10 +254,18 @@ h1, h2 {
   cursor: pointer;
 }
 
-#interestsArea {
-  margin: 5px;
+#interestsArea, #friendsOnline {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
 }
 
-#searchInterests {
+#searchInterests, # {
   text-align: center;
+}
+
+.eventId {
+  display: none;
 }

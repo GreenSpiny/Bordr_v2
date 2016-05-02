@@ -1,5 +1,7 @@
 var page = 0;
 var imageRatio = 0.621;
+var user = null;
+
 // Document functions --- o
 $(document).ready(function() {
 
@@ -14,7 +16,10 @@ $(document).ready(function() {
   });
 
   $(".pageButton").click(function(event) {
-  // Change pages
+  
+    setUser();
+  
+    // Change pages
     goToPage(($(this)).attr("value"));
     $(".infoArea").each(function(){
       $(this).hide();
@@ -77,8 +82,17 @@ function goToPage(num) {
   // Set page number to current page
   page = num;
   
-  // TESTING
-  $("#interestsArea").html(makeInterest("Corn Flakes") + makeInterest("Memes") + makeInterest("Bugs"));
+  // Page specific transitions ---o
+  if (num == 5) {
+    populateFriends();
+  }
+  
+  if (num == 6) {
+    populateInterests();
+  }
+  
+  // 0000000000000000000000000 ---o
+
 }
 
 function scroll(direction, duration) {
@@ -97,4 +111,61 @@ function scroll(direction, duration) {
 
 function makeInterest(name) {
   return '<div class="interest"><p>' + name + '</p><div></div></div>';
+}
+
+function makeFriend(name) {
+  return '<div class="friend"><p>' + name + '</p></div>';
+}
+
+// Reads in user info
+function setUser() {
+  if (user == null) {
+    user = current_user;
+    $("#mainmenu h1").html("Welcome to Bordr, " + user.username + "!");
+    $("#profile #changeUsername").html(user.username);
+    $("#profile #changePassword").html(user.password);
+    $("#profile #changeEmail").html(user.email);
+  }
+}
+
+// Populate interests page
+function populateInterests() {
+  var interests = user.interests.slice();
+  interests.push("team fortress 2");
+  interests.push("pokemon");
+  interests.push("R.O.B.");
+  for (var i = 0; i < 10; i++) {
+    interests.push("Super " + i.toString());
+  }
+  
+  var string = "";
+  for (var i = 0; i < interests.length; i++) {
+    string += makeInterest(interests[i]);
+  }
+  $("#interestsArea").html(string);
+}
+
+// Populate friends page
+function populateFriends() {
+
+  /*
+  // Grab friends' info
+  $.post('http://localhost:3000/userinfo', user_ids).done( function(data) {
+    // data contains information about all users in user_ids!!
+     console.log(data);
+     var friendArray = [];
+     friendArray.push
+  });*/
+
+  var friends = user.friends.slice();
+  var friendArray = [];
+  friendArray.push({name: "Dan", id: 123})
+  friendArray.push({name: "Conrad", id: 456})
+  friendArray.push({name: "Chandler", id: 789})
+  
+  var string = "";
+  for (var i = 0; i < friendArray.length; i++) {
+    string += makeFriend(friendArray[i].name);
+  }
+  $("#friendsOnline").html(string);
 }

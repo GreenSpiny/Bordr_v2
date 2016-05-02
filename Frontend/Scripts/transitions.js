@@ -208,6 +208,7 @@ function populateFriends() {
 function submitNewInterest(title, description) {
   $.post('http://localhost:3000/createInterest', {title: title, description: description}).done( function(data) {
      console.log(data); 
+     insertInterest(data.data);
   });
 }
 

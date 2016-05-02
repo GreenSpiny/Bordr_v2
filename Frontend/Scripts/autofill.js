@@ -25,7 +25,7 @@ function TestSubmit(data) {
 }
 
 function P3_insertInterest(suggestion) {
-  $("#P3_interests").append(makeInterest(suggestion.title,suggestion.description));
+  $("#P3_interests").append(makeInterest(suggestion.title, suggestion._id));
   $("#P3_interests").children().last().children("div").click( function( event ) {
     $(event.target).parent().remove();
   });
@@ -101,6 +101,7 @@ $(document).ready( function () {
                   _id: $(event.target).data('_id')
                 }
 
+                console.log(param);
                 window[click_event](param);
                 input.val("");
                 UpdateSuggestions();

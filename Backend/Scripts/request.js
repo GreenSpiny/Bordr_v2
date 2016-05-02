@@ -40,6 +40,7 @@ function () {
   });
 
   app.post('/createEvent', function (req, res) {
+    console.log('req body: ' + req.body);
     CreateEvent(req.body, function(data) { 
       res.send(data);
     });
@@ -104,12 +105,6 @@ function () {
       res.send(data);
     });
   });
-
-  app.post('/createEvent', function (req, res) {
-    CreateEvent(req.body, function(data) {
-      res.send(data);
-    });
-  })
 
   app.post('/getUserEvents', function (req, res){
     GetUserEvents(req.body[0], function(data) {
@@ -185,18 +180,19 @@ function CreateInterest (new_interest, callback) {
   });
 }
 
-function CreateEvent (new_interest, callback) {
+function CreateEvent (new_event, callback) {
   var err = {};
   var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i;
+  console.log(new_event);
 
-  if (new_interest.title.length < 3 || new_interest.title.length > 15 || !rx_Alphanumeric.test(new_interest.title))
+  if (new_event.title.length < 3 || new_event.title.length > 15 || !rx_Alphanumeric.test(new_event.title))
     err['title'] = "Event title must be between 3 and 15 alphanumeric characters";
-  if (new_interest.description.length > 250)
+  if (new_event.description.length > 250)
     err['description'] = "Event name must be under 250 characters";
   
   // Database Insertion
-  collection = mongo.db.collection('interests');    
-  collection.insert(new_interest, {w:1}, function(db_err, result) { 
+  collection = mongo.db.collection('events');    
+  collection.insert(new_event, {w:1}, function(db_err, result) { 
     if (err != null) 
       err['database'] = db_err;
     callback(err);
@@ -267,7 +263,6 @@ function ValidateUser (req, credentials, callback) {
 
 function CheckLogin(req, callback) {
   if (req.login_cookie && req.login_cookie.user) {
-    console.log(req.login_cookie.user);
     callback(req.login_cookie.user);
   }
   else {
@@ -399,8 +394,11 @@ function Autofill (data, callback) {
   });  
 }
 
-function CreateEvent(event_data, callback) {
-  var eventListing = {name: event_data.query.n, tags: event_data.query.t, description: event_data.query.d, isPrivate: event_data.query.p};
+/*function CreateEvent(event_data, callback) {
+  var eventListing = {
+    name: event_data.query.n, tags: event_data.query.t, description: event_data.query.d, isPrivate: event_data.query.p};
+
+
   collection = mongo.db.collection('events');
   collection.insert(eventListing, function(db_err, result) {
     if (db_err) {
@@ -411,7 +409,7 @@ function CreateEvent(event_data, callback) {
       callback("Event successfully created!");
     }
   })
-}
+}*/
 
 function GetUserEvents(user_id, callback) {
   var eventsList = [];

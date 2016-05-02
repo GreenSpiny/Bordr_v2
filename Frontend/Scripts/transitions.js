@@ -145,8 +145,9 @@ function scroll(direction, duration) {
   }
 }
 
-function makeInterest(name, id) {
-  return '<div class="interest"><p>' + name + '</p><div value=' + id + '></div></div>';
+function makeInterest(title, _id) {
+  console.log(_id);
+  return '<div class="interest" data-title="' + title + '" data-_id="' + _id + '"><p>' + title + '</p><div value=' + _id + '></div></div>';
 }
 
 function makeFriend(name) {
@@ -181,15 +182,6 @@ function populateInterests() {
 
 // Populate friends page
 function populateFriends() {
-
-  /*
-  // Grab friends' info
-  $.post('http://localhost:3000/userinfo', user_ids).done( function(data) {
-    // data contains information about all users in user_ids!!
-     console.log(data);
-     var friendArray = [];
-     friendArray.push
-  });*/
 
   var friends = user.friends.slice();
   var friendArray = [];

@@ -1,11 +1,17 @@
 current_user = {};
   var app = angular.module("Bordr", []);
 
+  function LogInUser(user_info) {
+    current_user = user.info;
+    goToPage(1);
+
+    // ADAM PUT CODE HERE
+  }
+
   $(document).ready( function () {
     $.post('http://localhost:3000/checkLogin').done( function(response) {
       if (response != false) {
-        current_user = response;
-        goToPage(1);
+        LogInUser(response);
       }
     });
   });
@@ -23,8 +29,7 @@ current_user = {};
       var data = {username: $scope.user, password: $scope.password};
       $.post('http://localhost:3000/login', data).done(function(response) {
         if (response.err == null) {
-          current_user = response.user;
-          goToPage($('#loginBTN').attr("value"));
+          LogInUser(response.user);
         }
       });
 

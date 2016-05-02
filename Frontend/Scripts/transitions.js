@@ -20,9 +20,6 @@ $(document).ready(function() {
     setUser();
     // Change pages
     goToPage(($(this)).attr("value"));
-    $(".infoArea").each(function(){
-      $(this).hide();
-    });
 
     if($(event.target)[0].id == "logoutBTN") {
       $.post('http://localhost:3000/logout').done( function (data) {

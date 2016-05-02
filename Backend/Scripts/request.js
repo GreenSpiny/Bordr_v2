@@ -38,7 +38,7 @@ function () {
   });
 
   app.post('/login', function (req, res) {
-    ValidateUser(req.body, function(data) { 
+    ValidateUser(req, req.body, function(data) { 
       res.send(data);
     });
   });
@@ -60,6 +60,24 @@ function () {
       res.send(data);
     });
   });
+
+  app.post('/createEvent', function(req, res) {
+    CreateEvent(req.body, function(data) {
+      res.send(data);
+    });
+  })
+
+  app.get('/getUserEvents', function(req, res){
+    GetUserEvents(req.body[0], function(data) {
+      res.send(data);
+    });
+  })
+
+  app.get('/saveChanges', function(req, res) {
+    UpdateEvent(req.body, function(data) {
+      res.send(data);
+    });
+  })
 
   app.listen(3000, function() {});
 }
@@ -103,15 +121,14 @@ function AddUser (signup_info, callback) {
   });
 }
 
-function ValidateUser (credentials, callback) {
+function ValidateUser (req, credentials, callback) {
   var err = {};
   var collection = mongo.db.collection('users');
   collection.findOne(credentials, function(db_err, record) {
-
     if (db_err) {
       err['database'] = db_err;
     }
-    else if (record && (user.username != "") ) {
+    else if (record && (record.username != "") ) {
       req.login_cookie.user = credentials;
       callback("Login Successful");
     }
@@ -169,9 +186,9 @@ function Relationship(user_ids, callback) {
 }
 
 function Autofill (data, callback) {
-
   var err = {};
   var value = data.value;
+
   property = data.property;
   collection = mongo.db.collection(data.collection);
 
@@ -191,7 +208,37 @@ function Autofill (data, callback) {
   });  
 }
 
+function CreateEvent(event_data, callback) {
+  var eventListing = {name: event_data.query.n, tags: event_data.query.t, description: event_data.query.d, isPrivate: event_data.query.p};
+  collection = mongo.db.collection('events');
+  collection.insert(eventListing, function(db_err, result) {
+    if (db_err) {
+      console.log(db_err);
+      callback(err);
+    }
+    else {
+      callback("Event successfully created!");
+    }
+  })
+}
 
+function GetUserEvents(user_id, callback) {
+  var eventsList = [];
+  var collection = mongo.db.collection('events');
+  var myCursor = collection.find({ 'participants': user_id });
+  myCursor.each( function(err, doc) {
+    if (doc != null)
+      eventsList.push(doc);
+    else 
+      callback(eventsList);
+  });
+}
+
+function UpdateEvents(req, client) {
+  //console.log(req.query.id);
+  //collection = mongo.db.collection('events');
+
+}
 
 
 

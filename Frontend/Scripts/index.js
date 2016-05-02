@@ -3,7 +3,8 @@ current_user = {};
 
   $(document).ready( function () {
     $.post('http://localhost:3000/checkLogin').done( function(response) {
-      if (response) {
+      if (response != false) {
+        current_user = response;
         goToPage(1);
       }
     });

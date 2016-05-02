@@ -249,11 +249,14 @@ function UpdateEvents(req, client) {
 }
 
 function CheckLogin(req, callback) {
+  console.log("CHECK");
   if (req.login_cookie && req.login_cookie.user) {
-    callback(true);
+    console.log(req.login_cookie.user);
+    callback(req.login_cookie.user);
   }
-  else
+  else {
     callback(false);
+  }
 }
 
 function Logout(req, callback) {

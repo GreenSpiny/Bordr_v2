@@ -13,7 +13,8 @@ function InitializeGlobals() {
     crypto        : require('crypto'),
     file          : require('fs'),
     mongo         : require('mongodb'),
-    http          : require('http')
+    http          : require('http'),
+    socket_io     : require('socket.io')
   }
 
   // Initialize Site Structure
@@ -32,7 +33,7 @@ function InitializeGlobals() {
   // Initialize Database Client
   global.client = mod.mongo.MongoClient;
   global.mongo = {
-    url      : 'mongodb://bordr:abc123@work.websci:7000/bordr'
+    url      : 'mongodb://localhost:27017/bordr'
   }
 
   global.logged_in = false;
@@ -59,10 +60,8 @@ function ConfigureSitemap() {
 function InitializeDatabase(callback) {
   // Connect with client
   client.connect(mongo.url, function(err, db) {
-    console.log(err);
     mongo.db = db;
     db.createCollection('users', function(collection_err, collection) {
-      console.log(collection_err);
       collection.createIndex({username: 1}, {unique: true}); 
     });
     db.createCollection('interests', function(collection_err, collection) {

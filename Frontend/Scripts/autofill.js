@@ -1,3 +1,19 @@
+function TestSubmit(data) {
+  var user1_id = data[0]["_id"];
+  var user2_id = data[0]["_id"];
+  console.log("ENTER");
+
+  $.post('http://localhost:3000/relationship', {0: user1_id, 1: user2_id}).done( function(data) {
+    // data contains all information about relationship between two users!
+    console.log(data);
+  });
+
+  $.post('http://localhost:3000/userinfo', {0: user1_id}).done( function(data) {
+    // data contains information about one user!
+     console.log(data); 
+  });
+}
+
 $(document).ready( function () {
   $('.AUTOFILL').each( function () {
 
@@ -6,8 +22,7 @@ $(document).ready( function () {
     var collection = input.data("collection");
     var property = input.data("property");
     var link_prefix = input.data("link-prefix");
-
-    console.log(link_prefix);
+    var submit_function = input.data("submit-function");
 
     // Append the suggestions box
     element.append("<div class='autofill_box'></div>");
@@ -17,8 +32,14 @@ $(document).ready( function () {
     // For the autofill object replace the name of the connection
     // with an actual connection.
     input.on('keyup', function(e) { 
-      if(e.keyCode >= 32 || e.keyCode == 8) 
+      if(e.keyCode == 13) {
+        $.post('http://localhost:3000/autofill', {"collection": collection, "value": input.val(), "property": property}).done( function(entries) {
+          window[submit_function](entries);
+        });
+      }
+      else if(e.keyCode >= 32 || e.keyCode == 8) {
         UpdateSuggestions(); 
+      }
     })
 
     function UpdateSuggestions() {
@@ -30,8 +51,11 @@ $(document).ready( function () {
         autofill_box.hide();
       }
       if (value.length >= 3) {
-        autofill_box.show();
         $.post('http://localhost:3000/autofill', {"collection": collection, "value": value, "property": property}).done( function(suggestions) {
+
+          if (suggestions.length > 0)
+            autofill_box.show();
+
           for (var key in suggestions) {
             var suggestion = suggestions[key];
             var link = link_prefix + suggestion[input.data("link-property")];

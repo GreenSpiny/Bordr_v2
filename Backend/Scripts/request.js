@@ -30,71 +30,150 @@ function () {
     }
   });
 
-  // Handle Post Requests
-  app.post('/signup', AddUser);
-  app.post('/login', ValidateUser);
-  app.post('/autofill', Autofill);
+  // Handle Post Requests 
+  app.post('/signup', function (req, res) {
+    AddUser(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/login', function (req, res) {
+    ValidateUser(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/autofill', function (req, res) {
+    Autofill(req.body, function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/userinfo', function (req, res) {
+    UserInfo(req.body[0], function(data) { 
+      res.send(data);
+    });
+  });
+
+  app.post('/relationship', function (req, res) {
+    Relationship(req.body, function(data) { 
+      res.send(data);
+    });
+  });
 
   app.listen(3000, function() {});
 }
 
 
-function AddUser (req, client) {
-  err = {};
-  user = req.body;
+function AddUser (signup_info, callback) {
+  var err = {};
 
   // Validate Username
   var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i
-  if (user.username.length < 3 || user.username.length > 15 || !rx_Alphanumeric.test(user.username))
+  if (signup_info.username.length < 3 || signup_info.username.length > 15 || !rx_Alphanumeric.test(signup_info.username))
     err['username'] = "Username must be between 3 and 15 alphanumeric characters";
 
   // Validate Password
-  if (user.password.length < 8 || user.password.length > 15 || !rx_Alphanumeric.test(user.username))
+  if (signup_info.password.length < 8 || signup_info.password.length > 15 || !rx_Alphanumeric.test(signup_info.username))
     err['password'] = "Password must be between 8 and 15 alphanumeric characters";
-  if (user.confirm != user.password){
-    console.log (user.confirm, user.password);
+  if (signup_info.confirm != signup_info.password){
     err['confirm'] = "The entered passwords do not match";
 }
   // Validate Email
   var rx_EmailAddress = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-  if (!rx_EmailAddress.test(user.email))
+  if (!rx_EmailAddress.test(signup_info.email))
     err['email'] = "Please enter a valid email address";
+
+  var user = signup_info;
+  user.friends = [];
+  user.interests = [];
+  user.participating_events = [];
+  user.hosting_events = [];
+  user.profile_picture = null;
+  user.bio = null;
+
+  console.log(err);
 
   // Database Insertion
   collection = mongo.db.collection('users');    
   collection.insert(user, {w:1}, function(db_err, result) { 
     if (err != null) 
       err['database'] = db_err;
-    client.send(err);
-    console.log(err);
+    callback(err);
   });
 }
 
-function ValidateUser (req, res) {
-  err = {};
-  user = req.body;
-  collection = mongo.db.collection('users');
-  collection.findOne(user, function(db_err, record) {
-    console.log(user);
+function ValidateUser (credentials, callback) {
+  var err = {};
+  var collection = mongo.db.collection('users');
+  collection.findOne(credentials, function(db_err, record) {
+
     if (db_err) {
-      console.log(db_err);
       err['database'] = db_err;
     }
     else if (record && (user.username != "") ) {
-      req.login_cookie.user = user;
-      res.send("Login Successful");
+      req.login_cookie.user = credentials;
+      callback("Login Successful");
     }
     else {
-      res.send("Invalid Credentials");
+      callback("Invalid Credentials");
     }
   });
 }
 
-function Autofill (req, res) {
-  err = {};
-  value = req.body.value;
-  property = req.body.property;
-  collection = mongo.db.collection(req.body.collection);
+function UserInfo (user_id, callback) {
+  var err = {};
+  var collection = mongo.db.collection('users');
+
+  collection.findOne({"_id": mod.mongo.ObjectId(user_id)} , function(db_err, record) {
+    if (db_err) {
+      err['database'] = db_err;
+      callback(err);
+    }
+    else {
+      callback(record);
+    }
+  });
+}
+
+function Relationship(user_ids, callback) {
+  var err = {};
+  var user1_id = user_ids[0];
+  var user2_id = user_ids[1];
+
+  function SharedEntities(user1, user2, field) {
+    var shared = [];
+    for (var i = 0; i < user1[field].length; i++) {
+      for (var j = 0; j < user2[field].length; j++) {
+        if (user1[field][i] == user2[field][j]) {
+          shared.push(user1[field][i]);
+        }
+      }
+    }
+    return shared;
+  }
+
+  UserInfo( user1_id, function(_user1) {
+    var user1 = _user1;
+    UserInfo( user2_id, function(_user2) {
+      var user2 = _user2;
+
+      var shared = {};
+      shared.friends = SharedEntities(user1, user2, "friends");
+      shared.interests = SharedEntities(user1, user2, "interests");
+      shared.participating_events = SharedEntities(user1, user2, "participating_events");
+
+      callback(shared);
+    })
+  });
+}
+
+function Autofill (data, callback) {
+
+  var err = {};
+  var value = data.value;
+  property = data.property;
+  collection = mongo.db.collection(data.collection);
 
   var possibilities = [];
   var rx_AutofillValue = new RegExp(value,"i");
@@ -106,8 +185,9 @@ function Autofill (req, res) {
   cursor.each( function(err, doc) {
     if (doc != null)
       possibilities.push(doc);
-    else 
-      res.send(possibilities);
+    else {
+      callback(possibilities);
+    }
   });  
 }
 

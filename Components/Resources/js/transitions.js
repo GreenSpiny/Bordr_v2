@@ -86,7 +86,11 @@ function scroll(direction, duration) {
   }
 }
 
+<<<<<<< HEAD
 /*function makeEventDiv(name, description, tags, isPublic) {
+=======
+function makeEventDiv(name, description, tags, isPublic) {
+>>>>>>> origin/Events
   var string = "";
   string += ' <div class="eventObject space">'
   string += '   <div class="form-group row">'
@@ -130,4 +134,8 @@ function scroll(direction, duration) {
   string += ' </div>'
 
   return string;
+<<<<<<< HEAD
 }*/
+=======
+}
+>>>>>>> origin/Events

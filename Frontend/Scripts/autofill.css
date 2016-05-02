@@ -1,8 +1,10 @@
 .AUTOFILL {
   position: relative;
-  width: 150px;
+  width: 100%;
   margin: auto;
+  margin-top: 5px;
   margin-bottom: 15px;
+  z-index: 1;
 }
 
 .AUTOFILL > input {

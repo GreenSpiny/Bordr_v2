@@ -1,6 +1,7 @@
 function TestSubmit(data) {
-  var user_id = data[0]["_id"];
-  var other_user_ids = [data[0]["_id"], data[1]["_id"], data[2]["_id"]];
+  console.log("HI!");
+  //var user_id = data[0]["_id"];
+  //var other_user_ids = [data[0]["_id"], data[1]["_id"], data[2]["_id"]];
 
   /*$.post('http://localhost:3000/relationship', {0: user1_id, 1: user2_id}).done( function(data) {
     // data contains all information about relationship between two users!
@@ -18,9 +19,31 @@ function TestSubmit(data) {
      //console.log(data); 
   });*/
 
-  $.post('http://localhost:3000/createInterest', {title: "game221", description: "play it"}).done( function(data) {
+  /*$.post('http://localhost:3000/createInterest', {title: "game221", description: "play it"}).done( function(data) {
        //console.log(data);
+  });*/
+}
+
+function P3_insertInterest(suggestion) {
+  $("#P3_interests").append(makeInterest(suggestion.title,suggestion.description));
+  $("#P3_interests").children().last().children("div").click( function( event ) {
+    $(event.target).parent().remove();
   });
+}
+
+function P6_insertInterest(suggestion) {
+  $("#searchInterests").val(suggestion.title);
+  var success = true;
+  for (var i = 0; i < user.interests.length; i++) {
+    if (user.interests[i]._id == suggestion._id) {
+      success = false;
+      break;
+    }
+  }
+  if (success) {
+    user.interests.push(suggestion);
+    populateInterests();
+  }
 }
 
 $(document).ready( function () {
@@ -30,7 +53,7 @@ $(document).ready( function () {
     var input = element.children('input');
     var collection = input.data("collection");
     var property = input.data("property");
-    var link_prefix = input.data("link-prefix");
+    //var link_prefix = input.data("link-prefix");
     var submit_function = input.data("submit-function");
 
     // Append the suggestions box
@@ -64,20 +87,23 @@ $(document).ready( function () {
           if (suggestions.length > 0)
             autofill_box.show();
 
+          var suggestion;
           for (var key in suggestions) {
-            var suggestion = suggestions[key];
-            var link = link_prefix + suggestion[input.data("link-property")];
-            var suggestion_element_html = "<div class='suggestion' href='" + link + "'>" 
-                                          + suggestion[property] +  "</div>";
-
+            suggestion = suggestions[key];
+            var click_event = input.data("click");
+            var suggestion_element_html = "<div class='suggestion' data-title=" + suggestion.title + " data-_id=" + suggestion._id + " >" + suggestion[property] + "</div>";
             autofill_box.append(suggestion_element_html);
             var suggestion_element = autofill_box.children().last();
+            
             suggestion_element.on('click', function( event ) {
-              console.log(suggestion);
-              $("#searchInterests").val(suggestion.title);
-              insertInterest(suggestion);
-              input.val("");
-              UpdateSuggestions();
+                var param = {
+                  title: $(event.target).data('title'),
+                  _id: $(event.target).data('_id')
+                }
+
+                window[click_event](param);
+                input.val("");
+                UpdateSuggestions();
             });
           }
         });
@@ -85,17 +111,3 @@ $(document).ready( function () {
     }
   });
 });
-
-function insertInterest(suggestion) {
-  var success = true;
-  for (var i = 0; i < user.interests.length; i++) {
-    if (user.interests[i]._id == suggestion._id) {
-      success = false;
-      break;
-    }
-  }
-  if (success) {
-    user.interests.push(suggestion);
-    populateInterests();
-   }
-}

@@ -56,7 +56,7 @@ $(document).ready(function() {
       $(this).html("Submit new interest");
     }
     else {
-      submitNewInterest($("#interestName").val(),$("#interestDescription").val());
+      submitNewInterest($("#interestName").val(),$("#interestDescription").val(),P6_insertInterest);
       $("#newInterestArea").slideUp();
       $(this).val(0);
       $(this).html("...not found? Make a new interest.");
@@ -205,9 +205,9 @@ function populateFriends() {
 }
 
 // Add a new interest via POST request
-function submitNewInterest(title, description) {
+function submitNewInterest(title, description, callback) {
   $.post('http://localhost:3000/createInterest', {title: title, description: description}).done( function(data) {
-     console.log(data); 
+      callback(data.data);
   });
 }
 

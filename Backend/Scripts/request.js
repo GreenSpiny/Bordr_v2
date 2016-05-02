@@ -180,7 +180,7 @@ function CreateInterest (new_interest, callback) {
       callback(err);
     }
     else {
-      callback({data: results.ops[0]});
+      callback({data: result.ops[0]});
     }
   });
 }

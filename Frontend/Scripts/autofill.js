@@ -64,7 +64,11 @@ $(document).ready( function () {
             autofill_box.append(suggestion_element_html);
             var suggestion_element = autofill_box.children().last();
             suggestion_element.on('click', function( event ) {
-              window.open($(event.target).attr("href"), "_self");
+              console.log(suggestion);
+              $("#searchInterests").val(suggestion.title);
+              insertInterest(suggestion);
+              input.val("");
+              UpdateSuggestions();
             });
           }
         });
@@ -73,7 +77,16 @@ $(document).ready( function () {
   });
 });
 
-
-
-
-
+function insertInterest(suggestion) {
+  var success = true;
+  for (var i = 0; i < user.interests.length; i++) {
+    if (user.interests[i]._id == suggestion._id) {
+      success = false;
+      break;
+    }
+  }
+  if (success) {
+    user.interests.push(suggestion);
+    populateInterests();
+   }
+}

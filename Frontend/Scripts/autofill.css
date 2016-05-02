@@ -1,6 +1,8 @@
 .AUTOFILL {
   position: relative;
   width: 150px;
+  margin: auto;
+  margin-bottom: 15px;
 }
 
 .AUTOFILL > input {
@@ -26,6 +28,7 @@ div.autofill_box > .suggestion {
   position: relative;
   display: block;
   width: 100%;
+  background-color: #e7e7e7;
   
   padding: 1px 2px 1px 2px;
   box-sizing: border-box;

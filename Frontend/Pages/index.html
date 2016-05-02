@@ -75,7 +75,9 @@
       <!-- Page 1: Main Menu -->
       <div id="mainmenu" hidden="true" class="page" value="1">
         
-        <h1>Welcome to Bordr!</h1>
+        <div class="row">
+          <h1>Welcome to Bordr!</h1>
+        </div>
         
         <div class="row">
           <div class="col-sm-6">
@@ -115,7 +117,9 @@
           <p>You can also talk to event attendees via group chat!</p>
         </div>
         
-        <h1>Event Listing</h1>
+        <div class="row">
+          <h1>Event Listing</h1>
+        </div>
         
         <div class="row">
           <div class="col-sm-6">
@@ -176,7 +180,9 @@
           <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
         </div>
         
-        <h1>Create Event</h1>
+        <div class="row">
+          <h1>Create Event</h1>
+        </div>
         
         <div class="row">
           <div class="col-sm-6">
@@ -248,7 +254,9 @@
           <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
         </div>
           
-        <h1>My Events</h1>
+        <div class="row">
+          <h1>My Events</h1>
+        </div>
         
         <div class="row">
           <div class="col-sm-6">
@@ -279,7 +287,9 @@
           <p>To add a new friend, search their username and visit their profile.</p>
         </div>
           
-        <h1>Friends!</h1>
+        <div class="row">
+          <h1>Friends!</h1>
+        </div>
         
         <div class="row">
           <div class="col-sm-6">
@@ -315,7 +325,9 @@
           <p>Add interests so your friends know what you like doing.</p>
         </div>
             
-        <h1>My profile</h1>
+        <div class="row">
+          <h1>My profile</h1>
+        </div>
         
         <div class="row">
           <div class="col-sm-6">
@@ -380,8 +392,9 @@
           <div class="col-sm-3"></div>
           <div class="col-sm-6">  
             <div class="AUTOFILL"> 
-              <input id="searchInterests" type='text' data-collection="interests" data-property="title" data-link-prefix="/users/" data-link-property="_id" data-submit-function="TestSubmit">
+              <input id="searchInterests" type='text' data-collection="interests" data-property="title" data-link-prefix="/users/" data-link-property="_id" data-submit-function="TestSubmit"></input>
             </div>
+          </div>
           <div class="col-sm-3"></div>
         </div>
         
@@ -390,8 +403,8 @@
         <div class="row">
           <div class="col-sm-3"></div>
           <div id="newInterestArea" hidden="true" class="col-sm-6">
-            <input id="interestName" type="text" value="(Name)" class="form-control"></input>
-            <textarea id="interestDescription" type="text" class="form-control">(Description)</textarea>
+            <input id="interestName" type="text" default="(Name)" value="(Name)" class="form-control"></input>
+            <textarea id="interestDescription" type="text" default="(Description)" class="form-control">(Description)</textarea>
           </div>
           <div class="col-sm-3"></div>
         </div>

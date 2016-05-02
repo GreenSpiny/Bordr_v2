@@ -61,8 +61,20 @@ $(document).ready(function() {
       $("#newInterestArea").slideUp();
       $(this).val(0);
       $(this).html("...not found? Make a new interest.");
-      $("#interestName").val("(Name)");
-      $("#interestDescription").val("(Description)");
+      $("#interestName").val($("#interestName").attr("default"));
+      $("#interestDescription").val($("#interestDescription").attr("default"));
+    }
+  });
+  
+  $("#newInterestArea .form-control").click(function() {
+    if ($(this).val() == $(this).attr("default")) {
+      $(this).val("")
+    }
+  });
+  
+  $("#newInterestArea .form-control").blur(function() {
+    if ($(this).val() == "") {
+      $(this).val($(this).attr("default"))
     }
   });
   
@@ -134,8 +146,8 @@ function scroll(direction, duration) {
   }
 }
 
-function makeInterest(name) {
-  return '<div class="interest"><p>' + name + '</p><div></div></div>';
+function makeInterest(name, id) {
+  return '<div class="interest"><p>' + name + '</p><div value=' + id + '></div></div>';
 }
 
 function makeFriend(name) {
@@ -155,19 +167,17 @@ function setUser() {
 
 // Populate interests page
 function populateInterests() {
-  var interests = user.interests.slice();
-  interests.push("team fortress 2");
-  interests.push("pokemon");
-  interests.push("R.O.B.");
-  for (var i = 0; i < 10; i++) {
-    interests.push("Super " + i.toString());
-  }
-  
+  var interests = user.interests;
   var string = "";
   for (var i = 0; i < interests.length; i++) {
-    string += makeInterest(interests[i]);
+    string += makeInterest(interests[i].title, interests[i]._id);
   }
   $("#interestsArea").html(string);
+  
+  $(".interest div").click(function() {
+    removeInterest($(this).attr("value"));
+    $(this).parent().remove();
+  });
 }
 
 // Populate friends page
@@ -195,8 +205,20 @@ function populateFriends() {
   $("#friendsOnline").html(string);
 }
 
+// Add a new interest via POST request
 function submitNewInterest(title, description) {
   $.post('http://localhost:3000/createInterest', {title: title, description: description}).done( function(data) {
      console.log(data); 
   });
+}
+
+// Remove a user's interest
+function removeInterest(id) {
+  for (var i = 0; i < user.interests.length; i++) {
+    if (user.interests[i]._id == id) {
+      console.log("removed interest");
+      user.interests.splice(i,1);
+      break;
+    }
+  }
 }

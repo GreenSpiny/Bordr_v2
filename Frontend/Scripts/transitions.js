@@ -13,8 +13,9 @@ $(document).ready(function() {
       scroll("down",0);
     }
   });
-  
+
   $(".pageButton").click(function(event) {
+  // Change pages
     goToPage(($(this)).attr("value"));
     $(".infoArea").each(function(){
       $(this).hide();

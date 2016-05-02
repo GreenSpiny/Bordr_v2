@@ -43,21 +43,29 @@
         <div class="form-group row">
           <label for="user">Username:</label>
           <input type="text" class="form-control input-sm" id="user" ng-model="user" ng-class="errorUser"> </input>
+          <p class="wrongInput" id="userFail" hidden="true">Must be 8-15 alphanumeric characters.</p>
           <label for="password">Password:</label>
           <input type="password" class="form-control input-sm" id="password" ng-model="password" ng-class="errorPassword"> </input>
-          <div id="signUpInfo" hidden="true">
-            <label for="password">Confirm Password:</label>
-            <input type="password" class="form-control input-sm" id="confirm" ng-model="confirm" ng-class="errorConfirm"> </input>
-            <label for="password">E-mail Address:</label>
-            <input type="text" class="form-control input-sm" id="email" ng-model="email" ng-class="errorEmail"> </input>
-          </div>        
-        <div class="row">
+          <p class="wrongInput" id="passwordFail" hidden="true">Must be 8-15 alphanumeric characters.</p>
+        </div>
+          
+        <div id="signUpInfo" hidden="true">
+          <label for="password">Confirm Password:</label>
+          <input type="password" class="form-control input-sm" id="confirm" ng-model="confirm" ng-class="errorConfirm"> </input>
+          <p class="wrongInput" id="confirmFail" hidden="true">Passwords do not match.</p>
+          <label for="password">E-mail Address:</label>
+          <input type="text" class="form-control input-sm" id="email" ng-model="email" ng-class="errorEmail"> </input>
+          <p class="wrongInput" id="emailFail" hidden="true">Invalid email address.</p>
+        </div>
+        
+        <div id="loginButtons" class="row">
           <div class="col-sm-6">
             <button id="loginBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary" ng-click="logInClick()">Log In</button>
           </div>
           <div class="col-sm-6"> 
             <button id="signupBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary" ng-click="signUpClick()">Sign Up</button>
           </div>
+          
         </div>
         
       </section>

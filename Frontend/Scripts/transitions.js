@@ -1,6 +1,5 @@
 var page = 0;
 var imageRatio = 0.621;
-
 // Document functions --- o
 $(document).ready(function() {
 
@@ -23,7 +22,7 @@ $(document).ready(function() {
 
     if($(event.target)[0].id == "logoutBTN") {
       $.post('http://localhost:3000/logout').done( function (data) {
-        console.log(data);
+        current_user = {};
       });
     };
   });

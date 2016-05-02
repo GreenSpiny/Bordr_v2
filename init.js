@@ -36,6 +36,10 @@ function InitializeGlobals() {
     url      : 'mongodb://localhost:27017/bordr'
   }
 
+  global.session = {
+    user: null
+  }
+
   global.logged_in = false;
 
   console.log("Global framework initialized")

@@ -1,38 +1,28 @@
 // load socket.io-client
 var socket = io();
 
-// on nick form submit, save nickname
-$('#nickname-form').submit(function(){
+//declare Angular app name
+var app = angular.module("chatApp", []);
 
-  // save nick in session & greet
-  sessionStorage.setItem("nickname", $('#nickname').val());
-  
-  // greet user
-  $("#greeting").html('Welcome' + ' ' + $('#nickname').val() + '!');
-  $('#nick').val('');
-  
-  return false;
-});
+//add controller to app
+app.controller("chatController",
+function($scope, $http) {
+	//I swear to you, this will not work. Thus the janky-not-so-angular solution
+	// $scope.messages = [{message: "Yo!"},{message: "Hello"}];
 
-// on chat form submit, send msg to server
-$('#chat-form').submit(function(){
-  
-  // get nickname from session storage
-var nick = sessionStorage.getItem("nickname");
-  
-  // append and emit message
-  $('#messages').append($('<li>').text(nick + ': ' + $('#message').val()));
-  socket.emit('message', nick + ': ' + $('#message').val());
-  $('#message').val('');
-  
-  return false;
-});
+	$scope.send = function() {
+		if (!($scope.message == "")) {
+			socket.emit("send", {message: $scope.message});
+		}
+	}
 
-socket.on("connection", function() {
-	console.log("CONNECT");
-});
-
-// on msg received, append to list
-socket.on('message', function(msg){
-	$('#messages').append($('<li>').text(msg));
+	socket.on("recieve", function(data){
+		console.log(data.message);
+		var message = data.message
+		var string = "";
+            string += ' <li> ';
+            string +=   data.message.message;
+            string += ' </li> ';
+        document.getElementById('conversation').innerHTML += string; 
+	});
 });

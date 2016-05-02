@@ -23,12 +23,14 @@ function () {
 
   app.post('/login', ValidateUser);
 
-  // app.listen(3000, function() {
-  //   io.on('connection', function(socket){
-  //     console.log("One user joined the chat");
-  //   });
-  // });
-
+  io.on("connection",function(socket) {
+    console.log("connect");
+    socket.on("send",function(data){
+      console.log(data.message)
+      socket.broadcast.emit("recieve", {message: data});
+      socket.emit("recieve", {message: data});
+    });
+  });
 }
 
 
@@ -80,17 +82,3 @@ function ValidateUser (req, res) {
     }
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

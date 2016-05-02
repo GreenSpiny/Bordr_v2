@@ -37,7 +37,7 @@ function InitializeGlobals() {
 
   global.logged_in = false;
 
-  global.io = (mod.socket_io).listen(app.listen(3000););
+  global.io = (mod.socket_io).listen(app.listen(3000));
 
   console.log("Global framework initialized")
 
@@ -115,28 +115,3 @@ function AllowPageAccess() {
   require(mod.path.join(loc.scripts, 'request.js'))();
     console.log("Site operational");
 }
-
-// //setups for the various modules
-// var express_ = require('express');
-// var http_ = require('http');
-// var app_ = express();
-// app_.use('/', express_.static(__dirname));
-// var server_ = app_.listen(3000);
-// var io_ = require('socket.io').listen(server_);
-
-
-
-io.on('connection', function(socket){
-  console.log("One user joined the chat");
-  //draw limited messages out of the database
-  //push messages to the chat
-  socket.on('message', function(msg){
-    console.log("Message recieved by the chat server");
-    //send message to the clients
-    // socket.broadcast.emit('message', msg);
-
-
-    //save message to database
-  });
-
-});

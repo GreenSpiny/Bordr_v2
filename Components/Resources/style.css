@@ -68,7 +68,7 @@ body {
   margin: auto;
 }
 
-#eventlist, #createEvent, #myEvents, #friends {
+#eventlist, #createEvent, #myEvents, #friends, #profile {
   max-width: 800px;
   padding: 20px;
   margin: auto;
@@ -148,7 +148,7 @@ h1, h2 {
   border: 1px solid #3d3434;
 }
 
-.space p {
+.space p, #loginInfo p {
   text-align: center;
   line-height: 24px;
   border-radius: 3px;
@@ -159,8 +159,20 @@ h1, h2 {
   border: 1px solid #57634A;
 }
 
-.space input, .space textarea, .space select, #friendsInput {
+.space input, .space textarea, .space select, #friendsInput, #loginInfo input {
   background-color: #F2E3DA;
+}
+
+#changeUsername {
+  background-color: 775644;
+  text-align: left;
+  line-height: 34px;
+  color: #FFF;
+}
+
+#loginInfo input, #changeUsername {
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 #eventMaker input {
@@ -180,4 +192,44 @@ h1, h2 {
 
 #friendsInput {
   text-align: center;
+}
+
+.interest {
+  float: left;
+  padding: 0px;
+  margin: 5px;
+  border: 2px solid #4C3E3E;
+  border-radius: 3px;
+  height: 34px;
+}
+
+.interest div:hover {
+  background-image: url("images/x_icon_1.png");
+}
+
+.interest p {
+  float: left;
+  line-height: 30px;
+  padding: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 0px;
+  border-right: 2px solid #4C3E3E;
+  background-color: #a38571;
+  cursor: default;
+  font-weight: 700;
+}
+
+.interest div {
+  padding: 0px;
+  margin: 0px;
+  background-image: url("images/x_icon_2.png");
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#interestsArea {
+  margin: 5px;
 }

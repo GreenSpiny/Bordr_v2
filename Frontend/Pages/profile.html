@@ -1,0 +1,73 @@
+<!-- Page 6: Profile -->      
+<details class="infoArea" hidden="true" value="6">
+  <p>Edit your user information here!</p>
+  <p>Add interests so your friends know what you like doing.</p>
+</details>
+      
+<h1>My profile</h1>
+  
+  
+<main id="loginInfo">
+
+  <button id="editUserInfoBTN" class="btn btn-success btn-block">Edit user information</button>  
+  
+  <div id="userInfo" hidden="true">
+    <div class=" ">
+      <div class="col-sm-2">
+        <p class="bg-1">User name:</p>
+      </div>
+      <div class="col-sm-8">
+        <div id="changeUsername">My Username</div>
+      </div>
+      <div class="col-sm-2">
+      </div>
+    </div>
+  
+    <div class=" ">
+      <div class="col-sm-2">
+        <p class="bg-1">Password:</p>
+      </div>
+      <div class="col-sm-8">
+        <input id="changePassword" type="password" class="form-control" value="My Username" />
+      </div>
+      <div class="col-sm-2">
+        <button id="saveChangePassword" type="button" class="btn btn-primary btn-block">Save</button>
+      </div>
+    </div>
+    
+    <div class=" ">
+      <div class="col-sm-2">
+        <p class="bg-1">Email:</p>
+      </div>
+      <div class="col-sm-8">
+        <input id="changeEmail" type="email" class="form-control" value="myemail@gmail.com" />
+      </div>
+      <div class="col-sm-2">
+        <button id="saveChangeEmail" type="button" class="btn btn-primary btn-block">Save</button>
+      </div>
+    </div>
+  </div>
+    
+</main>
+  
+<h2>My interests:</h2>
+    
+  <h3>Add an interest:</h3>
+
+  <div class=" ">
+    <div class="AUTOFILL col-sm-6"> 
+      <input id="searchInterests" type='text' data-collection="interests" data-property="title" data-click="P6_insertInterest" />
+    </div>
+  </div>
+  
+  <button id="newInterestBTN" class="btn btn-success" value=0>...not found? Make a new interest.</button>
+  
+  <div class=" ">
+    <div id="newInterestArea" hidden="true" class="col-sm-6">
+      <input id="interestName" type="text" default="(Name)"class="form-control" />
+      <textarea id="interestDescription" type="text" default="(Description)" class="form-control">(Description)</textarea>
+    </div>
+  </div>
+  
+</div>
+   

@@ -4,6 +4,9 @@ function () {
   // Handle Page Routing
   app.get("*", function(req, res) {
     var extension = req.originalUrl.toLowerCase();
+    if (req.originalUrl.indexOf('?') >= 0)
+      extension = extension.substr(0, extension.indexOf('?'));
+
     if (extension.slice(0,9) == '/scripts/') {
       var path  = mod.path.join(loc.frontend_scripts, extension.slice(9));
       res.sendFile(path);
@@ -40,7 +43,6 @@ function () {
   });
 
   app.post('/createEvent', function (req, res) {
-    console.log('req body: ' + req.body);
     CreateEvent(req.body, function(data) { 
       res.send(data);
     });
@@ -118,9 +120,35 @@ function () {
     });
   })
 
+  app.post('/appendList', function (req, res) {
+    AppendList(req.body, function(data) {
+      res.send(data);
+    });
+  })
+
   app.listen(3000, function() {});
 }
 
+function AppendList(data, callback) {
+  err = {};
+  var collection = mongo.db.collection(data.collection);
+  var push = {}
+  push[data.field] = mod.mongo.ObjectId( data.field_value );
+
+  collection.updateOne(
+    {_id: mod.mongo.ObjectId(data.entity) },
+    { $push: push },
+    function (db_err, result) {
+      if (db_err != null) {
+        err['database'] = db_err;
+        callback(err);
+      }
+      else {
+        callback(result);
+      }
+    }
+  );
+}
 
 function CreateUser (signup_info, callback) {
   var err = {};

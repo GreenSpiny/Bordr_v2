@@ -1,426 +1,105 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" ng-app="Bordr">
-  
+<html>
   <head>
-  
-    <!-- Title and icon -->
-    <title>Bordr</title>
-    <link rel="icon" href="images/raccoon_icon.png">
-    
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles -->
-    <link href="style.css" rel="stylesheet">
-    <link href="scripts/autofill.css" rel="stylesheet">  
+    <!-- Ensure the frame spans the whole page -->
+    <style>
+      iframe {
+        border: 0px;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
 
-    <!-- Angular JS link from Google - https://developers.google.com/speed/libraries/-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="jquery-2.1.4.min.js"></script>
-    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-    <script src="scripts/transitions.js"></script>
-    <script src="scripts/index.js" type="text/javascript"></script>
-    <script src="scripts/transitions.js"></script>
-    <script src="scripts/communication.js"></script>
-    <script src="scripts/submissions.js"></script>
+    <!-- JQuery, Angular, Bootstrap, Socket.IO -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Custom JS Scripts -->
     <script src="scripts/autofill.js"></script>
-    <script></script>
+    <script src="scripts/query.js"></script>
+    <script>
 
-     <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    
+      var pages = {}
+
+      function Initialize(callback) {
+        pages = {
+          "nav": null,
+          "menu": null,
+          "event_listing": null,
+          "create_event": null,
+          "my_events": null,
+          "friends": null,
+          "profile": null
+        };
+
+        js = [
+          "menu",
+          "event_listing",
+          "create_event",
+          "my_events",
+          "friends",
+          "profile"
+        ]
+
+        var requests = [];
+        for (key in pages) {
+          // Create a closure to hold the loop value
+          (function(key) {
+            requests.push (
+              $.get(key + '.html', function(page) {
+                pages[key] = page;
+              })
+            );
+          })(key);
+        }
+
+        js.forEach (function (script) {
+          // Create a closure to hold the loop value
+          (function(script) {
+            requests.push (
+              $.getScript('scripts/' + script + '.js')
+            );
+          })(script);
+        });
+
+        $.when.apply($, requests).then( function() {
+          callback();
+        });
+
+      }
+
+      function LoadPage(page) {
+        var html = page + '.html';
+        $("body").html("");
+
+        if (page != "menu")
+          $("body").append(pages["nav"]);
+
+        $("body").append(pages[page]);
+
+        if (page != "menu")
+          window['JS_' + page].Initialize();
+
+
+        $(".redirect").each( function () {
+          $( this ).on("click", function( event ) {
+            $("body").fadeOut(300, function () {
+              LoadPage( $( event.target ).data('redirect') );
+              autofill.Initialize();
+              $("body").fadeIn(300);
+            });
+          });
+        });
+      }
+
+      Initialize( function() { LoadPage("menu"); });
+
+    </script>
+
   </head>
-
   <body>
-  
-    <div id="header" class="container-fluid">
-      <img id="logo" src="images/raccoon_small.png"> </img>
-    </div>
-  
-    <div id="content" class="container-fluid">
-    
-      <!-- Page 0: Login -->
-      <section id="login" class="page" value="0" ng-controller="controller0">
-        <div class="form-group row">
-          <label for="user">Username:</label>
-          <input type="text" class="form-control input-sm" id="user" ng-model="user" ng-class="errorUser"> </input>
-          <p class="wrongInput" id="userFail" hidden="true">Must be 8-15 alphanumeric characters.</p>
-          <label for="password">Password:</label>
-          <input type="password" class="form-control input-sm" id="password" ng-model="password" ng-class="errorPassword"> </input>
-          <p class="wrongInput" id="passwordFail" hidden="true">Must be 8-15 alphanumeric characters.</p>
-        </div>
-          
-        <div id="signUpInfo" hidden="true">
-          <label for="password">Confirm Password:</label>
-          <input type="password" class="form-control input-sm" id="confirm" ng-model="confirm" ng-class="errorConfirm"> </input>
-          <p class="wrongInput" id="confirmFail" hidden="true">Passwords do not match.</p>
-          <label for="password">E-mail Address:</label>
-          <input type="text" class="form-control input-sm" id="email" ng-model="email" ng-class="errorEmail"> </input>
-          <p class="wrongInput" id="emailFail" hidden="true">Invalid email address.</p>
-        </div>
-        
-        <div id="loginButtons" class="row">
-          <div class="col-sm-6">
-            <button id="loginBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary" ng-click="logInClick()">Log In</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="signupBTN" type="button" value=1 class="pageButtonWait btn btn-block btn-primary" ng-click="signUpClick()">Sign Up</button>
-          </div>
-          
-        </div>
-        
-      </section>
-      
-      <!-- Page 1: Main Menu -->
-      <div id="mainmenu" hidden="true" class="page" value="1">
-        
-        <div class="row">
-          <h1>Welcome to Bordr!</h1>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6">
-            <button id="eventsBTN" type="button" value=2 class="pageButton btn btn-block btn-primary">Event Listing</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="makeBTN" type="button" value=3 class="pageButton btn btn-block btn-primary">Create Event</button>
-          </div>
-        </div>
-        
-        <div class="row" ng-controller="rootController">
-          <div class="col-sm-6">
-            <button id="friendsBTN" type="button" value=4 class="pageButton btn btn-block btn-primary" ng-click="$broadcast('loadEvents')">My Events</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="settingsBTN" type="button" value=5 class="pageButton btn btn-block btn-primary">Friends</button>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6">
-            <button id="profileBTN" type="button" value=6 class="pageButton btn btn-block btn-primary">Profile</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="logoutBTN" type="button" value=0 class="pageButton btn btn-block btn-primary">Logout</button>
-          </div>
-        </div>
-        
-      </div>
-      
-      <!-- Page 2: Event List -->
-      <div id="eventlist" hidden="true" class="page" value="2" ng-controller="Controller2">
-        
-        <div class="infoArea" hidden="true" value="2">
-          <p>Bored? Here's where you find something to do, close or far!</p>
-          <p>Browse through your friends' events, or search for all users' events.</p>
-          <p>You can also talk to event attendees via group chat!</p>
-        </div>
-        
-        <div class="row">
-          <h1>Event Listing</h1>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6">
-            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="helpBTN" type="button" value=2 class="infoButton btn btn-block btn-primary">Info</button>
-          </div>
-        </div>
-        
-         <div id="eventSearcher" class="space row container">
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">Search tags:</p>
-            </div>
-            <div class="form-group col-sm-10">
-              <input id="searchEvents" type="text" class="form-control" ng-model="searchEvents"></input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6 form-group">
-              <select id="distanceSelect" class="form-control" ng-model="distance">
-                <option>1 mile</option>
-                <option>10 miles</option>
-                <option>100 miles</option>
-                <option selected>anywhere</option>
-              </select>
-            </div>
-            <div class="col-sm-6 form-group">
-              <select id="friendSelect" class="form-control" ng-model="friends">
-                <option selected>friends only</option>
-                <option>all users</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-        <div id="searchSubmit" class="row">
-          <div class="col-sm-3"></div>
-          <button id="searchEventsBTN" class="btn btn-success col-sm-6">Search Events!</button>
-          <div class="col-sm-3"></div>
-        </div>
-        
-        <hr>
-        <h2 class="row">No results found.</h2>
-        <div id="eventsResultsArea" class="row container">
-        
-        </div>
-        
-      </div>
-      
-      <!-- Page 3: Create Event -->
-      <div id="createEvent" hidden="true" class="page" value="3" ng-controller="Controller3">
-        
-        <div class="infoArea" hidden="true" value="3">
-          <p>Create an event for others to join!  Your event will show up in your friends' Event Listings.</p>
-          <p>If "private" is selected, only friend members can find your event via search.</p>
-          <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
-        </div>
-        
-        <div class="row">
-          <h1>Create Event</h1>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6">
-            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="helpBTN" type="button" value=3 class="infoButton btn btn-block btn-primary">Info</button>
-          </div>
-        </div>
-      
-      <div id="eventArea">
-        <div id="eventMaker" class="space row container">
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">Name:</p>
-            </div>
-            <div class="form-group col-sm-10">
-              <input id="eventNameInput" type="text" class="form-control" ng-model="eventName"></input>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">Tags:</p>
-            </div>
-            <div class="form-group col-sm-10">
-              <div class="AUTOFILL" id="P3_Autofill">
-                <input id="eventTagsInput" type="text" class="form-control" ng-model="eventTags" data-collection="interests" data-property="title" data-click="P3_insertInterest"></input>
-              </div>
-              <div id='P3_interests'></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">Description:</p>
-            </div>
-            <div class="form-group col-sm-10">
-              <textarea id="eventDescriptionInput" type="text" class="form-control" ng-model="eventDesc"></textarea>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2">
-              <p class="bg-1">Private?</p>
-            </div>
-            <div class="form-group col-sm-1">
-              <input id="eventFriendsInput" type="checkbox" checked class="form-control" ng-model="eventFriends"></input>
-            </div>
-            <div class="col-sm-9"></div>
-          </div>
-        </div>
-        
-        <div id="eventSubmit" class="row">
-          <div class="col-sm-3"></div>
-          <button id="eventBTN" class="btn btn-success col-sm-6">Create Event!</button>
-          <div class="col-sm-3"></div>
-        </div>
-      </div>
 
-      <div id="resultsArea">
-        <div id="results" class="infoArea">
-        </div>
-        <button id="eventBTN" class="btn btn-success col-sm-12" ng-click="showCreateEvent()">Create Another Event!</button>
-      </div>
-        
-      </div>
-
-
-      <!-- Page 4: My Events -->
-      <div id="myEvents" hidden="true" class="page" value="4" ng-controller="Controller1">
-
-        <div class="infoArea" hidden="true" value="4">
-          <p>Here are all of the events you have created!</p>
-          <p>You can edit your events or invite friends to them.</p>
-          <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
-        </div>
-          
-        <div class="row">
-          <h1>My Events</h1>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6">
-            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="helpBTN" type="button" value=4 class="infoButton btn btn-block btn-primary">Info</button>
-          </div>
-        </div>
-
-        <div id="events" class="rowEvent" ng-controller="rootController">
-          <h1>Your Events</h1>
-          <section id="event-feed">
-          </section>
-        </div>
-        
-        <div id="eventsArea">
-        </div>
-
-      </div>
-      
-      <!-- Page 5: Friends -->
-      <div id="friends" hidden="true" class="page" value="5">
-      
-        <div class="infoArea" hidden="true" value="5">
-          <p>View, add, or delete your friends!</p>
-          <p>Click on a friends profile to see all their events.</p>
-          <p>To add a new friend, search their username and visit their profile.</p>
-        </div>
-          
-        <div class="row">
-          <h1>Friends!</h1>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6">
-            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="helpBTN" type="button" value=5 class="infoButton btn btn-block btn-primary">Info</button>
-          </div>
-        </div>
-        
-        <h1 class="row">Friend list:</h1>
-        <div id="friendsOnline" class="row">
-        </div>
-        
-        <h1 class="row">Add a friend:</h1>
-        
-        <div class="row">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-6">
-            <input id="friendsInput" type="text" class="form-control"></input>
-          </div>
-          <div class="col-sm-3"></div>
-        </div>
-        
-      
-      </div>
-        
-      <!-- Page 6: Profile -->
-      <div id="profile" hidden="true" class="page" value="6">
-    
-        <div class="infoArea" hidden="true" value="6">
-          <p>Edit your user information here!</p>
-          <p>Add interests so your friends know what you like doing.</p>
-        </div>
-            
-        <div class="row">
-          <h1>My profile</h1>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-6">
-            <button id="homeBTN" type="button" value=1 class="pageButton btn btn-block btn-primary">Back</button>
-          </div>
-          <div class="col-sm-6"> 
-            <button id="helpBTN" type="button" value=6 class="infoButton btn btn-block btn-primary">Info</button>
-          </div>
-        </div>
-        
-        <div id="loginInfo">
-        
-          <button id="editUserInfoBTN" class="btn btn-success btn-block">Edit user information</button>  
-          
-          <div id="userInfo" hidden="true">
-            <div class="row">
-              <div class="col-sm-2">
-                <p class="bg-1">User name:</p>
-              </div>
-              <div class="col-sm-8">
-                <div id="changeUsername">My Username</div>
-              </div>
-              <div class="col-sm-2">
-              </div>
-            </div>
-          
-            <div class="row">
-              <div class="col-sm-2">
-                <p class="bg-1">Password:</p>
-              </div>
-              <div class="col-sm-8">
-                <input id="changePassword" type="password" class="form-control" value="My Username"></input>
-              </div>
-              <div class="col-sm-2">
-                <button id="saveChangePassword" type="button" class="btn btn-primary btn-block">Save</button>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-sm-2">
-                <p class="bg-1">Email:</p>
-              </div>
-              <div class="col-sm-8">
-                <input id="changeEmail" type="email" class="form-control" value="myemail@gmail.com"></input>
-              </div>
-              <div class="col-sm-2">
-                <button id="saveChangeEmail" type="button" class="btn btn-primary btn-block">Save</button>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-        
-        <h1 class="row">My interests:</h1>
-        
-        <div id="interestsArea" class="row">
-        </div>
-        
-        <h1 class="row">Add an interest:</h1>
-
-        <div class="row">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-6">  
-            <div class="AUTOFILL"> 
-              <input id="searchInterests" type='text' data-collection="interests" data-property="title" data-click="P6_insertInterest" />
-            </div>
-          </div>
-          <div class="col-sm-3"></div>
-        </div>
-        
-        <button id="newInterestBTN" class="btn btn-success" value=0>...not found? Make a new interest.</button>
-        
-        <div class="row">
-          <div class="col-sm-3"></div>
-          <div id="newInterestArea" hidden="true" class="col-sm-6">
-            <input id="interestName" type="text" default="(Name)" value="(Name)" class="form-control"></input>
-            <textarea id="interestDescription" type="text" default="(Description)" class="form-control">(Description)</textarea>
-          </div>
-          <div class="col-sm-3"></div>
-        </div>
-        
-      </div>
-         
-    </div>
-      <!-- oooooooooooooooooooooooooo -->
-    </div>
   </body>
-  
 </html>

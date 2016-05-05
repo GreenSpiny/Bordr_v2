@@ -76,6 +76,10 @@ $(document).ready(function() {
     }
   });
   
+  $("#signUpButton").click(function() {
+    $("#signUpInfo").slideDown();
+  });
+  
 });
 
 // Helper functions --- o

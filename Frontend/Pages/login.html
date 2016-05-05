@@ -1,13 +1,73 @@
-<main id="login" class="space   container">
-<input id="logInInput" type="text" class="form-control"></input>
-<input id="passwordInput" type="password" class="form-control"></input>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<div id="hidden" hidden="true">
-	<input id="passwordConfirm" type="password" class="form-control"></input>
-	<input id="email" class="form-control"></input>
-</div>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" ng-app="Bordr">
+  
+  <head>
+  
+    <!-- Title and icon -->
+    <title>Bordr</title>
+    <link rel="icon" href="images/raccoon_icon.png">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
-<button id="logInButton" class="col-sm-6 redirectConditional" data-redirect="menu">Login In</button>
-<button id="signUpButton" class="col-sm-6 redirectConditional" data-redirect="menu">Sign Up</button>
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">
+    <link href="Scripts/autofill.css" rel="stylesheet">  
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="Scripts/transitions.js"></script>
 
-</main>
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    
+  </head>
+
+  <body>
+  
+    <div id="header" class="container-fluid">
+      <img id="logo" src="images/raccoon_small.png"> </img>
+    </div>
+  
+    <div id="content" class="container-fluid">
+    
+      <!-- Page 0: Login -->
+      <div id="login" class="page" value="0">
+        <div class="form-group row">
+          <label for="user">Username:</label>
+          <input type="text" class="form-control input-sm" id="logInInput"> </input>
+          <p class="wrongInput" id="userFail" hidden="true">Must be 8-15 alphanumeric characters.</p>
+          <label for="password">Password:</label>
+          <input type="password" class="form-control input-sm" id="passwordInput"> </input>
+          <p class="wrongInput" id="passwordFail" hidden="true">Must be 8-15 alphanumeric characters.</p>
+        </div>
+          
+        <div id="signUpInfo" class="form-group row" hidden="true">
+          <label for="password">Confirm Password:</label>
+          <input type="password" class="form-control input-sm" id="passwordConfirm"> </input>
+          <p class="wrongInput" id="confirmFail" hidden="true">Passwords do not match.</p>
+          <label for="password">E-mail Address:</label>
+          <input type="text" class="form-control input-sm" id="email"> </input>
+          <p class="wrongInput" id="emailFail" hidden="true">Invalid email address.</p>
+        </div>
+        
+        <div id="loginButtons" class="row">
+          <div class="col-sm-6">
+            <button id="logInButton" type="button" value=1 class="pageButtonWait btn btn-block btn-primary redirectConditional" data-redirect="menu">Log In</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="signUpButton" type="button" value=1 class="pageButtonWait btn btn-block btn-primary redirectConditional" data-redirect="menu">Sign Up</button>
+          </div>
+          
+        </div>
+        
+      </div>
+         
+    </div>
+    
+  </body>
+  
+</html>

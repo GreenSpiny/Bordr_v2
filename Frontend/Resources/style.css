@@ -66,6 +66,11 @@ body {
   margin-top: 15px;
 }
 
+#login .form-group {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
 .wrongInput {
   font-size: 14px;
   font-weight: 700;

@@ -141,11 +141,8 @@ function () {
     }
   });
 
-  // app.listen(3000, function() {});
-
 io.on("connection",function(socket) {
   console.log("connect");
-
   socket.on("send",function(data){
     var id = ObjectId(data.room.toString());
     collection = mongo.db.collection('chats');    
@@ -191,7 +188,6 @@ function AppendList(data, callback) {
 
 function CreateUser (signup_info, callback) {
   var err = {};
-  console.log(signup_info);
   // Validate Username
   var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i
   if (signup_info.username.length < 3 || signup_info.username.length > 15 || !rx_Alphanumeric.test(signup_info.username))
@@ -324,7 +320,6 @@ function ValidateUser (req, credentials, callback) {
     }
     else if (record && (record.username != "") ) {
       req.login_cookie.user = record;
-      console.log(req.login_cookie.user);
       callback({'err': null, 'user': record});
     }
     else {
@@ -428,7 +423,7 @@ function Relationship(user_ids, callback) {
     }
     return shared;
   }
-
+  
   UserInfo( user1_id, function(_user1) {
     var user1 = _user1;
     UserInfo( user2_id, function(_user2) {
@@ -498,23 +493,6 @@ function GetUserEvents(user_id, callback) {
 }
 
 function findUsers(req, res) {
-  console.log("USERS",req.users[0]);
-  collection = mongo.db.collection('chats');
-  collection.findOne({users: req.users[0], users: req.users[1]}, function(db_err, record) {
-    if (db_err) {
-      console.log(db_err);
-    }
-    else if (record) {
-      res.send(record._id);
-    }
-    else {
-      addChat(req,res);
-    }
-  });
-}
-
-function findUsers(req, res) {
-  console.log("USERS",req.users[0]);
   collection = mongo.db.collection('chats');
   collection.findOne({users: req.users[0], users: req.users[1]}, function(db_err, record) {
     if (db_err) {
@@ -532,10 +510,24 @@ function findUsers(req, res) {
 function addChat(chat, res) {
   collection = mongo.db.collection('chats');
   collection.insert(chat, {w:1}, function(db_err, result) { 
-    console.log(chat);
     if (db_err) {
       console.log(db_err);
     }  
     res.send(chat._id);
+  });
+}
+
+function findEvent(req, res) {
+  collection = mongo.db.collection('chats');
+  collection.findOne({event: req.event}, function(db_err, record) {
+    if (db_err) {
+      console.log(db_err);
+    }
+    else if (record) {
+      res.send(record._id);
+    }
+    else {
+      addChat(req,res);
+    }
   });
 }

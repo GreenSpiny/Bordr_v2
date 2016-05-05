@@ -58,9 +58,9 @@ JS_my_events = {
 			document.getElementById('event-feed').innerHTML += string;
 		}
 	$(".groupChat").on("click", function(event ) {
-		console.log(event);
-		// console.log("event",event.toElement.parentNode.parentNode.childrenNodes[1].childrenNodes[3].childrenNodes[1].value);
-		console.log("event",event.target.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].value);
+		var data = [0,0];
+		data[0] = event.target.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].value;
+		data[1] = current_user.user.username;
 		var form = document.createElement("form");
 	    form.setAttribute("method", "get");
 	    form.setAttribute("action", "http://localhost:3000/chat");
@@ -69,7 +69,7 @@ JS_my_events = {
 	    var hiddenField = document.createElement("input"); 
 	    hiddenField.setAttribute("type", "hidden");
 	    hiddenField.setAttribute("name", "message");
-	    hiddenField.setAttribute("value", "val");
+	    hiddenField.setAttribute("value", data);
 	    form.appendChild(hiddenField);
 	    document.body.appendChild(form);
 	    window.open('', 'view', 'resizable=0,width=350,height=250');

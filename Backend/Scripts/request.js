@@ -334,7 +334,10 @@ function ValidateUser (req, credentials, callback) {
 
 function CheckLogin(req, callback) {
   if (req.login_cookie && req.login_cookie.user) {
-    callback(req.login_cookie.user);
+    var collection = mongo.db.collection('users');
+    collection.findOne({_id: mod.mongo.ObjectId(req.login_cookie.user._id)}, function(db_err, record) {
+      callback(record);
+    })
   }
   else {
     callback(false);
@@ -368,7 +371,7 @@ function UserInfo (user_ids, callback) {
 }
 
 function InterestInfo (interest_ids, callback) {
-  console.log("THI");
+  console.log(interest_ids);
   var err = {};
   var collection = mongo.db.collection('interests');
 

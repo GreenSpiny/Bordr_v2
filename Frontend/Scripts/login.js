@@ -1,9 +1,7 @@
 JS_login = { 
   	Initialize : function() {
 
-      console.log("HERE");
       $.post('http://localhost:3000/checkLogin', function(response) {
-        console.log(response);
         if (response) {
           current_user = response;
           LoadPage("menu");
@@ -22,7 +20,6 @@ JS_login = {
   			}
   			else {
   				$.post('http://localhost:3000/signup', {username: $(logInInput).val(), password: $(passwordInput).val(), confirm: $(passwordConfirm).val(), email: $(email).val() }).done( function(response) {
-  					console.log("signup",response);
             var alerts = "";
   					if (response.username == "Username must be between 3 and 15 alphanumeric characters") {
   						alerts += (response.username + "\n");
@@ -54,6 +51,7 @@ function log(event) {
     if (response.err == null) {
       current_user = response.user;
     };
+
     LoadPage( $( event.target ).data('redirect') );
   });
 }

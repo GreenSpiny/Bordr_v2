@@ -90,7 +90,10 @@ autofill = {
               (function(key) {
                 suggestion = suggestions[key];
 
-                var suggestion_element_html = "<div class='suggestion'>" + suggestion.title + "</div>";
+                if (suggestion.title)
+                  var suggestion_element_html = "<div class='suggestion'>" + suggestion.title + "</div>";
+                var suggestion_element_html = "<div class='suggestion'>" + suggestion.username + "</div>";
+
                 autofill_box.append(suggestion_element_html);
 
                 var suggestion_element = autofill_box.children().last();

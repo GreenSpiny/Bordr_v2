@@ -1,6 +1,5 @@
 var request = module.exports =  
 function () { 
-
   // Handle Page Routing
   app.get("*", function(req, res) {
     var extension = req.originalUrl.toLowerCase();

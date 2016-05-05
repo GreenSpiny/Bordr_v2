@@ -1,9 +1,30 @@
 JS_login = { 
   	Initialize : function() {
   		var first = true;
-  		$("#logInButton").click(function(){
-  			$.post('http://localhost:3000/login', {title: $(eventNameInput).val() }).done( function(response) {
-  			});
+  		$("#logInButton").on("click", function( event ) {
+  			$.post('http://localhost:3000/login', {username: $(logInInput).val(), password: $(passwordInput).val()}).done( function(response) {
+  			 console.log("login",response);
+         if (response.err == null){
+          current_user = {
+            "user": {
+              "_id": response.user._id,
+              "email": response.user.email,
+              "friends": response.user.friends,
+              "hosting_events": response.user.hosting_events,
+              "interests": response.user.interests,
+              "participating_events": response.user.participating_events,
+              "profile_picture": response.user.profile_picture,
+              "username": response.user.username
+            }
+          };
+          $("body").fadeOut(300, function () {
+            LoadPage( $( event.target ).data('redirect') );
+            autofill.Initialize();
+            $("body").fadeIn(300);
+          });
+          alert("Successful login!")
+         }
+        });
   		});
   		$("#signUpButton").click(function(){
   			if (first) {
@@ -12,7 +33,7 @@ JS_login = {
   			}
   			else {
   				$.post('http://localhost:3000/signup', {username: $(logInInput).val(), password: $(passwordInput).val(), confirm: $(passwordConfirm).val(), email: $(email).val() }).done( function(response) {
-  					console.log(response);
+  					console.log("signup",response);
   					if (response.username == "Username must be between 3 and 15 alphanumeric characters") {
   						alert(response.username);
   					}

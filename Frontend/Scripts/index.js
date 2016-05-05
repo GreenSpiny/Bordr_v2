@@ -56,7 +56,6 @@ function LoadPage(page) {
   $("body").html("");
 
   if ((page != "menu") && (page != "login")) {
-    console.log(page);
     $("body").append(pages["nav"]);
   }
 

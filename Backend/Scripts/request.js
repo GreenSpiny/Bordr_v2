@@ -127,6 +127,19 @@ function () {
       res.send(data);
     });
   })
+  
+  app.post('/startChat', function(req, res) {
+    console.log(req.body);
+    if (req.body.event != null){
+      findEvent(req.body, res);
+    }
+    else if (req.body.users != null){
+      findUsers(req.body, res);
+    }
+    else {
+
+    }
+  });
 
   // app.listen(3000, function() {});
 
@@ -484,9 +497,10 @@ function GetUserEvents(user_id, callback) {
   });
 }
 
-function findEvent(req, res) {
+function findUsers(req, res) {
+  console.log("USERS",req.users[0]);
   collection = mongo.db.collection('chats');
-  collection.findOne({event: req.event}, function(db_err, record) {
+  collection.findOne({users: req.users[0], users: req.users[1]}, function(db_err, record) {
     if (db_err) {
       console.log(db_err);
     }

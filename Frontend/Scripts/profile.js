@@ -34,24 +34,30 @@ JS_profile = {
               "value": value
             }).done( function ( response ){
               var interests = response;
-              for (key in interests) {
-
-              }
-
+              for (key in interests)
+                if (current_user.interests.indexOf(interests[key]) > -1)
+                  interests.splice(current_user.interests.indexOf(interests[key]), 1)
+        
               callback( response );
-
-
             })
         }, 
 
-        Click: function( element, autofill_box, suggestion ) {
-          autofill_box.hide();
-          element.val( suggestion.title );
-        }, 
-
-        Submit: function() {
-          console.log("SUBMIT");
+        Submit: function( element_value ) {
+          $.post('http://localhost:3000/appendList',
+          {
+            collection: "users",
+            entity: current_user._id,
+            field: "interests",
+            field_value: element_value
+          }).done( function( response ) { 
+            console.log(response);
+            if (response.nModified == 1) {
+              current_user.interests.push( element_value );
+              console.log(current_user); 
+            }
+          });
         } 
+
     });
   }
 }
@@ -73,8 +79,7 @@ function AddFriendElement(friend) {
 }
 
 function AddInterestElement(interest) {
-  
   var interest_element = 
   "<div id='I_" + interest._id + "'>" + interest.title + "</div>"
-  $("#MyFriends").append(friend_element);
+  $("#MyInterests").append(interest_element);
 }

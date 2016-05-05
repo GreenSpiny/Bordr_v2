@@ -1,25 +1,25 @@
-.AUTOFILL {
+.autofill {
   position: relative;
-  width: 100%;
-  margin: auto;
+  width: 400px;
   margin-top: 5px;
   margin-bottom: 15px;
   z-index: 1;
 }
 
-.AUTOFILL > input {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 20px;
-  width: 100%;
+.autofill > .text_entry {
+  position: relative;
+  width: 75% !important;
 }
 
-.AUTOFILL > div.autofill_box {
-  position: absolute;
-  top: 20px;
-  width: 100%;
+.autofill > .submit {
+  position: relative;
+  width: 20%;
+}
 
+.autofill > div.autofill_box {
+  position: absolute;
+  top: 25px;
+  width: 75%;
   border: 1px solid black;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -30,7 +30,7 @@ div.autofill_box > .suggestion {
   position: relative;
   display: block;
   width: 100%;
-  background-color: #e7e7e7;
+  background-color: #FFFFFF;
   
   padding: 1px 2px 1px 2px;
   box-sizing: border-box;
@@ -41,4 +41,4 @@ div.autofill_box > .suggestion {
 div.autofill_box > .suggestion:hover {
   background-color: #d3d3d3;
   cursor: pointer;
-}
+}*/

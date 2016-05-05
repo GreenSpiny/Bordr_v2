@@ -51,25 +51,9 @@ JS_login = {
 
 function log(event) {
   $.post('http://localhost:3000/login', {username: $(logInInput).val(), password: $(passwordInput).val()}).done( function(response) {
-   if (response.err == null){
-    alert("Successful login!")
-    current_user = {
-      "user": {
-        "_id": response.user._id,
-        "email": response.user.email,
-        "friends": response.user.friends,
-        "hosting_events": response.user.hosting_events,
-        "interests": response.user.interests,
-        "participating_events": response.user.participating_events,
-        "profile_picture": response.user.profile_picture,
-        "username": response.user.username
-      }
+    if (response.err == null) {
+      current_user = response.user;
     };
-    $("body").fadeOut(300, function () {
-      LoadPage( $( event.target ).data('redirect') );
-      autofill.Initialize();
-      $("body").fadeIn(300);
-    });
-   }
+    LoadPage( $( event.target ).data('redirect') );
   });
 }

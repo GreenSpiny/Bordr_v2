@@ -54,14 +54,27 @@ autofill = {
     var autofill_box = wrapper.children('.autofill_box');
     autofill_box.hide();
 
+    var submit_value = null;
+    function Submit() {
+      submit.hide();
+      methods.Submit( submit_value );
+      element.val("");
+    }
+
+    var submit = wrapper.children('.submit');
+    submit.on("click", Submit);
+    submit.hide();
+
     element.on('keyup', function(e) { 
 
       if(e.keyCode == 13) {
-        methods.Submit();
+        Submit();
       }
       else if(e.keyCode >= 32 || e.keyCode == 8) {
         var value = element.val();
         autofill_box.html("");
+        submit.hide();
+        submit_value = null
 
         if (value.length < 3) {
           autofill_box.hide();
@@ -70,6 +83,9 @@ autofill = {
           autofill_box.show();
 
           methods.Populate(value, function( suggestions ) {
+            if (suggestions.length == 0)
+              autofill_box.hide();
+
             for (var key in suggestions) {
               (function(key) {
                 suggestion = suggestions[key];
@@ -79,7 +95,10 @@ autofill = {
 
                 var suggestion_element = autofill_box.children().last();
                 suggestion_element.on('click', function() { 
-                  methods.Click(element, autofill_box, suggestion) 
+                  autofill_box.hide();
+                  element.val( suggestion.title );
+                  submit_value = suggestion._id;
+                  submit.show();
                 });
 
               })(key);
@@ -88,7 +107,6 @@ autofill = {
         }
       } 
     })
-
   }
 }
 

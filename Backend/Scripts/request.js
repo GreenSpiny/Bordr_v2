@@ -30,7 +30,7 @@ function () {
 
   // Handle Post Requests 
   app.post('/signup', function (req, res) {
-    CreateUser(req.body, function(data) { 
+    CreateUser(req.body, function(data) {
       res.send(data);
     });
   });

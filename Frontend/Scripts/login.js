@@ -44,6 +44,7 @@ function log(event) {
    console.log("login",response);
    if (response.err == null){
     alert("Successful login!")
+    console.log("hosting",response.user.hosting_events);
     current_user = {
       "user": {
         "_id": response.user._id,

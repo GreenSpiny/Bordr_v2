@@ -209,21 +209,25 @@ function CreateInterest (new_interest, callback) {
 
 function CreateEvent (new_event, callback) {
   var err = {};
+  var error = false;
   var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i;
-  console.log(new_event);
-
-  if (new_event.title.length < 3 || new_event.title.length > 15 || !rx_Alphanumeric.test(new_event.title))
+  if (new_event.title.length < 3 || new_event.title.length > 15 || !rx_Alphanumeric.test(new_event.title)) {
+    error = true;
     err['title'] = "Event title must be between 3 and 15 alphanumeric characters";
-  else if (new_event.description.length > 250)
+  }
+  else if (new_event.description.length > 250) {
+    error = true;
     err['description'] = "Event name must be under 250 characters";
-  if (err != null) {
+  }
+  if (error) {
     callback(err);
   }
   else {
     // Database Insertion
-    // collection = mongo.db.collection('events');    
-    // collection.insert(new_event, {w:1}, function(db_err, result) { 
-    // });
+    collection = mongo.db.collection('events');    
+    collection.insert(new_event, {w:1}, function(db_err, result) { 
+      callback(new_event);
+    });
   }
 }
 

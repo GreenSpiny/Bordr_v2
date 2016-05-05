@@ -10,7 +10,7 @@ function Initialize(callback) {
     "create_event": null,
     "my_events": null,
     "friends": null,
-    "profile": null
+    "profile": null,
   };
 
   js = [

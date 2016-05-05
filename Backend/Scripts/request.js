@@ -1,5 +1,8 @@
 var request = module.exports =  
 function () { 
+  app.get('/chat', function(req, res) {
+    res.render(mod.path.join(loc.root, 'Frontend/Pages/chat.html'));
+  });
   // Handle Page Routing
   app.get("*", function(req, res) {
     var extension = req.originalUrl.toLowerCase();

@@ -6,8 +6,10 @@ JS_my_events = {
   	console.log("events",events);
   	for (var i=0; i < events.length; i++)
 		{
+			var eventsObject = JSON.parse(events[i]);
+			console.log(eventsObject);
 			var checked = "";
-			if (events[i].private) {
+			if (eventsObject.private) {
 				checked = "checked";
 			}
 			var string = "";
@@ -17,7 +19,7 @@ JS_my_events = {
 			string += '       <p class="bg-1">Name:</p>'
 			string += '     </div>'
 			string += '     <div class="col-sm-7">'
-			string += '       <input type="text" class="eventName form-control" value="' + events[i].title + '"></input>'
+			string += '       <input type="text" class="eventName form-control" value="' + eventsObject.title + '"></input>'
 			string += '     </div>'
 			string += '     <div class="col-sm-2">'
 			string += '       <p class="bg-1">Private:</p>'
@@ -31,12 +33,12 @@ JS_my_events = {
 			string += '       <p class="bg-1">Tags:</p>'
 			string += '     </div>'
 			string += '     <div class="col-sm-10">'
-			string += '       <input type="text" class="eventTags form-control" value="' + events[i].tags + '"></input>'
+			string += '       <input type="text" class="eventTags form-control" value="' + eventsObject.tags + '"></input>'
 			string += '     </div>'
 			string += '   </div>'
 			string += '   <div class="form-group row">'
 			string += '     <div class="col-sm-12">'
-			string += '       <textarea class="eventDescription form-control">' + events[i].description + '</textarea>'
+			string += '       <textarea class="eventDescription form-control">' + eventsObject.description + '</textarea>'
 			string += '     </div>'
 			string += '   </div>'
 			string += '   <div class="form-group row">'
@@ -53,5 +55,10 @@ JS_my_events = {
 			string += ' </div>'
 			document.getElementById('event-feed').innerHTML += string;
 		}
+	$(".groupChat").on("click", function(event ) {
+		console.log("event",event.toElement.parentNode.parentNode);
+		console.log("event",event.toElement.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].value);
+	});
   }
+
 }

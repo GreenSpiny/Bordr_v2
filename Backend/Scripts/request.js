@@ -27,7 +27,7 @@ function () {
       });
     }
   });
-
+}
   // Handle Post Requests 
   app.post('/signup', function (req, res) {
     CreateUser(req.body, function(data) {
@@ -125,8 +125,33 @@ function () {
     });
   })
 
-  app.listen(3000, function() {});
-}
+  // app.listen(3000, function() {});
+
+io.on("connection",function(socket) {
+  console.log("connect");
+
+  socket.on("send",function(data){
+    var id = ObjectId(data.room.toString());
+    collection = mongo.db.collection('chats');    
+    collection.update({"_id": id}, { $push: { messages: data.message } }, function(db_err, result) {});
+    collection.findOne({"_id" : id}, function(db_err, record) {
+    });
+    io.sockets.in(data.room).emit("recieve", data.message[0]);
+  });
+
+  socket.on('room', function(data) {
+    var id = ObjectId(data.room.toString());
+    socket.join(data.room);
+    collection = mongo.db.collection('chats')
+    collection.findOne({"_id" : id}, function(db_err, record) {
+      if (!(record == null || record.messages == undefined)) {
+        for (var i = 0; i < record.messages.length; i++) {
+          socket.emit("recieve",record.messages[i][0]); 
+        }   
+      }
+    });
+  });
+});
 
 function AppendList(data, callback) {
   err = {};
@@ -456,17 +481,44 @@ function GetUserEvents(user_id, callback) {
   });
 }
 
+function findEvent(req, res) {
+  collection = mongo.db.collection('chats');
+  collection.findOne({event: req.event}, function(db_err, record) {
+    if (db_err) {
+      console.log(db_err);
+    }
+    else if (record) {
+      res.send(record._id);
+    }
+    else {
+      addChat(req,res);
+    }
+  });
+}
 
+function findUsers(req, res) {
+  console.log("USERS",req.users[0]);
+  collection = mongo.db.collection('chats');
+  collection.findOne({users: req.users[0], users: req.users[1]}, function(db_err, record) {
+    if (db_err) {
+      console.log(db_err);
+    }
+    else if (record) {
+      res.send(record._id);
+    }
+    else {
+      addChat(req,res);
+    }
+  });
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+function addChat(chat, res) {
+  collection = mongo.db.collection('chats');
+  collection.insert(chat, {w:1}, function(db_err, result) { 
+    console.log(chat);
+    if (db_err) {
+      console.log(db_err);
+    }  
+    res.send(chat._id);
+  });
+}

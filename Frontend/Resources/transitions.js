@@ -19,6 +19,17 @@ $(document).ready(function() {
     
   });
   
+  // Open help info
+  $(".infoButton").click(function(){
+    var value = $(this).val();
+    $(this).blur();
+    $(".infoArea").each(function(){
+      if ($(this).attr("value") == value) {
+        $(this).slideToggle("fast");
+      }
+    });
+  });
+  
 });
 
 // Helper functions --- o

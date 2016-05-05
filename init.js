@@ -33,7 +33,8 @@ function InitializeGlobals() {
   // Initialize Database Client
   global.client = mod.mongo.MongoClient;
   global.mongo = {
-    url      : 'mongodb://localhost:27017/bordr'
+    url      : "mongodb://conradmossl:password@work.websci:7000/lab7"
+
   }
 
   global.session = {

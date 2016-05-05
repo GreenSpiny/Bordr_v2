@@ -4,7 +4,6 @@ var user = null;
 
 // Document functions --- o
 $(document).ready(function() {
-
   // Resize the window
   $(window).resize(function() {
     if (page > 0) {
@@ -198,7 +197,7 @@ function populateFriends() {
 
 // Add a new interest via POST request
 function submitNewInterest(title, description, callback) {
-  $.post('http://localhost:3000/createInterest', {title: title, description: description}).done( function(data) {
+  $.post('http://localhost:3000/getUserEvents', {}).done( function(data) {
       callback(data.data);
   });
 }

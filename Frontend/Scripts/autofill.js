@@ -47,6 +47,52 @@ function P6_insertInterest(suggestion) {
 }*/
 
 autofill = {
+  Initialize : function(wrapper, methods) {
+
+    // Append the suggestions box
+    var element = wrapper.children('.text_entry');
+    var autofill_box = wrapper.children('.autofill_box');
+    autofill_box.hide();
+
+    element.on('keyup', function(e) { 
+
+      if(e.keyCode == 13) {
+        methods.Submit();
+      }
+      else if(e.keyCode >= 32 || e.keyCode == 8) {
+        var value = element.val();
+        autofill_box.html("");
+
+        if (value.length < 3) {
+          autofill_box.hide();
+        }
+        if (value.length >= 3) {
+          autofill_box.show();
+
+          methods.Populate(value, function( suggestions ) {
+            for (var key in suggestions) {
+              (function(key) {
+                suggestion = suggestions[key];
+
+                var suggestion_element_html = "<div class='suggestion'>" + suggestion.title + "</div>";
+                autofill_box.append(suggestion_element_html);
+
+                var suggestion_element = autofill_box.children().last();
+                suggestion_element.on('click', function() { 
+                  methods.Click(element, autofill_box, suggestion) 
+                });
+
+              })(key);
+            }
+          });
+        }
+      } 
+    })
+
+  }
+}
+
+/*autofill = {
 
   Initialize: function() {
     $('.AUTOFILL').each( function () {
@@ -112,4 +158,4 @@ autofill = {
       }
     });
   }
-};
+};*/

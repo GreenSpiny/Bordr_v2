@@ -40,7 +40,9 @@ function Initialize(callback) {
     // Create a closure to hold the loop value
     (function(script) {
       requests.push (
-        $.getScript('scripts/' + script + '.js')
+        $.getScript('scripts/' + script + '.js').fail( function(jqxhr, settings, exception) { 
+          console.log(exception);
+        })
       );
     })(script);
   });
@@ -66,13 +68,10 @@ function LoadPage(page) {
     window['JS_nav'].Initialize();
   }
 
-
-
   $(".redirect").each( function () {
     $( this ).on("click", function( event ) {
       $("body").fadeOut(300, function () {
         LoadPage( $( event.target ).data('redirect') );
-        autofill.Initialize();
         $("body").fadeIn(300);
       });
     });

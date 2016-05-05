@@ -1,5 +1,16 @@
 JS_login = { 
   	Initialize : function() {
+
+      console.log("HERE");
+      $.post('http://localhost:3000/checkLogin', function(response) {
+        console.log(response);
+        if (response) {
+          current_user = response;
+          LoadPage("menu");
+        }
+      })
+
+
   		var first = true;
   		$("#logInButton").on("click", function( event ) {
   			log(event);
@@ -38,13 +49,10 @@ JS_login = {
   	}
 }
 
-
 function log(event) {
   $.post('http://localhost:3000/login', {username: $(logInInput).val(), password: $(passwordInput).val()}).done( function(response) {
-   console.log("login",response);
    if (response.err == null){
     alert("Successful login!")
-    console.log("hosting",response.user.hosting_events);
     current_user = {
       "user": {
         "_id": response.user._id,

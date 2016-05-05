@@ -357,6 +357,7 @@ function UserInfo (user_ids, callback) {
 }
 
 function InterestInfo (interest_ids, callback) {
+  console.log("THI");
   var err = {};
   var collection = mongo.db.collection('interests');
 

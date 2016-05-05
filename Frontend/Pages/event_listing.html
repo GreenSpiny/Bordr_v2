@@ -1,42 +1,96 @@
-<!-- Page 2: Event Listing -->        
-<details class="infoArea" hidden="true">
-  Bored? Here's where you find something to do, close or far! </br>
-  B se through your friends' events, or search for all users' events. </br>
-  You can also talk to event attendees via group chat!
-</details>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<header class=" ">
-  <h1>Event Listing</h1>
-</header>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  
+  <head>
+  
+    <!-- Title and icon -->
+    <title>Bordr</title>
+    <link rel="icon" href="images/raccoon_icon.ico">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
-<main id="eventSearcher" class="space   container">
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
-  <div class=" ">
-    <h2 class="col-sm-2">Search tags:</p>
-    <div class="form-group col-sm-10">
-      <input id="searchEvents" type="text" class="form-control" ng-model="searchEvents"></input>
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    
+  </head>
+  
+  <body>
+  
+    <div id="header" class="container-fluid">
+      <img id="logo" src="images/raccoon_small.png"> </img>
     </div>
-  </div>
-
-  <div class=" ">
-
-    <div class="col-sm-6 form-group">
-      <select id="distanceSelect" class="form-control" ng-model="distance">
-        <option>1 mile</option>
-        <option>10 miles</option>
-        <option>100 miles</option>
-        <option selected>anywhere</option>
-      </select>
+  
+    <div id="content" class="container-fluid">
+  
+      <!-- Page 2: Event List -->
+      <div id="eventSearcher" hidden="true" class="page" value="2" ng-controller="Controller2">
+        
+        <div class="infoArea" hidden="true" value="2">
+          <p>Bored? Here's where you find something to do, close or far!</p>
+          <p>Browse through your friends' events, or search for all users' events.</p>
+          <p>You can also talk to event attendees via group chat!</p>
+        </div>
+        
+        <div class="row">
+          <h1>Event Listing</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" data-redirect="menu" value=1 class="pageButton btn btn-block btn-primary redirect">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=2 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+        
+         <div id="eventSearcher" class="space row container">
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="bg-1">Search tags:</p>
+            </div>
+            <div class="form-group col-sm-10">
+              <input id="searchEvents" type="text" class="form-control" ng-model="searchEvents"></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <select id="distanceSelect" class="form-control" ng-model="distance">
+                <option>1 mile</option>
+                <option>10 miles</option>
+                <option>100 miles</option>
+                <option selected>anywhere</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <select id="friendSelect" class="form-control" ng-model="friends">
+                <option selected>friends only</option>
+                <option>all users</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div id="searchSubmit" class="row">
+          <div class="col-sm-3"></div>
+          <button id="getEventsButton" class="btn btn-success col-sm-6">Search Events!</button>
+          <div class="col-sm-3"></div>
+        </div>
+        
+      </div>
+      
     </div>
-
-    <div class="col-sm-6 form-group">
-      <select id="friendSelect" class="form-control" ng-model="friends">
-        <option selected>friends only</option>
-        <option>all users</option>
-      </select>
-    </div>
-
-  </div>
-
-  <button id="getEventsButton"></button>
-</main>
+    
+  </body>
+  
+</html>

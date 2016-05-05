@@ -83,7 +83,7 @@ body {
   margin: auto;
 }
 
-#eventlist, #createEvent, #myEvents, #friends, #profile {
+#eventSearcher, #createEvent, #myEvents, #friends, #profile {
   max-width: 800px;
   padding: 20px;
   margin: auto;

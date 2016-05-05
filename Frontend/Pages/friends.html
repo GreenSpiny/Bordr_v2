@@ -1,18 +1,75 @@
-<!-- Page 5: Friends -->      
-<details class="infoArea" hidden="true" value="5">
-  <p>View, add, or delete your friends!</p>
-  <p>Click on a friends profile to see all their events.</p>
-  <p>To add a new friend, search their username and visit their profile.</p>
-</details>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   
-<h1>My Friends</h1>
+  <head>
+  
+    <!-- Title and icon -->
+    <title>Bordr</title>
+    <link rel="icon" href="images/raccoon_icon.ico">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
-<h2 class=" ">Friend list:</h1>
-<div id="friendsOnline" class=" "></div>
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
-<h2 class=" ">Add a friend:</h1>
-<div class="AUTOFILL"> 
-  <input id="addFriend" type='text' data-collection="users" data-property="username" data-click="AddFriend" />
-</div>
-
-
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    
+  </head>
+  
+  <body>
+  
+    <div id="header" class="container-fluid">
+      <img id="logo" src="images/raccoon_small.png"> </img>
+    </div>
+  
+    <div id="content" class="container-fluid">
+  
+      <!-- Page 5: Friends -->
+      <div id="friends" hidden="true" class="page" value="5">
+      
+        <div class="infoArea" hidden="true" value="5">
+          <p>View, add, or delete your friends!</p>
+          <p>Click on a friends profile to see all their events.</p>
+          <p>To add a new friend, search their username and visit their profile.</p>
+        </div>
+          
+        <div class="row">
+          <h1>Friends!</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" data-redirect="menu" value=1 class="pageButton btn btn-block btn-primary redirect">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=5 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+        
+        <h1 class="row">Friend list:</h1>
+        <div id="friendsOnline" class="row">
+        </div>
+        
+        <h1 class="row">Add a friend:</h1>
+        
+        <div class="row">
+          <div class="AUTOFILL"> 
+            <input id="addFriend" type='text' data-collection="users" data-property="username" data-click="AddFriend"></input>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+    
+  </body>
+  
+</html>

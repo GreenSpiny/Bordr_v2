@@ -1,17 +1,72 @@
-<!-- Page 4: My Events -->
-<details class="infoArea" hidden="true" value="4">
-  <p>Here are all of the events you have created!</p>
-  <p>You can edit your events or invite friends to them.</p>
-  <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
-</details>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   
-<h1>My Events</h1>
+  <head>
+  
+    <!-- Title and icon -->
+    <title>Bordr</title>
+    <link rel="icon" href="images/raccoon_icon.ico">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
-<main id="events" class="rowEvent">
-  <section id="event-feed"></section>
-  <div id="eventsArea">
-  </div>
-</main>
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
-<!-- 
-ng-controller="myEventsController" -->
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    
+  </head>
+  
+  <body>
+  
+    <div id="header" class="container-fluid">
+      <img id="logo" src="images/raccoon_small.png"> </img>
+    </div>
+  
+    <div id="content" class="container-fluid">
+  
+      <!-- Page 4: My Events -->
+      <div id="myEvents" hidden="true" class="page" value="4">
+
+        <div class="infoArea" hidden="true" value="4">
+          <p>Here are all of the events you have created!</p>
+          <p>You can edit your events or invite friends to them.</p>
+          <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
+        </div>
+          
+        <div class="row">
+          <h1>My Events</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" data-redirect="menu" value=1 class="pageButton btn btn-block btn-primary redirect">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=4 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+
+        <div id="events" class="rowEvent">
+          <h1>Your Events</h1>
+          <section id="event-feed">
+          </section>
+        </div>
+        
+        <div id="eventsArea">
+        </div>
+
+      </div>
+      
+    </div>
+    
+  </body>
+  
+</html>

@@ -1,24 +1,75 @@
-<!-- Page 1: Main Menu -->
-<header class=" ">
-  <h1>Welcome to Bordr!</h1>
-</header>
-  
-<nav> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-  <div class=" ">
-    <button id="eventsBTN" type="button" data-redirect="event_listing" class="col-sm-6 redirect">Event Listing</button> 
-    <button id="makeBTN" type="button" data-redirect="create_event" class="col-sm-6 redirect">Create Event</button>
-  </div>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   
-  <div class=" ">
-    <button id="friendsBTN" type="button" data-redirect="my_events" class="col-sm-6 redirect">My Events</button>
-    <button id="settingsBTN" type="button" data-redirect="friends" class="col-sm-6 redirect">Friends</button>
-  </div>
+  <head>
   
-  <div class=" ">
-    <button id="profileBTN" type="button" data-redirect="profile" class="col-sm-6 redirect">Profile</button>
-    <button id="logoutBTN" type="button" data-redirect="login" class="col-sm-6 redirect">Logout</button>
-  </div>
+    <!-- Title and icon -->
+    <title>Bordr</title>
+    <link rel="icon" href="images/raccoon_icon.ico">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
-</nav>
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    
+  </head>
   
+  <body>
+  
+    <div id="header" class="container-fluid">
+      <img id="logo" src="images/raccoon_small.png"> </img>
+    </div>
+  
+    <div id="content" class="container-fluid">
+  
+      <!-- Page 1: Main Menu -->
+      <div id="mainmenu" hidden="true" class="page" value="1">
+        
+        <div class="row">
+          <h1>Welcome to Bordr!</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="eventsBTN" type="button" data-redirect="event_listing" value=2 class="pageButton btn btn-block btn-primary redirect">Event Listing</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="makeBTN" type="button" data-redirect="create_event" value=3 class="pageButton btn btn-block btn-primary redirect">Create Event</button>
+          </div>
+        </div>
+        
+        <div class="row" ng-controller="rootController">
+          <div class="col-sm-6">
+            <button id="friendsBTN" type="button" data-redirect="my_events" value=4 class="pageButton btn btn-block btn-primary redirect">My Events</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="settingsBTN" type="button" data-redirect="friends" value=5 class="pageButton btn btn-block btn-primary redirect">Friends</button>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="profileBTN" type="button" data-redirect="profile" value=6 class="pageButton btn btn-block btn-primary redirect">Profile</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="logoutBTN" type="button" data-redirect="login" value=0 class="pageButton btn btn-block btn-primary redirect">Logout</button>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </body>
+  
+</html>

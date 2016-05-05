@@ -215,16 +215,17 @@ function CreateEvent (new_event, callback) {
 
   if (new_event.title.length < 3 || new_event.title.length > 15 || !rx_Alphanumeric.test(new_event.title))
     err['title'] = "Event title must be between 3 and 15 alphanumeric characters";
-  if (new_event.description.length > 250)
+  else if (new_event.description.length > 250)
     err['description'] = "Event name must be under 250 characters";
-  
-  // Database Insertion
-  collection = mongo.db.collection('events');    
-  collection.insert(new_event, {w:1}, function(db_err, result) { 
-    if (err != null) 
-      err['database'] = db_err;
+  if (err != null) {
     callback(err);
-  });
+  }
+  else {
+    // Database Insertion
+    // collection = mongo.db.collection('events');    
+    // collection.insert(new_event, {w:1}, function(db_err, result) { 
+    // });
+  }
 }
 
 function LinkEntries (link_data, callback) {

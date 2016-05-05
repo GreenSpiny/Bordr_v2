@@ -154,12 +154,9 @@ io.on("connection",function(socket) {
 });
 
 function AppendList(data, callback) {
-  console.log("____>",data);
   err = {};
   var collection = mongo.db.collection(data.collection);
   var push = {}
-  console.log("field_value",data.field_value);
-  console.log("field",data.field);
   push[data.field] = (data.field_value);
   collection.updateOne(
     {_id: ObjectId(data.entity) },

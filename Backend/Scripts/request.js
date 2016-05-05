@@ -152,7 +152,7 @@ function AppendList(data, callback) {
 
 function CreateUser (signup_info, callback) {
   var err = {};
-
+  console.log(signup_info);
   // Validate Username
   var rx_Alphanumeric = /^([0-9]|[a-z])+([0-9a-z]+)$/i
   if (signup_info.username.length < 3 || signup_info.username.length > 15 || !rx_Alphanumeric.test(signup_info.username))
@@ -281,6 +281,7 @@ function ValidateUser (req, credentials, callback) {
     }
     else if (record && (record.username != "") ) {
       req.login_cookie.user = record;
+      console.log(req.login_cookie.user);
       callback({'err': null, 'user': record});
     }
     else {

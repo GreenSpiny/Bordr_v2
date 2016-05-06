@@ -46,19 +46,35 @@ JS_my_events = {
 			string += '       <button type="button" class="btn btn-success btn-block groupChat">Group Chat</button>'
 			string += '     </div>'
 			string += '     <div class="col-sm-4">'
-			string += '       <button type="button" class="btn btn-success btn-block groupChat">View Attendees</button>'
+			string += '       <button type="button" class="btn btn-success btn-block groupChat" onclick="viewAttn(this)">View Attendees</button>'
 			string += '     </div>'
 			string += '     <div class="col-sm-4">'
-			string += '       <button type="button" class="btn btn-primary btn-block groupChat" ng-click="saveChanges()">Save Chages</button>'
+			string += '       <button type="button" class="btn btn-primary btn-block groupChat" onclick="saveChanges(this)">Save Chages</button>'
 			string += '     </div>'
 			string += '   </div>'
 			string += ' </div>'
 			document.getElementById('event-feed').innerHTML += string;
 		}
-	$(".groupChat").on("click", function(event ) {
+	/*$(".groupChat").on("click", function(event ) {
+		console.log("Clicked");
 		console.log("event",event.toElement.parentNode.parentNode);
 		console.log("event",event.toElement.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].value);
-	});
-  }
-
+	});*/
 }
+}
+
+
+	function saveChanges(param) {
+		var eventObj = $(param).parent().parent().parent();
+		var eId = eventObj._id;
+		var eName = eventObj.find(".eventName").val();
+		var eTags = eventObj.find(".eventTags").val();
+		var eDesc = eventObj.find(".eventDescription").val();
+		var isP = eventObj.find(".eventFriends").val();
+
+		return $.post('http://localhost:3000/saveChanges', { id: eId, n: eName, t: eTags, d: eDesc, p: isP } ).done(function( data ) {
+		alert(data);
+		  });
+		} 
+
+   

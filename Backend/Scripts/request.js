@@ -113,11 +113,9 @@ function () {
     });
   })
 
-  app.post('/saveChanges', function (req, res) {
-    UpdateEvent(req.body, function(data) {
-      res.send(data);
-    });
-  })
+app.post('/saveChanges', function(req, res) {
+  UpdateEvent(req.body, res);
+})
 
   app.post('/appendList', function (req, res) {
     AppendList(req.body, function(data) {
@@ -523,4 +521,24 @@ function addChat(chat, res) {
     }  
     res.send(chat._id);
   });
+}
+
+function UpdateEvent(req, res) {
+  mongo.db.collection('users').updateOne(
+    {hosting_events._id: mod.mongo.ObjectId(req.id)},
+    {
+      $set: {
+        hosting_events.title: req.n,
+        hosting_events.description: req.t,
+        hosting_events.tags: req.d,
+        hosting_events.private: req.p
+      }
+    }, function(err, result) {
+        if (err)
+          {
+            console.log(err);
+          }
+        }
+        )
+  res.send("Event " + req.n + " successfully updated!");
 }

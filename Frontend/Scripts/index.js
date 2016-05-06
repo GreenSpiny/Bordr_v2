@@ -56,11 +56,6 @@ function Initialize(callback) {
 function LoadPage(page) {
   var html = page + '.html';
   $("body").html("");
-
-  if ((page != "menu") && (page != "login")) {
-    $("body").append(pages["nav"]);
-  }
-
   $("body").append(pages[page]);
 
   if ((page != "menu") || (page != "login")) {

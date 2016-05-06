@@ -17,6 +17,7 @@ $(document).ready(function() {
   $(".pageButton").click(function(event) {
   
     setUser();
+    
     // Change pages
     goToPage(($(this)).attr("value"));
     $(".infoArea").each(function(){
@@ -76,26 +77,14 @@ $(document).ready(function() {
     }
   });
   
+  $("#signUpButton").click(function() {
+    $("#signUpInfo").slideDown();
+  });
+  
 });
 
 // Helper functions --- o
 function goToPage(num) {
-
-  // Calculate fade in speed
-  var fadeValue = 0;
-  if (page > 0 && num > 0) {
-    fadeValue = 300;
-  }
-
-  // Go to designated page
-  $(".page").each(function(){
-    if ($(this).attr("value") == num) {
-      $(this).fadeIn(fadeValue);
-    }
-    else {
-      $(this).hide();
-    }
-  });
   
   // Scroll header up or down
   if (num > 0 && page <= 0) {
@@ -116,6 +105,7 @@ function goToPage(num) {
   // Set page number to current page
   page = num;
   
+  /*
   // Page specific transitions ---o
   if (num == 5) {
     populateFriends();
@@ -125,9 +115,7 @@ function goToPage(num) {
     populateInterests();
     $("#newInteresBTN").val(0);
   }
-  
-  // 0000000000000000000000000 ---o
-
+  */
 }
 
 function scroll(direction, duration) {

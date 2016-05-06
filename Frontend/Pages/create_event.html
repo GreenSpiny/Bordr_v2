@@ -1,58 +1,112 @@
-<!-- Page 3: Create Event -->  
-<details class="infoArea" hidden="true" value="3">
-  Create an event for others to join!  Your event will show up in your friends' Event Listings.</br>
-  If "private" is selected, only friend members can find your event via search.</br>
-  Events expire at 5:00 AM or in 24 hours, whichever comes first.</br>
-</details>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" ng-app="Bordr">
   
-<header class=" ">
-  <h1>Create Event</h1>
-</header>
+  <head>
+  
+    <!-- Title and icon -->
+    <title>Bordr</title>
+    <link rel="icon" href="images/raccoon_icon.png">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
 
-<main id="eventMaker" class="space   container">
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">
+    <link href="Scripts/autofill.css" rel="stylesheet">  
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="Scripts/transitions.js"></script>
 
-  <div class=" ">
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    
+  </head>
 
-    <h2 class="col-sm-2">Name:</div>
-    <input id="eventNameInput" type="text" class="form-control"></input>
-
-  </div>
-
-  <div class=" ">
-
-    <h2 class="col-sm-2">Tags:</div>
-    <div class="AUTOFILL" id="P3_Autofill">
-      <input id="eventTagsInput" type="text" class="form-control" data-collection="interests" data-property="title" data-click="P3_insertInterest"></input>
+  <body>
+  
+    <div id="header" class="container-fluid">
+      <img id="logo" src="images/raccoon_small.png"> </img>
     </div>
-    <div id='P3_interests'></div>
-
-  </div>
-
-  <div class=" ">
-
-    <h2 class="col-sm-2">Description:</div>
-    <textarea id="eventDescriptionInput" type="text" class="form-control col-sm-10"></textarea>
-
-  </div>
-
-  <div class=" ">
-
-    <h2 class="col-sm-2">Private?:</div>
-    <div class="form-group col-sm-1">
-      <input id="eventFriendsInput" type="checkbox" class="form-control col-sm-1" checked></input>
+  
+    <div id="content" class="container-fluid">
+      
+      <!-- Page 3: Create Event -->
+      <div id="eventMaker" class="page" value="3">
+        
+        <div class="infoArea" hidden="true" value="3">
+          <p>Create an event for others to join!  Your event will show up in your friends' Event Listings.</p>
+          <p>If "private" is selected, only friend members can find your event via search.</p>
+          <p>Events expire at 5:00 AM or in 24 hours, whichever comes first.</p>
+        </div>
+        
+        <div class="row">
+          <h1>Create Event</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" data-redirect="menu" value=1 class="pageButton btn btn-block btn-primary redirect">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=3 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+      
+        <div id="eventArea">
+          <div id="eventMaker" class="space row container">
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Name:</p>
+              </div>
+              <div class="form-group col-sm-10">
+                <input id="eventNameInput" type="text" class="form-control" ng-model="eventName"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Tags:</p>
+              </div>
+              <div class="form-group col-sm-10">
+                <div class="AUTOFILL" id="P3_Autofill">
+                  <input id="eventTagsInput" type="text" class="form-control" data-collection="interests" data-property="title" data-click="P3_insertInterest"></input>
+                </div>
+                <div id='P3_interests'></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Description:</p>
+              </div>
+              <div class="form-group col-sm-10">
+                <textarea id="eventDescriptionInput" type="text" class="form-control" ng-model="eventDesc"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Private?</p>
+              </div>
+              <div class="form-group col-sm-1">
+                <input id="eventFriendsInput" type="checkbox" checked class="form-control" ng-model="eventFriends"></input>
+              </div>
+              <div class="col-sm-9"></div>
+            </div>
+          </div>
+          
+          <div id="eventSubmit" class="row">
+            <div class="col-sm-3"></div>
+            <button id="eventBTN" class="btn btn-success col-sm-6">Create Event!</button>
+            <div class="col-sm-3"></div>
+          </div>
+        </div>
+          
+        </div>
+         
     </div>
-
-  </div>
-
-  <div id="eventSubmit" class=" ">
-    <button id="eventBTN" class="btn btn-success col-sm-6">Create Event!</button>
-  </div>
-
-  <!--<div id="resultsArea">
-    <div id="results" class="infoArea">
-    </div>
-    <button id="eventBTN" class="btn btn-success col-sm-12" ng-click="showCreateEvent()">Create Another Event!</button>
-  </div>-->
-</main>
-
-
+    
+  </body>
+  
+</html>

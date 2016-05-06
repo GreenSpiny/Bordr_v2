@@ -1,50 +1,3 @@
-function TestSubmit(data) {
-  console.log("HI!");
-  //var user_id = data[0]["_id"];
-  //var other_user_ids = [data[0]["_id"], data[1]["_id"], data[2]["_id"]];
-
-  /*$.post('http://localhost:3000/relationship', {0: user1_id, 1: user2_id}).done( function(data) {
-    // data contains all information about relationship between two users!
-    console.log(data);
-  });*/
-
-  /*var query = {
-    collection: 'users',
-    entry_property_name: 'friends',
-    entry_id: user_id,
-    corresponding_entry_ids: other_user_ids
-  }
-
-  $.post('http://localhost:3000/linkEntries', query).done( function(data) {
-     //console.log(data); 
-  });*/
-
-  /*$.post('http://localhost:3000/createInterest', {title: "game221", description: "play it"}).done( function(data) {
-       //console.log(data);
-  });*/
-}
-
-/*function P3_insertInterest(suggestion) {
-  $("#P3_interests").append(makeInterest(suggestion.title, suggestion._id));
-  $("#P3_interests").children().last().children("div").click( function( event ) {
-    $(event.target).parent().remove();
-  });
-}
-
-function P6_insertInterest(suggestion) {
-  $("#searchInterests").val(suggestion.title);
-  var success = true;
-  for (var i = 0; i < user.interests.length; i++) {
-    if (user.interests[i]._id == suggestion._id) {
-      success = false;
-      break;
-    }
-  }
-  if (success) {
-    user.interests.push(suggestion);
-    populateInterests();
-  }
-}*/
 
 autofill = {
   Initialize : function(wrapper, methods) {
@@ -92,14 +45,18 @@ autofill = {
 
                 if (suggestion.title)
                   var suggestion_element_html = "<div class='suggestion'>" + suggestion.title + "</div>";
-                var suggestion_element_html = "<div class='suggestion'>" + suggestion.username + "</div>";
+                else 
+                  var suggestion_element_html = "<div class='suggestion'>" + suggestion.username + "</div>";
 
                 autofill_box.append(suggestion_element_html);
 
                 var suggestion_element = autofill_box.children().last();
                 suggestion_element.on('click', function() { 
                   autofill_box.hide();
-                  element.val( suggestion.title );
+                  if (suggestion.title)
+                    element.val( suggestion.title );
+                  else
+                    element.val( suggestion.username );
                   submit_value = suggestion._id;
                   submit.show();
                 });

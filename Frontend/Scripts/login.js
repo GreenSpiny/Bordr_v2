@@ -19,7 +19,7 @@ JS_login = {
   				first = false;
   			}
   			else {
-  				$.post('http://localhost:3000/signup', {username: $(logInInput).val(), password: $(passwordInput).val(), confirm: $(passwordConfirm).val(), email: $(email).val() }).done( function(response) {
+  				$.post('http://localhost:3000/signup', {username: $(logInInput).val().toLowerCase(), password: $(passwordInput).val(), confirm: $(passwordConfirm).val(), email: $(email).val() }).done( function(response) {
             var alerts = "";
   					if (response.username == "Username must be between 3 and 15 alphanumeric characters") {
   						alerts += (response.username + "\n");
@@ -49,9 +49,9 @@ JS_login = {
 function log(event) {
   $.post('http://localhost:3000/login', {username: $(logInInput).val(), password: $(passwordInput).val()}).done( function(response) {
     if (response.err == null) {
+      console.log(response);
       current_user = response.user;
+      LoadPage( $( event.target ).data('redirect') );
     };
-
-    LoadPage( $( event.target ).data('redirect') );
   });
 }

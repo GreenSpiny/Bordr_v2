@@ -42,8 +42,7 @@ JS_profile = {
           }).done( function( response ) { 
             if (response.nModified == 1) {
               current_user.friends.push( element_value );
-              AddFriendElement( element_value );
-              console.log(current_user); 
+              LoadPage("profile");
             }
           });
         } 
@@ -54,7 +53,6 @@ JS_profile = {
       $.post('http://localhost:3000/interestinfo', {values: current_user.interests}).done( function(response) {
         for(key in response) {
           var interest = response[key];
-          AddInterestElement(interest);
         }
       })
     } else {
@@ -90,8 +88,7 @@ JS_profile = {
           }).done( function( response ) { 
             if (response.nModified == 1) {
               current_user.interests.push( element_value );
-              AddInterestElement(element_value);
-              console.log(current_user); 
+              LoadPage("profile");
             }
           });
         } 
@@ -106,17 +103,23 @@ function AddFriendElement(friend) {
     "<h4>" + friend.username + "</h4>" + 
     "<h5>Interests: </h5>";
 
-  for(key in friend.interests) {
-    interest = friend.interests[key];
-    friend_element += interest + ", ";
-  }
-  friend_element = friend_element.slice(0,-2);
+  $.post('http://localhost:3000/interestinfo', {
+    friend.interests;
+  })/*.done( function ( response ) {
 
-  friend_element += "</div>";
-  $("#MyFriends").append(friend_element);
+    console.log(response);
+    /*for(key in friend.interests) {
+      interest = friend.interests[key];
+      friend_element += interest + ", ";
+    }
+    friend_element = friend_element.slice(0,-2);
+    friend_element += "</div>";
+    $("#MyFriends").append(friend_element);
+  });*/
 }
 
 function AddInterestElement(interest) {
+  console.log(interest);
   var interest_element = 
   "<div id='I_" + interest._id + "'>" + interest.title + "</div>"
   $("#MyInterests").append(interest_element);

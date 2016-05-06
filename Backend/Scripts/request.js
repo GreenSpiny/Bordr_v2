@@ -314,6 +314,9 @@ function RemoveDocumentById(document_info, callback) {
 }
 
 function ValidateUser (req, credentials, callback) {
+
+  credentials.username = credentials.username.toLowerCase();
+  console.log(credentials);
   var err = {};
   var collection = mongo.db.collection('users');
   collection.findOne(credentials, function(db_err, record) {
@@ -321,7 +324,7 @@ function ValidateUser (req, credentials, callback) {
       err['database'] = db_err;
       callback({'err': err, 'user': null});
     }
-    else if (record && (record.username != "") ) {
+    else if (record && record._id != null) {
       req.login_cookie.user = record;
       callback({'err': null, 'user': record});
     }
@@ -371,7 +374,7 @@ function UserInfo (user_ids, callback) {
 }
 
 function InterestInfo (interest_ids, callback) {
-  console.log(interest_ids);
+
   var err = {};
   var collection = mongo.db.collection('interests');
 

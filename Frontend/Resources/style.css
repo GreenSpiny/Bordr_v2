@@ -318,3 +318,8 @@ h1, h2 {
 div.interest > p {
   border: 0px;
 }
+
+#searchInterests {
+  position: auto;
+  margin: auto;
+}

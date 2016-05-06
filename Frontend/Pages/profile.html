@@ -1,80 +1,133 @@
-<!-- Page 6: Profile -->      
-<details class="infoArea" hidden="true" value="6">
-  <p>Edit your user information here!</p>
-  <p>Add interests so your friends know what you like doing.</p>
-</details>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" ng-app="Bordr">
+  
+  <head>
+  
+    <!-- Title and icon -->
+    <title>Bordr</title>
+    <link rel="icon" href="images/raccoon_icon.png">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="style.css" rel="stylesheet">
+    <link href="Scripts/autofill.css" rel="stylesheet">  
+    
+    <!-- Custom JS -->
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="Scripts/transitions.js"></script>
+
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    
+  </head>
+
+  <body>
+  
+    <div id="header" class="container-fluid">
+      <img id="logo" src="images/raccoon_small.png"> </img>
+    </div>
+  
+    <div id="content" class="container-fluid">
       
-<h1>My profile</h1>
-  
-<main id="loginInfo">
+      <!-- Page 6: Profile -->
+      <div id="profile" class="page" value="6">
+    
+        <div class="infoArea" hidden="true" value="6">
+          <p>Edit your user information here!</p>
+          <p>Add interests so your friends know what you like doing.</p>
+        </div>
+            
+        <div class="row">
+          <h1>My profile</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <button id="homeBTN" type="button" data-redirect="menu" value=1 class="pageButton btn btn-block btn-primary redirect">Back</button>
+          </div>
+          <div class="col-sm-6"> 
+            <button id="helpBTN" type="button" value=6 class="infoButton btn btn-block btn-primary">Info</button>
+          </div>
+        </div>
+        
+        <div id="loginInfo">
+        
+          <button id="editUserInfoBTN" class="btn btn-success btn-block">Edit user information</button>  
+          
+          <div id="userInfo" hidden="true">
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">User name:</p>
+              </div>
+              <div class="col-sm-8">
+                <div id="changeUsername">My Username</div>
+              </div>
+              <div class="col-sm-2">
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Password:</p>
+              </div>
+              <div class="col-sm-8">
+                <input id="changePassword" type="password" class="form-control" value="My Username"></input>
+              </div>
+              <div class="col-sm-2">
+                <button id="saveChangePassword" type="button" class="btn btn-primary btn-block">Save</button>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-sm-2">
+                <p class="bg-1">Email:</p>
+              </div>
+              <div class="col-sm-8">
+                <input id="changeEmail" type="email" class="form-control" value="myemail@gmail.com"></input>
+              </div>
+              <div class="col-sm-2">
+                <button id="saveChangeEmail" type="button" class="btn btn-primary btn-block">Save</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <h1 class="row">My interests:</h1>
+        
+        <div id="interestsArea" class="row">
+        </div>
+        
+        <h1 class="row">Add an interest:</h1>
 
-  <button id="editUserInfoBTN" class="btn btn-success btn-block">Edit user information</button>  
-  
-  <div id="userInfo" hidden="true">
-    <div class=" ">
-      <div class="col-sm-2">
-        <p class="bg-1">User name:</p>
+        <div class="row">
+          <div id="searchInterests" class="autofill">
+          <input type='text' class="text_entry"/>
+          <input type="button" value="Submit" class="submit" />
+          <div class="autofill_box"></div>
+          </div>
+        </div>
+        
+        <button id="newInterestBTN" class="btn btn-success" value=0>...not found? Make a new interest.</button>
+        
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div id="newInterestArea" hidden="true" class="col-sm-6">
+            <input id="interestName" type="text" default="(Name)" value="(Name)" class="form-control"></input>
+            <textarea id="interestDescription" type="text" default="(Description)" class="form-control">(Description)</textarea>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        
       </div>
-      <div class="col-sm-8">
-        <div id="changeUsername">My Username</div>
-      </div>
-      <div class="col-sm-2">
-      </div>
-    </div>
-  
-    <div class=" ">
-      <div class="col-sm-2">
-        <p class="bg-1">Password:</p>
-      </div>
-      <div class="col-sm-8">
-        <input id="changePassword" type="password" class="form-control" value="My Username" />
-      </div>
-      <div class="col-sm-2">
-        <button id="saveChangePassword" type="button" class="btn btn-primary btn-block">Save</button>
-      </div>
+         
     </div>
     
-    <div class=" ">
-      <div class="col-sm-2">
-        <p class="bg-1">Email:</p>
-      </div>
-      <div class="col-sm-8">
-        <input id="changeEmail" type="email" class="form-control" value="myemail@gmail.com" />
-      </div>
-      <div class="col-sm-2">
-        <button id="saveChangeEmail" type="button" class="btn btn-primary btn-block">Save</button>
-      </div>
-    </div>
-  </div>
-    
-</main>
-
-<h2>My Friends:</h2>
-<section id="MyFriends">
-
-</section>
-<h3>Find a Friend</h3>
+  </body>
   
-<h2>My Interests:</h2>
-<section id="MyInterests">
-
-</section>
-<h3>Find an Interest</h3>
-<div id="searchInterests" class="autofill">
-  <input type='text' class="text_entry"/>
-  <input type="button" value="Submit" class="submit" />
-  <div class="autofill_box"></div>
-  
-</div>
-  
-   <!--<button id="newInterestBTN" class="btn btn-success" value=0>...not found? Make a new interest.</button>
- 
-  <div class=" ">
-    <div id="newInterestArea" hidden="true" class="col-sm-6">
-      <input id="interestName" type="text" default="(Name)"class="form-control" />
-      <textarea id="interestDescription" type="text" default="(Description)" class="form-control">(Description)</textarea>
-    </div>
-  </div>
-  -->
-</div>
-   
+</html>
